@@ -43,3 +43,6 @@ ENV/
 # PPT temporary files
 ~$*.ppt*
 
+# Pipeline outputs
+output/
+

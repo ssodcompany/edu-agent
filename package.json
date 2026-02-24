@@ -4,9 +4,15 @@
   "description": "PPT Team Agent - Claude Code Sub-Agent and Skill based presentation generator",
   "type": "module",
   "scripts": {
-    "html2pptx": "node .claude/skills/pptx-skill/scripts/html2pptx.js"
+    "html2pptx": "node .claude/skills/pptx-skill/scripts/html2pptx.js",
+    "generate-infographic": "node scripts/generate_infographic.cjs",
+    "generate-images": "node scripts/generate_images.cjs",
+    "qa-validate": "node scripts/qa_validate.cjs",
+    "orchestrate": "node scripts/orchestrate.cjs"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "cheerio": "^1.0.0",
     "playwright": "^1.40.0",
     "pptxgenjs": "^3.12.0",
     "react": "^19.2.4",

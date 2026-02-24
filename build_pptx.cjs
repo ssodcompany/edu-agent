@@ -10,6 +10,19 @@ const fs = require('fs');
 const SLIDES_DIR = path.join(__dirname, 'slides');
 const OUTPUT_FILE = path.join(__dirname, 'AI시대_네트워킹_강의.pptx');
 
+// Parse CLI args for dynamic paths
+const args = process.argv.slice(2);
+let slidesDir = SLIDES_DIR;
+let outputFile = OUTPUT_FILE;
+let notesFile = null;
+
+for (let i = 0; i < args.length; i++) {
+  if (args[i] === '--slides-dir' && args[i+1]) slidesDir = path.resolve(args[i+1]);
+  if (args[i] === '--output' && args[i+1]) outputFile = path.resolve(args[i+1]);
+  if (args[i] === '--notes' && args[i+1]) notesFile = path.resolve(args[i+1]);
+  if (args[i] === '--title' && args[i+1]) pptx.title = args[i+1];
+}
+
 // Speaker notes per slide (from lecture_v2.json)
 const NOTES = [
   "(강의 시작 전 타이틀 슬라이드. 청중이 착석하면서 볼 수 있도록 미리 띄워놓기.)",
@@ -34,8 +47,18 @@ async function main() {
   pptx.title = 'AI시대에 결국 남는 것은 사람과의 네트워킹이다';
   pptx.subject = '10분 강의 - 신뢰의 희소성';
 
+  // Apply --title if provided (re-apply after pptx instantiation)
+  for (let i = 0; i < args.length; i++) {
+    if (args[i] === '--title' && args[i+1]) pptx.title = args[i+1];
+  }
+
+  // Load notes from file if --notes provided, otherwise use hardcoded NOTES
+  const notes = notesFile && fs.existsSync(notesFile)
+    ? JSON.parse(fs.readFileSync(notesFile, 'utf8'))
+    : NOTES;
+
   // Get all slide HTML files sorted
-  const slideFiles = fs.readdirSync(SLIDES_DIR)
+  const slideFiles = fs.readdirSync(slidesDir)
     .filter(f => f.endsWith('.html'))
     .sort();
 
@@ -43,15 +66,15 @@ async function main() {
 
   for (let i = 0; i < slideFiles.length; i++) {
     const file = slideFiles[i];
-    const filePath = path.join(SLIDES_DIR, file);
+    const filePath = path.join(slidesDir, file);
     console.log(`  [${i + 1}/${slideFiles.length}] Converting ${file}...`);
 
     try {
       const { slide } = await html2pptx(filePath, pptx);
 
       // Add speaker notes
-      if (NOTES[i]) {
-        slide.addNotes(NOTES[i]);
+      if (notes[i]) {
+        slide.addNotes(notes[i]);
       }
 
       console.log(`    OK`);
@@ -61,8 +84,8 @@ async function main() {
   }
 
   // Save
-  await pptx.writeFile({ fileName: OUTPUT_FILE });
-  console.log(`\nPPTX saved: ${OUTPUT_FILE}`);
+  await pptx.writeFile({ fileName: outputFile });
+  console.log(`\nPPTX saved: ${outputFile}`);
 }
 
 main().catch(err => {

@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "qa-report.schema.json",
+  "title": "QA Report",
+  "description": "품질검수 보고서 - QA 에이전트의 출력 포맷",
+  "type": "object",
+  "required": ["meta", "overallPass", "slides"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["runId", "reviewedAt", "iteration"],
+      "properties": {
+        "runId": { "type": "string" },
+        "reviewedAt": { "type": "string", "format": "date-time" },
+        "iteration": { "type": "integer", "minimum": 1, "maximum": 3, "description": "현재 검수 회차 (최대 3회)" },
+        "htmlDir": { "type": "string" },
+        "specFile": { "type": "string" }
+      }
+    },
+    "overallPass": { "type": "boolean" },
+    "summary": {
+      "type": "object",
+      "properties": {
+        "totalSlides": { "type": "integer" },
+        "passedSlides": { "type": "integer" },
+        "failedSlides": { "type": "integer" },
+        "criticalIssues": { "type": "integer" },
+        "warningIssues": { "type": "integer" },
+        "infoIssues": { "type": "integer" }
+      }
+    },
+    "slides": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["slideNumber", "file", "pass", "checks"],
+        "properties": {
+          "slideNumber": { "type": "integer" },
+          "file": { "type": "string" },
+          "pass": { "type": "boolean" },
+          "checks": {
+            "type": "object",
+            "properties": {
+              "dimensionsCorrect": { "type": "boolean", "description": "720pt x 405pt 확인" },
+              "noOverflow": { "type": "boolean", "description": "콘텐츠 오버플로우 없음" },
+              "allImagesExist": { "type": "boolean", "description": "모든 img 경로 존재 확인" },
+              "noCssGradients": { "type": "boolean", "description": "CSS 그래디언트 미사용 확인" },
+              "textInProperTags": { "type": "boolean", "description": "텍스트가 p/h1-h6/ul/ol 안에 있음" },
+              "fontsApproved": { "type": "boolean", "description": "승인된 웹안전 폰트만 사용" },
+              "colorConsistency": { "type": "boolean", "description": "팔레트 일관성" },
+              "contentMatchesSpec": { "type": "boolean", "description": "lecture-spec 대비 완성도" }
+            }
+          },
+          "issues": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["severity", "category", "description"],
+              "properties": {
+                "severity": { "type": "string", "enum": ["critical", "warning", "info"] },
+                "category": { "type": "string", "enum": ["dimension", "overflow", "image", "gradient", "text-tag", "font", "color", "content", "accessibility"] },
+                "description": { "type": "string" },
+                "fix": { "type": "string", "description": "수정 방법" },
+                "targetAgent": { "type": "string", "enum": ["assembly-agent", "infographic-agent", "image-gen-agent", "manual"], "description": "수정 담당 에이전트" },
+                "autoFixable": { "type": "boolean", "default": false }
+              }
+            }
+          }
+        }
+      }
+    },
+    "recommendations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "description", "targetAgent"],
+        "properties": {
+          "type": { "type": "string", "enum": ["fix-required", "improvement", "review-needed"] },
+          "description": { "type": "string" },
+          "targetAgent": { "type": "string" },
+          "slideNumbers": { "type": "array", "items": { "type": "integer" } }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "lecture-spec.schema.json",
+  "title": "Lecture Specification",
+  "description": "강의 기획서 - 강의기획 에이전트의 출력 포맷",
+  "type": "object",
+  "required": ["meta", "theme", "structure", "slides"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["runId", "topic", "audience", "duration", "language"],
+      "properties": {
+        "runId": { "type": "string", "description": "고유 실행 ID (YYYYMMDD-HHMMSS-xxxx)" },
+        "topic": { "type": "string", "description": "강의 주제" },
+        "audience": { "type": "string", "description": "청중 설명" },
+        "duration": { "type": "integer", "description": "강의 시간 (분)", "minimum": 1 },
+        "language": { "type": "string", "default": "ko", "description": "강의 언어" },
+        "purpose": { "type": "string", "description": "강의 목적" },
+        "tone": { "type": "string", "enum": ["formal", "conversational", "inspirational", "educational", "persuasive"], "description": "발표 톤" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "theme": {
+      "type": "object",
+      "required": ["palette", "fonts"],
+      "properties": {
+        "palette": {
+          "type": "object",
+          "required": ["primary", "secondary", "accent", "background", "text"],
+          "properties": {
+            "primary": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+            "secondary": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+            "accent": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+            "background": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+            "text": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" }
+          }
+        },
+        "fonts": {
+          "type": "object",
+          "properties": {
+            "heading": { "type": "string", "default": "Arial" },
+            "body": { "type": "string", "default": "Arial" }
+          }
+        },
+        "style": { "type": "string", "enum": ["executive-minimal", "sage-professional", "modern-dark", "corporate-blue", "warm-neutral"], "description": "design-skill 팔레트 이름" },
+        "mood": { "type": "string", "description": "전체 분위기 키워드" }
+      }
+    },
+    "structure": {
+      "type": "object",
+      "required": ["framework", "sections"],
+      "properties": {
+        "framework": { "type": "string", "enum": ["SCQA", "problem-solution", "what-so_what-now_what", "chronological", "topical"], "description": "스토리라인 프레임워크" },
+        "sections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "title", "slides"],
+            "properties": {
+              "id": { "type": "string" },
+              "title": { "type": "string" },
+              "purpose": { "type": "string" },
+              "estimatedMinutes": { "type": "number" },
+              "slides": { "type": "array", "items": { "type": "integer" } }
+            }
+          }
+        }
+      }
+    },
+    "slides": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["slideNumber", "sectionId", "type", "headline"],
+        "properties": {
+          "slideNumber": { "type": "integer", "minimum": 1 },
+          "sectionId": { "type": "string" },
+          "type": { "type": "string", "enum": ["title", "section", "content", "data", "comparison", "timeline", "case-study", "quote", "summary", "closing", "two-column"] },
+          "headline": { "type": "string", "maxLength": 60 },
+          "subHeadline": { "type": "string", "maxLength": 100 },
+          "body": { "type": "string" },
+          "bullets": { "type": "array", "items": { "type": "string" } },
+          "keyMessage": { "type": "string", "description": "이 슬라이드의 핵심 메시지 한 줄" },
+          "speakerNotes": { "type": "string" },
+          "estimatedSeconds": { "type": "integer" },
+          "visual": {
+            "type": "object",
+            "properties": {
+              "layout": { "type": "string", "enum": ["full", "split-left", "split-right", "two-column", "three-column", "centered"] },
+              "backgroundType": { "type": "string", "enum": ["solid", "gradient-png", "image", "pattern"] },
+              "backgroundColor": { "type": "string" },
+              "backgroundImage": { "type": "string" },
+              "infographicNeeded": { "type": "boolean", "default": false },
+              "infographicType": { "type": "string", "enum": ["bar-chart", "pie-chart", "donut-chart", "stat-card", "timeline", "process-flow", "comparison-table", "icon-grid"] },
+              "infographicData": { "type": "object", "description": "차트에 사용할 데이터 (유형에 따라 다름)" },
+              "imageNeeded": { "type": "boolean", "default": false },
+              "imageDescription": { "type": "string", "description": "Gemini API용 이미지 프롬프트" },
+              "imageStyle": { "type": "string", "enum": ["photo-realistic", "abstract", "illustration", "icon"] }
+            }
+          },
+          "dataRequirements": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["claim", "type", "priority"],
+              "properties": {
+                "claim": { "type": "string" },
+                "type": { "type": "string", "enum": ["statistic", "fact", "quote", "case-study", "trend"] },
+                "priority": { "type": "string", "enum": ["must-have", "nice-to-have"] },
+                "searchKeywords": { "type": "array", "items": { "type": "string" } }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

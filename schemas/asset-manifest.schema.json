@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "asset-manifest.schema.json",
+  "title": "Asset Manifest",
+  "description": "에셋 목록 - 인포그래픽/이미지 에이전트의 에셋 레지스트리",
+  "type": "object",
+  "required": ["meta", "assets"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["runId", "updatedAt"],
+      "properties": {
+        "runId": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "baseDir": { "type": "string", "description": "에셋 기본 디렉토리 경로" }
+      }
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "path", "slideNumber", "generator"],
+        "properties": {
+          "id": { "type": "string", "description": "고유 에셋 ID" },
+          "type": { "type": "string", "enum": ["infographic", "background-image", "icon", "decoration", "photo"] },
+          "path": { "type": "string", "description": "파일 경로 (baseDir 기준 상대경로)" },
+          "absolutePath": { "type": "string" },
+          "slideNumber": { "type": "integer" },
+          "generator": { "type": "string", "enum": ["infographic-agent", "image-gen-agent", "create-assets", "manual"] },
+          "width": { "type": "integer" },
+          "height": { "type": "integer" },
+          "fileSizeBytes": { "type": "integer" },
+          "format": { "type": "string", "enum": ["png", "jpg", "svg"] },
+          "description": { "type": "string" },
+          "prompt": { "type": "string", "description": "이미지 생성에 사용된 프롬프트 (image-gen-agent)" },
+          "fallback": { "type": "boolean", "default": false, "description": "폴백으로 생성된 에셋 여부" },
+          "createdAt": { "type": "string", "format": "date-time" }
+        }
+      }
+    }
+  }
+}

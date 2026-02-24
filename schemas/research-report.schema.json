@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "research-report.schema.json",
+  "title": "Research Report",
+  "description": "자료조사 보고서 - 리서치 에이전트의 출력 포맷",
+  "type": "object",
+  "required": ["meta", "findings"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["runId", "researchedAt"],
+      "properties": {
+        "runId": { "type": "string" },
+        "researchedAt": { "type": "string", "format": "date-time" },
+        "totalFindings": { "type": "integer" },
+        "verifiedCount": { "type": "integer" },
+        "unverifiedCount": { "type": "integer" }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["slideNumber", "claimId", "originalClaim", "verified", "confidence"],
+        "properties": {
+          "slideNumber": { "type": "integer" },
+          "claimId": { "type": "string" },
+          "originalClaim": { "type": "string" },
+          "verified": { "type": "boolean" },
+          "confidence": { "type": "number", "minimum": 0, "maximum": 1, "description": "검증 신뢰도 (0.0~1.0)" },
+          "verifiedData": {
+            "type": "object",
+            "properties": {
+              "value": { "type": "string", "description": "검증된 데이터 값" },
+              "context": { "type": "string", "description": "데이터의 맥락 설명" },
+              "methodology": { "type": "string", "description": "원본 조사 방법론" },
+              "originalDate": { "type": "string", "description": "원본 데이터 날짜" }
+            }
+          },
+          "sources": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["title", "url", "accessedDate", "reliability"],
+              "properties": {
+                "title": { "type": "string" },
+                "url": { "type": "string", "format": "uri" },
+                "author": { "type": "string" },
+                "publisher": { "type": "string" },
+                "publishedDate": { "type": "string" },
+                "accessedDate": { "type": "string", "format": "date" },
+                "reliability": { "type": "string", "enum": ["high", "medium", "low"], "description": "출처 신뢰도" }
+              }
+            }
+          },
+          "crossValidation": {
+            "type": "object",
+            "properties": {
+              "sourcesAgreed": { "type": "integer" },
+              "sourcesDisagreed": { "type": "integer" },
+              "notes": { "type": "string" }
+            }
+          },
+          "alternativeData": { "type": "string", "description": "검증 실패 시 대체 데이터 제안" }
+        }
+      }
+    },
+    "additionalInsights": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["slideNumber", "insight", "source"],
+        "properties": {
+          "slideNumber": { "type": "integer" },
+          "insight": { "type": "string" },
+          "source": { "type": "string" },
+          "recommendation": { "type": "string", "enum": ["add-to-slide", "add-to-notes", "reference-only"] }
+        }
+      }
+    }
+  }
+}
