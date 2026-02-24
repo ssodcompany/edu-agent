@@ -168,10 +168,12 @@ function addElements(slideData, targetSlide, pres) {
 
       targetSlide.addText(el.text || '', shapeOptions);
     } else if (el.type === 'list') {
+      // Widen list boxes by 3% to prevent wrapping
+      const listWidthIncrease = el.position.w * 0.03;
       const listOptions = {
         x: el.position.x,
         y: el.position.y,
-        w: el.position.w,
+        w: el.position.w + listWidthIncrease,
         h: el.position.h,
         fontSize: el.style.fontSize,
         fontFace: el.style.fontFace,
@@ -193,23 +195,23 @@ function addElements(slideData, targetSlide, pres) {
       let adjustedX = el.position.x;
       let adjustedW = el.position.w;
 
-      // Make single-line text 2% wider to account for underestimate
-      if (isSingleLine) {
-        const widthIncrease = el.position.w * 0.02;
-        const align = el.style.align;
+      // Widen text boxes to prevent wrapping due to font rendering differences
+      // between Chrome and PowerPoint (PowerPoint renders text ~3-5% wider)
+      const widthMultiplier = isSingleLine ? 0.06 : 0.03;
+      const widthIncrease = el.position.w * widthMultiplier;
+      const align = el.style.align;
 
-        if (align === 'center') {
-          // Center: expand both sides
-          adjustedX = el.position.x - (widthIncrease / 2);
-          adjustedW = el.position.w + widthIncrease;
-        } else if (align === 'right') {
-          // Right: expand to the left
-          adjustedX = el.position.x - widthIncrease;
-          adjustedW = el.position.w + widthIncrease;
-        } else {
-          // Left (default): expand to the right
-          adjustedW = el.position.w + widthIncrease;
-        }
+      if (align === 'center') {
+        // Center: expand both sides
+        adjustedX = el.position.x - (widthIncrease / 2);
+        adjustedW = el.position.w + widthIncrease;
+      } else if (align === 'right') {
+        // Right: expand to the left
+        adjustedX = el.position.x - widthIncrease;
+        adjustedW = el.position.w + widthIncrease;
+      } else {
+        // Left (default): expand to the right
+        adjustedW = el.position.w + widthIncrease;
       }
 
       const textOptions = {

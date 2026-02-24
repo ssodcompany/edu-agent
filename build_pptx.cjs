@@ -16,11 +16,12 @@ let slidesDir = SLIDES_DIR;
 let outputFile = OUTPUT_FILE;
 let notesFile = null;
 
+let titleOverride = null;
 for (let i = 0; i < args.length; i++) {
   if (args[i] === '--slides-dir' && args[i+1]) slidesDir = path.resolve(args[i+1]);
   if (args[i] === '--output' && args[i+1]) outputFile = path.resolve(args[i+1]);
   if (args[i] === '--notes' && args[i+1]) notesFile = path.resolve(args[i+1]);
-  if (args[i] === '--title' && args[i+1]) pptx.title = args[i+1];
+  if (args[i] === '--title' && args[i+1]) titleOverride = args[i+1];
 }
 
 // Speaker notes per slide (from lecture_v2.json)
@@ -48,9 +49,7 @@ async function main() {
   pptx.subject = '10분 강의 - 신뢰의 희소성';
 
   // Apply --title if provided (re-apply after pptx instantiation)
-  for (let i = 0; i < args.length; i++) {
-    if (args[i] === '--title' && args[i+1]) pptx.title = args[i+1];
-  }
+  if (titleOverride) pptx.title = titleOverride;
 
   // Load notes from file if --notes provided, otherwise use hardcoded NOTES
   const notes = notesFile && fs.existsSync(notesFile)
