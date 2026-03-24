@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=720, height=405">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 720pt; height: 405pt;
+    font-family: 'Pretendard', 'Apple SD Gothic Neo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #FFFFFF;
+    overflow: hidden;
+  }
+  .slide {
+    width: 720pt; height: 405pt;
+    padding: 40pt 48pt;
+    display: flex;
+    flex-direction: column;
+  }
+  .title {
+    color: #1A1A1A;
+    font-size: 22pt;
+    font-weight: 700;
+    margin-bottom: 36pt;
+    text-align: center;
+    letter-spacing: -0.3pt;
+  }
+  .cards {
+    display: flex;
+    gap: 20pt;
+    flex: 1;
+    align-items: stretch;
+  }
+  .card {
+    flex: 1;
+    background: #FFFFFF;
+    border: 1pt solid #E0E0E0;
+    padding: 28pt 20pt;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .num-circle {
+    width: 40pt;
+    height: 40pt;
+    background: #1A73E8;
+    color: #FFFFFF;
+    font-size: 18pt;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-bottom: 20pt;
+  }
+  .card-title {
+    color: #1A1A1A;
+    font-size: 15pt;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+  .card-sub {
+    color: #666666;
+    font-size: 11pt;
+    font-weight: 400;
+    margin-top: 10pt;
+    line-height: 1.4;
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+  <h2 class="title">AI가 따라올 수 없는 세 가지 판단력</h2>
+  <div class="cards">
+    <div class="card">
+      <div class="num-circle"><p>1</p></div>
+      <h3 class="card-title">맥락을 읽는<br>판단</h3>
+      <p class="card-sub">데이터 너머의<br>진짜 의미를 읽다</p>
+    </div>
+    <div class="card">
+      <div class="num-circle"><p>2</p></div>
+      <h3 class="card-title">리스크를 감수하는<br>판단</h3>
+      <p class="card-sub">확률이 아닌<br>관계로 결정하다</p>
+    </div>
+    <div class="card">
+      <div class="num-circle"><p>3</p></div>
+      <h3 class="card-title">버리는<br>판단</h3>
+      <p class="card-sub">100개 중 9개를<br>걸러내는 용기</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,7 +1,7 @@
 {
   "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"cd /Users/kimjimyoung/Documents/projects/bni-edu && git status -sb && echo \\\"---\\\" && git remote -v && echo \\\"---\\\" && git log --oneline -5\",\"description\":\"Check git status, remote, and re...",
-  "error": "Exit code 128\nfatal: not a git repository (or any of the parent directories): .git\n\nfatal: not a git repository (or any of the parent directories): .git",
-  "timestamp": "2026-02-24T14:28:24.332Z",
-  "retry_count": 1
+  "tool_input_preview": "{\"command\":\"ls -la /Users/kimjimyoung/Documents/projects/bni-edu/ppt_team_agent/lectures/02_ai_skills/assets/ 2>/dev/null || echo \\\"No assets dir\\\"; find /Users/kimjimyoung/Documents/projects/bni-edu/...",
+  "error": "Exit code 2\nNo assets dir",
+  "timestamp": "2026-03-24T12:41:04.214Z",
+  "retry_count": 2
 }

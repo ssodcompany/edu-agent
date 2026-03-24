@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=720, height=405">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 720pt; height: 405pt;
+    font-family: 'Pretendard', 'Apple SD Gothic Neo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #FFFFFF;
+    overflow: hidden;
+  }
+  .slide {
+    width: 720pt; height: 405pt;
+    padding: 36pt 56pt;
+    display: flex;
+    flex-direction: column;
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 10pt;
+    margin-bottom: 24pt;
+  }
+  .header img {
+    width: 32pt;
+    height: 32pt;
+  }
+  .header-label {
+    color: #1A1A1A;
+    font-size: 12pt;
+    font-weight: 600;
+  }
+  .stat {
+    color: #1A1A1A;
+    font-size: 18pt;
+    font-weight: 700;
+    margin-bottom: 28pt;
+    line-height: 1.4;
+  }
+  .stat .blue {
+    color: #1A73E8;
+  }
+  .equation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16pt;
+    margin-bottom: 28pt;
+    padding: 20pt 24pt;
+    background: #F8F9FA;
+    border-left: 3pt solid #1A73E8;
+  }
+  .eq-item {
+    color: #1A1A1A;
+    font-size: 15pt;
+    font-weight: 600;
+    text-align: center;
+  }
+  .eq-op {
+    color: #1A73E8;
+    font-size: 20pt;
+    font-weight: 700;
+  }
+  .eq-result {
+    color: #1A73E8;
+    font-size: 18pt;
+    font-weight: 800;
+    text-align: center;
+  }
+  .bottom-quote-wrap {
+    margin-top: auto;
+    padding-top: 16pt;
+    border-top: 1pt solid #E8E8E8;
+  }
+  .bottom-quote {
+    color: #666666;
+    font-size: 14pt;
+    font-weight: 500;
+    text-align: center;
+  }
+  .bottom-quote .bold {
+    color: #1A1A1A;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="header">
+    <img src="../assets/notion-logo.png" alt="Notion">
+    <h2 class="header-label">Judgment Economy</h2>
+  </div>
+  <p class="stat">컨설턴트가 들어간 회사의 매출이 <span class="blue">2배</span></p>
+  <div class="equation">
+    <p class="eq-item">AI 도구</p>
+    <p class="eq-op">+</p>
+    <p class="eq-item">사람의 판단력</p>
+    <p class="eq-op">=</p>
+    <p class="eq-result">매출 2배</p>
+  </div>
+  <div class="bottom-quote-wrap"><p class="bottom-quote"><span class="bold">판단력은 복리로 쌓인다</span></p></div>
+</div>
+</body>
+</html>

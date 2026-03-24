@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=720, height=405">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 720pt; height: 405pt;
+    font-family: 'Pretendard', 'Apple SD Gothic Neo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #FFFFFF;
+    overflow: hidden;
+  }
+  .slide {
+    width: 720pt; height: 405pt;
+    padding: 36pt 48pt;
+    display: flex;
+    flex-direction: column;
+  }
+  .title {
+    color: #1A1A1A;
+    font-size: 20pt;
+    font-weight: 700;
+    margin-bottom: 24pt;
+    text-align: center;
+    letter-spacing: -0.3pt;
+  }
+  .comparison {
+    display: flex;
+    gap: 20pt;
+    flex: 1;
+    align-items: stretch;
+  }
+  .box {
+    flex: 1;
+    padding: 20pt 22pt;
+    display: flex;
+    flex-direction: column;
+  }
+  .box-before {
+    background: #F5F5F5;
+    border: 1pt solid #E0E0E0;
+  }
+  .box-after {
+    background: #FFFFFF;
+    border: 2pt solid #1A73E8;
+  }
+  .box-label {
+    font-size: 10pt;
+    font-weight: 700;
+    margin-bottom: 14pt;
+    letter-spacing: 0.5pt;
+  }
+  .label-muted {
+    color: #999999;
+  }
+  .label-blue {
+    color: #1A73E8;
+  }
+  .box-text {
+    font-size: 13pt;
+    line-height: 1.7;
+    flex: 1;
+  }
+  .text-muted {
+    color: #888888;
+    font-weight: 400;
+  }
+  .text-strong {
+    color: #1A1A1A;
+    font-weight: 500;
+  }
+  .vs-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36pt;
+    flex-shrink: 0;
+  }
+  .vs-text {
+    color: #CCCCCC;
+    font-size: 14pt;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+  <h2 class="title">내 Skill이 담긴 60초 소개</h2>
+  <div class="comparison">
+    <div class="box box-before">
+      <p class="box-label label-muted">AI가 5초 만에 쓴 소개</p>
+      <p class="box-text text-muted">"주거, 상업 공간 인테리어 합니다. 리모델링 필요하신 분 소개해주세요."</p>
+    </div>
+    <div class="vs-divider">
+      <p class="vs-text">VS</p>
+    </div>
+    <div class="box box-after">
+      <p class="box-label label-blue">내 판단력이 담긴 소개</p>
+      <p class="box-text text-strong">"도면 보고 3분 안에 '여기 건드리면 큰일 납니다'를 찾아냅니다. 2호점 내시는 프랜차이즈 사장님 소개해주세요."</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>
