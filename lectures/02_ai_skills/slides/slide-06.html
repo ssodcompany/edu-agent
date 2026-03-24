@@ -2,94 +2,64 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=720, height=405">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    width: 720pt; height: 405pt;
-    font-family: 'Pretendard', 'Apple SD Gothic Neo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: #FFFFFF;
-    overflow: hidden;
-  }
-  .slide {
-    width: 720pt; height: 405pt;
-    padding: 40pt 48pt;
-    display: flex;
-    flex-direction: column;
-  }
-  .title {
-    color: #1A1A1A;
-    font-size: 22pt;
-    font-weight: 700;
-    margin-bottom: 36pt;
-    text-align: center;
-    letter-spacing: -0.3pt;
-  }
-  .cards {
-    display: flex;
-    gap: 20pt;
-    flex: 1;
-    align-items: stretch;
-  }
-  .card {
-    flex: 1;
-    background: #FFFFFF;
-    border: 1pt solid #E0E0E0;
-    padding: 28pt 20pt;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  .num-circle {
-    width: 40pt;
-    height: 40pt;
-    background: #1A73E8;
-    color: #FFFFFF;
-    font-size: 18pt;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    margin-bottom: 20pt;
-  }
-  .card-title {
-    color: #1A1A1A;
-    font-size: 15pt;
-    font-weight: 700;
-    line-height: 1.4;
-  }
-  .card-sub {
-    color: #666666;
-    font-size: 11pt;
-    font-weight: 400;
-    margin-top: 10pt;
-    line-height: 1.4;
-  }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { background: #1a1a1a; }
+body {
+  width: 720pt; height: 405pt;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  padding: 52pt 64pt;
+}
 </style>
 </head>
 <body>
-<div class="slide">
-  <h2 class="title">AI가 따라올 수 없는 세 가지 판단력</h2>
-  <div class="cards">
-    <div class="card">
-      <div class="num-circle"><p>1</p></div>
-      <h3 class="card-title">맥락을 읽는<br>판단</h3>
-      <p class="card-sub">데이터 너머의<br>진짜 의미를 읽다</p>
-    </div>
-    <div class="card">
-      <div class="num-circle"><p>2</p></div>
-      <h3 class="card-title">리스크를 감수하는<br>판단</h3>
-      <p class="card-sub">확률이 아닌<br>관계로 결정하다</p>
-    </div>
-    <div class="card">
-      <div class="num-circle"><p>3</p></div>
-      <h3 class="card-title">버리는<br>판단</h3>
-      <p class="card-sub">100개 중 9개를<br>걸러내는 용기</p>
+
+  <!-- Section badge -->
+  <div style="margin-bottom: 28pt;">
+    <div style="display: inline-block; border: 1pt solid #444444; border-radius: 4pt; padding: 5pt 14pt;">
+      <p style="font-size: 9pt; font-weight: 600; color: #999999; letter-spacing: 0.12em;">CORE FRAMEWORK</p>
     </div>
   </div>
-</div>
+
+  <!-- Title -->
+  <div style="flex: 1; display: flex; align-items: center;">
+    <div style="display: flex; gap: 48pt; align-items: flex-start; width: 100%;">
+
+      <!-- Left: main title -->
+      <div style="display: flex; flex-direction: column; gap: 4pt; flex: 1.2;">
+        <h1 style="font-size: 40pt; font-weight: 800; color: #ffffff; line-height: 1.25; letter-spacing: -0.03em;">AI가 따라올 수 없는</h1>
+        <h1 style="font-size: 40pt; font-weight: 800; color: #ffffff; line-height: 1.25; letter-spacing: -0.03em;">세 가지 판단력</h1>
+        <div style="width: 36pt; height: 3pt; background: #ffffff; border-radius: 2pt; margin-top: 16pt;"></div>
+      </div>
+
+      <!-- Right: three items -->
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 16pt; padding-top: 4pt;">
+        <div style="display: flex; align-items: center; gap: 16pt;">
+          <div style="width: 28pt; height: 28pt; border: 1pt solid #444444; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <p style="font-size: 11pt; font-weight: 700; color: #666666;">1</p>
+          </div>
+          <p style="font-size: 15pt; font-weight: 500; color: #cccccc; letter-spacing: -0.01em;">맥락을 읽는 판단</p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 16pt;">
+          <div style="width: 28pt; height: 28pt; border: 1pt solid #444444; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <p style="font-size: 11pt; font-weight: 700; color: #666666;">2</p>
+          </div>
+          <p style="font-size: 15pt; font-weight: 500; color: #cccccc; letter-spacing: -0.01em;">리스크를 감수하는 판단</p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 16pt;">
+          <div style="width: 28pt; height: 28pt; border: 1pt solid #444444; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <p style="font-size: 11pt; font-weight: 700; color: #666666;">3</p>
+          </div>
+          <p style="font-size: 15pt; font-weight: 500; color: #cccccc; letter-spacing: -0.01em;">버리는 판단</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </body>
 </html>

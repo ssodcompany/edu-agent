@@ -2,63 +2,57 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=720, height=405">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    width: 720pt; height: 405pt;
-    font-family: 'Pretendard', 'Apple SD Gothic Neo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: #FFFFFF;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .slide {
-    width: 720pt; height: 405pt;
-    padding: 60pt 80pt;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
-  .title {
-    color: #1A1A1A;
-    font-size: 32pt;
-    font-weight: 700;
-    line-height: 1.3;
-    margin-bottom: 16pt;
-    letter-spacing: -0.5pt;
-  }
-  .accent-line {
-    width: 60pt;
-    height: 3pt;
-    background: #1A73E8;
-    margin-bottom: 20pt;
-  }
-  .subtitle {
-    color: #666666;
-    font-size: 14pt;
-    font-weight: 400;
-    line-height: 1.5;
-    margin-bottom: 8pt;
-  }
-  .date {
-    color: #999999;
-    font-size: 12pt;
-    font-weight: 400;
-    margin-top: 4pt;
-  }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { background: #f5f5f0; }
+body {
+  width: 720pt; height: 405pt;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #f5f5f0;
+  display: flex;
+}
 </style>
 </head>
 <body>
-<div class="slide">
-  <h1 class="title">AI가 대체할 수 없는<br>내 Skills 찾기</h1>
-  <div class="accent-line"></div>
-  <p class="subtitle">BNI K-Chapter 교육 | AI 시대 네트워킹 #2</p>
-  <p class="date">2026. 03. 24</p>
-</div>
+
+  <!-- Left accent bar -->
+  <div style="width: 4pt; background: #1a1a1a; flex-shrink: 0;"></div>
+
+  <!-- Main content -->
+  <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-between; padding: 48pt 56pt 44pt 56pt;">
+
+    <!-- Top: badge row -->
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <div style="border: 1pt solid #1a1a1a; border-radius: 20pt; padding: 5pt 14pt;">
+        <p style="font-size: 9pt; font-weight: 600; color: #1a1a1a; letter-spacing: 0.08em;">BNI K-CHAPTER EDUCATION</p>
+      </div>
+      <p style="font-size: 9pt; color: #999999; letter-spacing: 0.04em;">AI 시대 네트워킹 #2</p>
+    </div>
+
+    <!-- Center: main title -->
+    <div style="display: flex; flex-direction: column; gap: 10pt;">
+      <h1 style="font-size: 52pt; font-weight: 800; color: #1a1a1a; line-height: 1.15; letter-spacing: -0.03em;">AI가 대체할 수 없는</h1>
+      <h1 style="font-size: 52pt; font-weight: 800; color: #1a1a1a; line-height: 1.15; letter-spacing: -0.03em;">내 Skills 찾기</h1>
+      <div style="width: 48pt; height: 3pt; background: #1a1a1a; border-radius: 2pt; margin-top: 12pt;"></div>
+    </div>
+
+    <!-- Bottom: date meta -->
+    <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+      <div style="display: flex; gap: 32pt;">
+        <div>
+          <p style="font-size: 7pt; color: #999999; letter-spacing: 0.08em; margin-bottom: 4pt;">DATE</p>
+          <p style="font-size: 11pt; color: #666666; font-weight: 500;">2026. 03. 24</p>
+        </div>
+        <div>
+          <p style="font-size: 7pt; color: #999999; letter-spacing: 0.08em; margin-bottom: 4pt;">SESSION</p>
+          <p style="font-size: 11pt; color: #666666; font-weight: 500;">10-Minute Education</p>
+        </div>
+      </div>
+      <div style="width: 8pt; height: 8pt; background: #1a1a1a; border-radius: 50%;"></div>
+    </div>
+
+  </div>
+
 </body>
 </html>

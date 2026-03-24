@@ -2,96 +2,62 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=720, height=405">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    width: 720pt; height: 405pt;
-    font-family: 'Pretendard', 'Apple SD Gothic Neo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: #FFFFFF;
-    overflow: hidden;
-  }
-  .slide {
-    width: 720pt; height: 405pt;
-    padding: 40pt 64pt;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .title {
-    color: #1A1A1A;
-    font-size: 22pt;
-    font-weight: 700;
-    margin-bottom: 24pt;
-    text-align: center;
-    letter-spacing: -0.3pt;
-  }
-  .skills-list {
-    display: flex;
-    justify-content: center;
-    gap: 24pt;
-    margin-bottom: 20pt;
-  }
-  .skill-item-wrap {
-    padding: 10pt 16pt;
-    border: 1pt solid #E0E0E0;
-    background: #F8F9FA;
-  }
-  .skill-item {
-    color: #444444;
-    font-size: 13pt;
-    font-weight: 500;
-    text-align: center;
-  }
-  .divider {
-    width: 100%;
-    height: 1pt;
-    background: #E0E0E0;
-    margin: 20pt 0;
-  }
-  .formula-label {
-    color: #1A73E8;
-    font-size: 11pt;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 12pt;
-    letter-spacing: 0.5pt;
-  }
-  .formula {
-    color: #1A1A1A;
-    font-size: 16pt;
-    font-weight: 600;
-    text-align: center;
-    line-height: 1.6;
-    margin-bottom: 16pt;
-  }
-  .formula .blank {
-    color: #1A73E8;
-    border-bottom: 2pt solid #1A73E8;
-    padding: 0 12pt;
-  }
-  .cta {
-    color: #666666;
-    font-size: 12pt;
-    font-weight: 400;
-    text-align: center;
-    line-height: 1.5;
-  }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { background: #f5f5f0; }
+body {
+  width: 720pt; height: 405pt;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #f5f5f0;
+  display: flex;
+  flex-direction: column;
+  padding: 48pt 64pt;
+  justify-content: space-between;
+}
 </style>
 </head>
 <body>
-<div class="slide">
-  <h2 class="title">대체 불가능한 나만의 Skills</h2>
-  <div class="skills-list">
-    <div class="skill-item-wrap"><p class="skill-item">내가 읽는 맥락</p></div>
-    <div class="skill-item-wrap"><p class="skill-item">내가 감수하는 리스크</p></div>
-    <div class="skill-item-wrap"><p class="skill-item">내가 버리는 것들</p></div>
+
+  <!-- Top: title + three skills -->
+  <div style="display: flex; flex-direction: column; gap: 20pt;">
+    <h2 style="font-size: 28pt; font-weight: 800; color: #1a1a1a; letter-spacing: -0.02em; line-height: 1.2;">대체 불가능한 나만의 Skills</h2>
+
+    <!-- Three skill tags -->
+    <div style="display: flex; gap: 12pt; align-items: center;">
+      <div style="border: 1pt solid #1a1a1a; border-radius: 20pt; padding: 7pt 18pt;">
+        <p style="font-size: 12pt; font-weight: 500; color: #1a1a1a;">내가 읽는 맥락</p>
+      </div>
+      <div style="width: 16pt; height: 1pt; background: #d4d4d0;"></div>
+      <div style="border: 1pt solid #1a1a1a; border-radius: 20pt; padding: 7pt 18pt;">
+        <p style="font-size: 12pt; font-weight: 500; color: #1a1a1a;">내가 감수하는 리스크</p>
+      </div>
+      <div style="width: 16pt; height: 1pt; background: #d4d4d0;"></div>
+      <div style="border: 1pt solid #1a1a1a; border-radius: 20pt; padding: 7pt 18pt;">
+        <p style="font-size: 12pt; font-weight: 500; color: #1a1a1a;">내가 버리는 것들</p>
+      </div>
+    </div>
   </div>
-  <div class="divider"></div>
-  <p class="formula-label">HOMEWORK</p>
-  <p class="formula">"저는 <span class="blank">___</span>를 하는 사람이 아니라,<br><span class="blank">___</span>를 판단하는 사람입니다."</p>
-  <p class="cta">다음 주 60초 소개의 첫 문장으로 써보세요.</p>
-</div>
+
+  <!-- Divider -->
+  <div style="width: 100%; height: 1pt; background: #d4d4d0;"></div>
+
+  <!-- Bottom: homework formula -->
+  <div style="display: flex; flex-direction: column; gap: 16pt;">
+    <div style="display: flex; align-items: center; gap: 10pt;">
+      <div style="background: #1a1a1a; border-radius: 4pt; padding: 4pt 12pt; display: inline-block;">
+        <p style="font-size: 8pt; font-weight: 600; color: #ffffff; letter-spacing: 0.1em;">HOMEWORK</p>
+      </div>
+    </div>
+
+    <!-- Formula block -->
+    <div style="background: #e8e8e3; border-radius: 8pt; border-left: 3pt solid #1a1a1a; padding: 20pt 28pt;">
+      <p style="font-size: 17pt; font-weight: 700; color: #1a1a1a; line-height: 1.7; letter-spacing: -0.01em;">"저는 <span style="text-decoration: underline; text-decoration-color: #1a1a1a;">[___]</span>를 하는 사람이 아니라,</p>
+      <p style="font-size: 17pt; font-weight: 700; color: #1a1a1a; line-height: 1.7; letter-spacing: -0.01em;"><span style="text-decoration: underline; text-decoration-color: #1a1a1a;">[___]</span>를 판단하는 사람입니다."</p>
+    </div>
+
+    <p style="font-size: 11pt; color: #999999; line-height: 1.5;">다음 주 60초 소개의 첫 문장으로 써보세요.</p>
+  </div>
+
 </body>
 </html>

@@ -2,6 +2,6 @@
   "tool_name": "Read",
   "tool_input_preview": "{\"file_path\":\"/Users/kimjimyoung/Documents/projects/bni-edu/ppt_team_agent/.claude/skills/design-skill/SKILL.md\"}",
   "error": "File content (13194 tokens) exceeds maximum allowed tokens (10000). Use offset and limit parameters to read specific portions of the file, or search for specific content instead of reading the whole file.",
-  "timestamp": "2026-03-24T12:50:55.635Z",
+  "timestamp": "2026-03-24T12:53:35.327Z",
   "retry_count": 1
 }
