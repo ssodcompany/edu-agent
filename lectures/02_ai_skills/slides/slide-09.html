@@ -12,39 +12,31 @@ body {
   background: #f5f5f0;
   display: flex;
   flex-direction: column;
-  padding: 48pt 64pt;
-  justify-content: center;
+  padding: 44pt 64pt 40pt 64pt;
 }
 </style>
 </head>
 <body>
 
-  <div style="display: flex; flex-direction: column; gap: 24pt;">
-
-    <!-- Badge + title -->
-    <div style="display: flex; flex-direction: column; gap: 10pt;">
-      <div style="display: inline-block; background: #1a1a1a; border-radius: 4pt; padding: 5pt 14pt; align-self: flex-start;">
-        <p style="font-size: 9pt; font-weight: 600; color: #ffffff; letter-spacing: 0.12em;">SKILL 3</p>
-      </div>
-      <h2 style="font-size: 32pt; font-weight: 800; color: #1a1a1a; letter-spacing: -0.02em; line-height: 1.2;">버리는 판단</h2>
+  <!-- Badge + Title row -->
+  <div style="display: flex; align-items: center; gap: 16pt; margin-bottom: 28pt;">
+    <div style="background: #1a1a1a; padding: 5pt 14pt; flex-shrink: 0;">
+      <p style="font-size: 8pt; font-weight: 700; color: #ffffff; letter-spacing: 0.14em;">SKILL 3</p>
     </div>
+    <h2 style="font-size: 34pt; font-weight: 800; color: #1a1a1a; letter-spacing: -0.03em; line-height: 1.1;">버리는 판단</h2>
+  </div>
 
-    <!-- Quote box — prominent -->
-    <div style="border: 1pt solid #1a1a1a; border-left: 3pt solid #1a1a1a; padding: 20pt 28pt; background: #1a1a1a; border-radius: 0 6pt 6pt 0;">
-      <p style="font-size: 18pt; font-weight: 700; color: #ffffff; line-height: 1.6; letter-spacing: -0.01em;">"사장님, 이건 안 하시는 게 맞습니다"</p>
+  <!-- Inverted quote block: dark = maximum impact -->
+  <div style="background: #1a1a1a; padding: 20pt 28pt; margin-bottom: 24pt;">
+    <h3 style="font-size: 20pt; font-weight: 700; color: #ffffff; line-height: 1.5; letter-spacing: -0.01em;">"사장님, 이건 안 하시는 게 맞습니다"</h3>
+  </div>
+
+  <!-- Key line -->
+  <div style="flex: 1; display: flex; align-items: flex-end;">
+    <div>
+      <p style="font-size: 16pt; font-weight: 600; color: #1a1a1a; line-height: 1.55; letter-spacing: -0.01em;">'안 한다'고 말할 수 있는 것,</p>
+      <p style="font-size: 16pt; font-weight: 600; color: #1a1a1a; line-height: 1.55; letter-spacing: -0.01em;">그것이 수수료의 진짜 근거입니다</p>
     </div>
-
-    <!-- Key line -->
-    <div style="display: flex; flex-direction: column; gap: 4pt;">
-      <div style="display: flex; align-items: center; gap: 12pt;">
-        <div style="width: 20pt; height: 1pt; background: #1a1a1a; flex-shrink: 0;"></div>
-        <p style="font-size: 15pt; font-weight: 700; color: #1a1a1a; line-height: 1.6;">'안 한다'고 말할 수 있는 것,</p>
-      </div>
-      <div style="padding-left: 32pt;">
-        <p style="font-size: 15pt; font-weight: 700; color: #1a1a1a; line-height: 1.6;">그것이 수수료의 진짜 근거입니다</p>
-      </div>
-    </div>
-
   </div>
 
 </body>

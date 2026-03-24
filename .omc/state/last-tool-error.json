@@ -1,7 +1,7 @@
 {
-  "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"npm install -g impeccable 2>&1\",\"timeout\":60000,\"description\":\"Install impeccable globally\"}",
-  "error": "Exit code 1\nnpm error code E404\nnpm error 404 Not Found - GET https://registry.npmjs.org/impeccable - Not found\nnpm error 404\nnpm error 404  'impeccable@*' is not in this registry.\nnpm error 404\nnpm error 404 Note that you can also install from a\nnpm error 404 tarball, folder, http url, or git url.\nnpm error A complete log of this run can be found in: /Users/kimjimyoung/.npm/_logs/2026-03-24T13_04_56_564Z-debug-0.log",
-  "timestamp": "2026-03-24T13:04:57.057Z",
+  "tool_name": "Read",
+  "tool_input_preview": "{\"file_path\":\"/Users/kimjimyoung/Documents/projects/bni-edu/ppt_team_agent/.claude/skills/design-skill/SKILL.md\"}",
+  "error": "File content (13194 tokens) exceeds maximum allowed tokens (10000). Use offset and limit parameters to read specific portions of the file, or search for specific content instead of reading the whole file.",
+  "timestamp": "2026-03-24T13:12:42.013Z",
   "retry_count": 1
 }
