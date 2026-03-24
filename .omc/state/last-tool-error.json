@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"cd /Users/kimjimyoung/Documents/projects/bni-edu && git status -sb && echo \\\"---\\\" && git remote -v && echo \\\"---\\\" && git log --oneline -5\",\"description\":\"Check git status, remote, and re...",
+  "error": "Exit code 128\nfatal: not a git repository (or any of the parent directories): .git\n\nfatal: not a git repository (or any of the parent directories): .git",
+  "timestamp": "2026-02-24T14:28:24.332Z",
+  "retry_count": 1
+}
