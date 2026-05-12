@@ -262,8 +262,8 @@
   /* head right slot — SSOD brand mark (SVG mask, currentColor adapts to light/dark) */
   .head .brand-mark {
     display: inline-block;
-    width: 56px;
-    height: 22px;
+    width: 112px;
+    height: 44px;
     background-color: var(--ink);
     -webkit-mask: url('assets/ssod-logo-mono.svg') no-repeat right center / contain;
             mask: url('assets/ssod-logo-mono.svg') no-repeat right center / contain;
@@ -434,6 +434,187 @@
     font-size: 13.5px;
     color: var(--muted);
     letter-spacing: -0.005em;
+  }
+
+  /* ---- Amber Punch (02b) — 단독 슬라이드용 이중 앰버서더 punch ---- */
+  .amber-punch-stage {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 44px;
+    padding: 24px 0;
+  }
+  .amber-punch-badges {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 64px;
+  }
+  .amber-punch-badges img {
+    height: 168px;
+    width: auto;
+    display: block;
+    border-radius: 14px;
+    box-shadow: 0 2px 0 var(--hairline);
+  }
+  .amber-punch-headline {
+    font-size: 84px;
+    font-weight: 500;
+    letter-spacing: -0.038em;
+    line-height: 1.04;
+    color: var(--ink);
+  }
+  .amber-punch-headline strong {
+    color: var(--coral);
+    font-weight: 600;
+  }
+  .amber-punch-context {
+    font-size: 21px;
+    font-weight: 400;
+    color: var(--muted);
+    letter-spacing: -0.012em;
+    line-height: 1.5;
+    max-width: 800px;
+  }
+  .amber-punch-context strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .amber-punch-stamp {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--coral);
+  }
+  .amber-punch-stamp::before,
+  .amber-punch-stamp::after {
+    content: "";
+    width: 28px;
+    height: 1px;
+    background: var(--coral);
+  }
+
+  /* ---- Insight Grid (SoR/SoE/SoI 정의·통찰 분할 + 통일 패턴) ---- */
+  .insight-grid {
+    display: grid;
+    grid-template-columns: 4fr 8fr;
+    gap: 72px;
+    margin-top: 28px;
+    flex: 1;
+    align-items: stretch;
+  }
+  .insight-reminder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+    border-right: 1px solid var(--hairline);
+    padding-right: 36px;
+  }
+  .insight-reminder-no {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 72px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--coral);
+    line-height: 1;
+  }
+  .insight-reminder-frame {
+    font-size: 40px;
+    font-weight: 500;
+    letter-spacing: -0.026em;
+    color: var(--ink);
+    line-height: 1.05;
+  }
+  .insight-reminder-tag {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 56px;
+    font-weight: 600;
+    letter-spacing: -0.024em;
+    color: var(--coral);
+    line-height: 1;
+    margin-top: 4px;
+    margin-bottom: -2px;
+  }
+  .insight-reminder-mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .insight-reminder-aside {
+    font-size: 14px;
+    color: var(--muted);
+    letter-spacing: -0.005em;
+    line-height: 1.5;
+    margin-top: 6px;
+  }
+  .insight-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+  }
+  .insight-eyebrow {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--coral);
+  }
+  .insight-headline {
+    font-size: 54px;
+    font-weight: 500;
+    letter-spacing: -0.034em;
+    line-height: 1.08;
+    color: var(--ink);
+  }
+  .insight-headline strong { color: var(--coral); font-weight: 600; }
+  .insight-context {
+    font-size: 19px;
+    font-weight: 400;
+    color: var(--muted);
+    letter-spacing: -0.012em;
+    line-height: 1.6;
+    max-width: 680px;
+  }
+  .insight-context strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .insight-example {
+    background: var(--ink);
+    color: var(--on-dark);
+    border-radius: 12px;
+    padding: 26px 30px;
+    border-left: 3px solid var(--coral);
+  }
+  .insight-example-line {
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: -0.012em;
+    line-height: 1.45;
+  }
+  .insight-example-line + .insight-example-line {
+    margin-top: 8px;
+  }
+  .insight-example-meta {
+    font-size: 13.5px;
+    color: var(--on-dark-soft);
+    margin-top: 14px;
+    letter-spacing: -0.005em;
+    line-height: 1.5;
   }
 
   /* Photo placeholder — user drops images later.
@@ -1391,13 +1572,13 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">01 / 13</span>
+    <span class="page-no">01 / 22</span>
     <span class="source-line">2026 · 05 · 13</span>
   </div>
 </section>
 
 
-<!-- ========== 02 · 자기소개 ========== -->
+<!-- ========== 02 · 자기소개 (인사 + 하는 일) ========== -->
 <section class="slide">
   <div class="head">
     <span class="head-eyebrow">발표자 · 자기소개</span>
@@ -1408,45 +1589,86 @@
     <div class="intro-left">
       <div class="intro-name">김지명</div>
       <div class="intro-role">쏘드 컴퍼니 · 대표</div>
-      <div class="intro-pill">B2B 7년차 · 글로벌 이중 앰버서더</div>
-      <div class="intro-amber-cards">
-        <div class="amber-card">
-          <img class="amber-badge" src="assets/notion-ambassador-badge.png" alt="Notion Official Ambassador">
-          <span class="amber-label">Ambassador</span>
-          <span class="amber-value">Notion Global Official</span>
-        </div>
-        <div class="amber-card">
-          <img class="amber-badge" src="assets/n8n-amber-ssod-black.png" alt="n8n Official Ambassador">
-          <span class="amber-label">Ambassador</span>
-          <span class="amber-value">n8n Global Official</span>
-        </div>
-      </div>
+      <div class="intro-pill">B2B 7년차</div>
     </div>
-    <div class="intro-right">
-      <div class="intro-row">
+    <div class="intro-right" style="justify-content: center;">
+      <div class="intro-row" style="border-top: none; padding-top: 0;">
         <div class="intro-label">하는 일</div>
-        <div class="intro-headline">회사의<br>일하는 구조 만들기</div>
-        <div class="intro-aside">B2B 7년차 · 데이터 · 일 · 판단을 한 자리에</div>
-      </div>
-      <div class="intro-row">
-        <div class="intro-label">고객 스펙트럼</div>
-        <div class="intro-headline-md">직원 3명 사무실 → 수천억 매출 코스닥</div>
-        <div class="intro-aside">자영업·전문직·중견기업까지 — 같은 진단 렌즈</div>
-      </div>
-      <div class="intro-row">
-        <div class="intro-label">도구</div>
-        <div class="intro-headline-md">Notion · n8n · Claude Code</div>
-      </div>
-      <div class="intro-row">
-        <div class="intro-label">유튜브 구독자</div>
-        <div class="intro-headline-md"><strong>4,750</strong><span class="intro-unit">명</span></div>
-        <div class="intro-aside">최근 Notion 협업 — Notion Camp 워크숍 진행</div>
+        <div class="intro-headline">회사의<br>일하는 구조를 만듭니다.</div>
+        <div class="intro-aside" style="margin-top: 12px;">데이터 · 일 · 판단 — 셋을 한 자리에.</div>
       </div>
     </div>
   </div>
 
   <div class="foot">
-    <span class="page-no">02 / 13</span>
+    <span class="page-no">02 / 22</span>
+    <span class="source-line"></span>
+  </div>
+</section>
+
+
+<!-- ========== 03 · 이중 앰버서더 PUNCH ========== -->
+<section class="slide">
+  <div class="head">
+    <span class="head-eyebrow">자격 · 글로벌 공식 앰버서더</span>
+    <span class="brand-mark">SSOD</span>
+  </div>
+
+  <div class="amber-punch-stage">
+    <div class="amber-punch-badges">
+      <img src="assets/notion-ambassador-badge.png" alt="Notion Global Official Ambassador">
+      <img src="assets/n8n-amber-ssod-black.png" alt="n8n Global Official Ambassador">
+    </div>
+
+    <span class="amber-punch-stamp">Global · Official</span>
+
+    <div class="amber-punch-headline">
+      둘 다 — <strong>한국 1인.</strong>
+    </div>
+
+    <div class="amber-punch-context">
+      <strong>Notion · n8n</strong> — 글로벌 공식 앰버서더 자격, <strong>한국에서 단 한 명</strong>이 보유합니다.
+    </div>
+  </div>
+
+  <div class="foot">
+    <span class="page-no">03 / 22</span>
+    <span class="source-line"></span>
+  </div>
+</section>
+
+
+<!-- ========== 04 · 자기소개 (활동 · 스펙트럼) ========== -->
+<section class="slide">
+  <div class="head">
+    <span class="head-eyebrow">자기소개 · 활동 영역</span>
+    <span class="brand-mark">SSOD</span>
+  </div>
+
+  <div class="intro-grid">
+    <div class="intro-left" style="justify-content: center;">
+      <div class="intro-row" style="border-top: none; padding-top: 0;">
+        <div class="intro-label">고객 스펙트럼</div>
+        <div class="intro-headline">직원 3명 사무실<br>→ 수천억 코스닥</div>
+        <div class="intro-aside" style="margin-top: 12px;">자영업·전문직·중견기업까지 — 같은 진단 렌즈.</div>
+      </div>
+    </div>
+    <div class="intro-right">
+      <div class="intro-row" style="border-top: none; padding-top: 0;">
+        <div class="intro-label">도구</div>
+        <div class="intro-headline-md">Notion · n8n · Claude Code</div>
+        <div class="intro-aside" style="margin-top: 6px;">세 도구로 데이터·일·판단을 잇습니다.</div>
+      </div>
+      <div class="intro-row">
+        <div class="intro-label">유튜브 구독자</div>
+        <div class="intro-headline-md"><strong>4,750</strong><span class="intro-unit">명</span></div>
+        <div class="intro-aside">SSOD with Notion · Notion Camp 워크숍 협업</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span class="page-no">04 / 22</span>
     <span class="source-line"></span>
   </div>
 </section>
@@ -1482,164 +1704,252 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">03 / 13</span>
+    <span class="page-no">05 / 22</span>
     <span class="source-line"></span>
   </div>
 </section>
 
 
-<!-- ========== 04 · SoR ========== -->
+<!-- ========== 05 · SoR · 정의 ========== -->
 <section class="slide">
   <div class="head">
-    <span class="head-eyebrow">진단 프레임 · 01</span>
+    <span class="head-eyebrow">진단 프레임 · 01 · 데이터</span>
     <span class="brand-mark">SSOD</span>
   </div>
 
-  <div class="frame-headline">
-    <span class="frame-no">①</span>
-    <span class="display-md">데이터</span>
-    <span class="frame-mono">— SoR</span>
-  </div>
-  <div class="subtitle">일하는 구조의 첫 번째 부분 — 사실이 적힌 곳 <span style="color: var(--muted);">· System of Record</span></div>
-
-  <div class="definition-grid">
-    <div class="def-card">
-      <div class="def-eyebrow-row">
-        <img class="def-icon" src="assets/icon-chart.png" alt="">
-        <div class="def-eyebrow">정의</div>
-      </div>
-      <div class="def-title">진짜 사실이 모인 곳</div>
-      <div class="def-subtitle">변하지 않는 기록</div>
-      <ul class="def-keywords">
-        <li>어제 누가 뭘 샀고, 재고가 얼마고, 단골이 누군지</li>
-        <li>ERP · 회계 시스템 · 고객 명단 · 거래 기록</li>
-        <li>변경되면 안 되는 사내 표준 정보</li>
-      </ul>
+  <div class="insight-grid">
+    <div class="insight-reminder">
+      <div class="insight-reminder-no">①</div>
+      <div class="insight-reminder-frame">데이터</div>
+      <div class="insight-reminder-tag">SoR</div>
+      <div class="insight-reminder-mono">System of Record</div>
+      <div class="insight-reminder-aside">일하는 구조의 첫 번째 부분 — 사실이 적힌 곳</div>
     </div>
-    <div class="def-card with-accent">
-      <div class="def-eyebrow">통찰</div>
-      <div class="def-title">데이터만으로는 부족합니다</div>
-      <div class="def-subtitle">다음 슬라이드에서 이어집니다</div>
-      <div class="def-insight">
-        SoR에는 <strong>거래 데이터뿐만 아니라</strong> — 우리 회사가 <strong>어떻게 판단하는지</strong>도 같이 적혀 있어야 합니다.<br><br>
-        이게 빠진 회사가 가장 많습니다.
+    <div class="insight-body">
+      <div class="def-card">
+        <div class="def-eyebrow-row">
+          <img class="def-icon" src="assets/icon-chart.png" alt="">
+          <div class="def-eyebrow">정의</div>
+        </div>
+        <div class="def-title">진짜 사실이 모인 곳</div>
+        <div class="def-subtitle">변하지 않는 기록</div>
+        <ul class="def-keywords">
+          <li>어제 누가 뭘 샀고, 재고가 얼마고, 단골이 누군지</li>
+          <li>ERP · 회계 시스템 · 고객 명단 · 거래 기록</li>
+          <li>변경되면 안 되는 사내 표준 정보</li>
+        </ul>
       </div>
     </div>
   </div>
 
   <div class="foot">
-    <span class="page-no">04 / 13</span>
+    <span class="page-no">06 / 22</span>
     <span class="source-line"></span>
   </div>
 </section>
 
 
-<!-- ========== 05 · SoE ========== -->
+<!-- ========== 06 · SoR · 통찰 ========== -->
 <section class="slide">
   <div class="head">
-    <span class="head-eyebrow">진단 프레임 · 02</span>
+    <span class="head-eyebrow">진단 프레임 · 01 · 통찰</span>
     <span class="brand-mark">SSOD</span>
   </div>
 
-  <div class="frame-headline">
-    <span class="frame-no">②</span>
-    <span class="display-md">일하는 곳</span>
-    <span class="frame-mono">— SoE</span>
-  </div>
-  <div class="subtitle">일하는 구조의 두 번째 부분 — 메시지·결정이 흐르는 자리 <span style="color: var(--muted);">· System of Engagement</span></div>
-
-  <div class="definition-grid">
-    <div class="def-card">
-      <div class="def-eyebrow-row">
-        <img class="def-icon" src="assets/icon-users.png" alt="">
-        <div class="def-eyebrow">정의</div>
-      </div>
-      <div class="def-title">사람과 사람이 만나는 디지털 공간</div>
-      <div class="def-subtitle">직원들이 진짜로 일하는 자리</div>
-      <ul class="def-keywords">
-        <li>카톡방 · 슬랙 · 노션</li>
-        <li>이메일 · 결재 시스템 · 협업 도구</li>
-        <li>알림 · 요청 · 응답 · 승인이 흐르는 통로</li>
-      </ul>
+  <div class="insight-grid">
+    <div class="insight-reminder">
+      <div class="insight-reminder-no">①</div>
+      <div class="insight-reminder-frame">데이터</div>
+      <div class="insight-reminder-tag">SoR</div>
+      <div class="insight-reminder-mono">System of Record</div>
     </div>
-    <div class="def-card with-accent">
-      <div class="def-eyebrow">통찰</div>
-      <div class="def-title">AI는 이 공간 안으로 들어와야 합니다</div>
-      <div class="def-subtitle">밖에서 부르면 안 만나집니다</div>
-      <div class="def-insight">
-        AI 에이전트가 일하려면 — <strong>사람들이 이미 모여 있는 공간</strong> 안에서 호출되고 응답해야 합니다.<br><br>
-        "AI 콘솔 열어서 명령" 모델은 무너집니다.
+    <div class="insight-body">
+      <div class="insight-eyebrow">핵심 통찰</div>
+      <div class="insight-headline">데이터만으로는 — <strong>부족합니다.</strong></div>
+      <div class="insight-context">
+        SoR에는 <strong>거래 데이터뿐만 아니라</strong> — 우리 회사가 <strong>어떻게 판단하는지</strong>도 같이 적혀 있어야 합니다. 이게 빠진 회사가 가장 많습니다.
       </div>
     </div>
   </div>
 
   <div class="foot">
-    <span class="page-no">05 / 13</span>
+    <span class="page-no">07 / 22</span>
     <span class="source-line"></span>
   </div>
 </section>
 
 
-<!-- ========== 06 · SoI ========== -->
+<!-- ========== 07 · SoE · 정의 ========== -->
 <section class="slide">
   <div class="head">
-    <span class="head-eyebrow">진단 프레임 · 03 · 핵심</span>
+    <span class="head-eyebrow">진단 프레임 · 02 · 일하는 곳</span>
     <span class="brand-mark">SSOD</span>
   </div>
 
-  <div class="frame-headline">
-    <span class="frame-no coral">③</span>
-    <span class="display-md">판단</span>
-    <span class="frame-mono">— SoI</span>
-  </div>
-  <div class="subtitle">일하는 구조의 세 번째 부분 — 데이터가 결정으로 바뀌는 자리 <span style="color: var(--muted);">· System of Intelligence</span></div>
-
-  <div class="definition-grid">
-    <div class="def-card">
-      <div class="def-eyebrow-row">
-        <img class="def-icon" src="assets/icon-robot.png" alt="">
-        <div class="def-eyebrow">정의</div>
-      </div>
-      <div class="def-title">결정이 나오는 자리</div>
-      <div class="def-subtitle">데이터 → 의미 → 행동</div>
-      <ul class="def-keywords">
-        <li>"어제 매출 안 좋네, 오늘 이거 더 들이자."</li>
-        <li>옛날엔 — 사장님이 그 자리에 있었음</li>
-        <li>지금은 — 대시보드 · AI 에이전트가 받고 있음</li>
-      </ul>
+  <div class="insight-grid">
+    <div class="insight-reminder">
+      <div class="insight-reminder-no">②</div>
+      <div class="insight-reminder-frame">일하는 곳</div>
+      <div class="insight-reminder-tag">SoE</div>
+      <div class="insight-reminder-mono">System of Engagement</div>
+      <div class="insight-reminder-aside">두 번째 부분 — 메시지·결정이 흐르는 자리</div>
     </div>
-    <div class="def-card with-accent">
-      <div class="def-eyebrow">핵심 통찰</div>
-      <div class="def-title">사람 머릿속 룰이<br>데이터 옆에 같이 적혀야 합니다</div>
-      <div class="def-subtitle">이게 빠진 회사가 가장 많습니다</div>
-      <div class="dark-inset">
-        <div class="quote-line">"이 단골은 신상 빨리 알린다"</div>
-        <div class="quote-line">"재고 30% 이하면 발주"</div>
-        <div class="quote-meta">— 이런 기준이 데이터 옆에 같이 적혀야 AI가 그 자리를 받습니다.</div>
+    <div class="insight-body">
+      <div class="def-card">
+        <div class="def-eyebrow-row">
+          <img class="def-icon" src="assets/icon-users.png" alt="">
+          <div class="def-eyebrow">정의</div>
+        </div>
+        <div class="def-title">사람과 사람이 만나는 디지털 공간</div>
+        <div class="def-subtitle">직원들이 진짜로 일하는 자리</div>
+        <ul class="def-keywords">
+          <li>카톡방 · 슬랙 · 노션</li>
+          <li>이메일 · 결재 시스템 · 협업 도구</li>
+          <li>알림 · 요청 · 응답 · 승인이 흐르는 통로</li>
+        </ul>
       </div>
     </div>
   </div>
 
   <div class="foot">
-    <span class="page-no">06 / 13</span>
+    <span class="page-no">08 / 22</span>
     <span class="source-line"></span>
   </div>
 </section>
 
 
-<!-- ========== 07 · SSOD 브랜드 의미 reveal ========== -->
+<!-- ========== 08 · SoE · 통찰 ========== -->
+<section class="slide">
+  <div class="head">
+    <span class="head-eyebrow">진단 프레임 · 02 · 통찰</span>
+    <span class="brand-mark">SSOD</span>
+  </div>
+
+  <div class="insight-grid">
+    <div class="insight-reminder">
+      <div class="insight-reminder-no">②</div>
+      <div class="insight-reminder-frame">일하는 곳</div>
+      <div class="insight-reminder-tag">SoE</div>
+      <div class="insight-reminder-mono">System of Engagement</div>
+    </div>
+    <div class="insight-body">
+      <div class="insight-eyebrow">핵심 통찰</div>
+      <div class="insight-headline">AI는 이 공간 <strong>안으로</strong> 들어와야 합니다.</div>
+      <div class="insight-context">
+        AI 에이전트가 일하려면 — <strong>사람들이 이미 모여 있는 공간</strong> 안에서 호출되고 응답해야 합니다. <strong>"AI 콘솔 열어서 명령"</strong> 모델은 무너집니다.
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span class="page-no">09 / 22</span>
+    <span class="source-line"></span>
+  </div>
+</section>
+
+
+<!-- ========== 09 · SoI · 정의 ========== -->
+<section class="slide">
+  <div class="head">
+    <span class="head-eyebrow">진단 프레임 · 03 · 판단 · 핵심</span>
+    <span class="brand-mark">SSOD</span>
+  </div>
+
+  <div class="insight-grid">
+    <div class="insight-reminder">
+      <div class="insight-reminder-no" style="color: var(--coral);">③</div>
+      <div class="insight-reminder-frame">판단</div>
+      <div class="insight-reminder-tag">SoI</div>
+      <div class="insight-reminder-mono">System of Intelligence</div>
+      <div class="insight-reminder-aside">세 번째 부분 — 데이터가 결정으로 바뀌는 자리</div>
+    </div>
+    <div class="insight-body">
+      <div class="def-card">
+        <div class="def-eyebrow-row">
+          <img class="def-icon" src="assets/icon-robot.png" alt="">
+          <div class="def-eyebrow">정의</div>
+        </div>
+        <div class="def-title">결정이 나오는 자리</div>
+        <div class="def-subtitle">데이터 → 의미 → 행동</div>
+        <ul class="def-keywords">
+          <li>"어제 매출 안 좋네, 오늘 이거 더 들이자."</li>
+          <li>옛날엔 — 사장님이 그 자리에 있었음</li>
+          <li>지금은 — 대시보드 · AI 에이전트가 받고 있음</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span class="page-no">10 / 22</span>
+    <span class="source-line"></span>
+  </div>
+</section>
+
+
+<!-- ========== 10 · SoI · 통찰 (발표의 thesis) ========== -->
+<section class="slide">
+  <div class="head">
+    <span class="head-eyebrow">진단 프레임 · 03 · 통찰 · 발표의 thesis</span>
+    <span class="brand-mark">SSOD</span>
+  </div>
+
+  <div class="insight-grid">
+    <div class="insight-reminder">
+      <div class="insight-reminder-no" style="color: var(--coral);">③</div>
+      <div class="insight-reminder-frame">판단</div>
+      <div class="insight-reminder-tag">SoI</div>
+      <div class="insight-reminder-mono">System of Intelligence</div>
+    </div>
+    <div class="insight-body">
+      <div class="insight-eyebrow">핵심 통찰</div>
+      <div class="insight-headline">사람 머릿속 룰이<br><strong>데이터 옆에</strong> 같이 적혀야 합니다.</div>
+      <div class="insight-example">
+        <div class="insight-example-line">"이 단골은 신상 빨리 알린다"</div>
+        <div class="insight-example-line">"재고 30% 이하면 발주"</div>
+        <div class="insight-example-meta">— 이런 기준이 데이터 옆에 같이 적혀야 AI가 그 자리를 받습니다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span class="page-no">11 / 22</span>
+    <span class="source-line"></span>
+  </div>
+</section>
+
+
+<!-- ========== 11 · SSOD 브랜드 의미 reveal (punch only) ========== -->
 <section class="slide paper">
   <div class="head">
-    <span class="head-eyebrow">브랜드 의미 · 회사 이름과 프레임</span>
+    <span class="head-eyebrow">브랜드 의미 · 회사 이름 풀이</span>
     <span class="brand-mark">SSOD</span>
   </div>
 
-  <div class="ssod-reveal-headline">
-    <span class="ssod-letter">S</span><span class="ssod-letter">S</span><span class="ssod-letter">O</span><span class="ssod-letter">D</span>
-    <span class="ssod-equals">=</span>
-    <span class="ssod-expansion">Sync with <strong>Self</strong> · <strong>Other</strong> · <strong>Data</strong></span>
+  <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 36px;">
+    <div class="ssod-reveal-headline" style="justify-content: center;">
+      <span class="ssod-letter">S</span><span class="ssod-letter">S</span><span class="ssod-letter">O</span><span class="ssod-letter">D</span>
+      <span class="ssod-equals">=</span>
+      <span class="ssod-expansion">Sync with <strong>Self</strong> · <strong>Other</strong> · <strong>Data</strong></span>
+    </div>
+    <div class="subtitle" style="max-width: 820px;">회사 이름 자체가 — 개인 · 조직 · 데이터를 한 자리에 맞춰서 일하는 구조를 만드는 일입니다.</div>
   </div>
-  <div class="subtitle">회사 이름 자체가 — 개인 · 조직 · 데이터를 한 자리에 맞춰서 일하는 구조를 만드는 일입니다.</div>
+
+  <div class="foot">
+    <span class="page-no">12 / 22</span>
+    <span class="source-line"></span>
+  </div>
+</section>
+
+
+<!-- ========== 12 · SSOD ↔ SoX 매핑 ========== -->
+<section class="slide paper">
+  <div class="head">
+    <span class="head-eyebrow">브랜드 의미 · 프레임 매핑</span>
+    <span class="brand-mark">SSOD</span>
+  </div>
+
+  <div class="display-md" style="margin-top: 8px;">SSOD 세 글자가 — 진단 프레임 셋과 맞물립니다.</div>
 
   <div class="ssod-map-grid">
     <div class="ssod-map-row">
@@ -1679,7 +1989,7 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">07 / 13</span>
+    <span class="page-no">13 / 22</span>
     <span class="source-line"></span>
   </div>
 </section>
@@ -1713,7 +2023,7 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">08 / 13</span>
+    <span class="page-no">14 / 22</span>
     <span class="source-line"></span>
   </div>
 </section>
@@ -1760,76 +2070,81 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">09 / 13</span>
+    <span class="page-no">15 / 22</span>
     <span class="source-line">두 회사 합성 · NDA 익명</span>
   </div>
 </section>
 
 
-<!-- ========== 10 · AI 시대 timeline ========== -->
+<!-- ========== AI 본질 · 팔란티어 통찰 (이전 14·AI 시대 timeline 슬라이드는 Gartner 의존 제거 결정으로 통째 삭제 2026-05-13) ========== -->
 <section class="slide paper">
   <div class="head">
-    <span class="head-eyebrow">AI 시대 · 1년 · 3년 · 5년 풍경</span>
+    <span class="head-eyebrow">AI 시대 · 본질 · 진짜 비싼 일</span>
     <span class="brand-mark">SSOD</span>
   </div>
 
-  <div class="display-md">AI는 일하는 구조 있는 회사만 받습니다.</div>
-  <div class="subtitle">풍경은 발화로, 숫자는 슬라이드로.</div>
-
-  <div class="timeline-line">
-    <span class="point p1"></span>
-    <span class="point p2"></span>
-    <span class="point p3"></span>
-  </div>
-
-  <div class="stat-grid">
-    <div class="stat-card">
-      <div class="stat-when">1년 후 · 2026</div>
-      <div class="stat-value">40%</div>
-      <div class="stat-label">앱 10개 중 4개</div>
-      <div class="stat-body">회사에서 쓰는 앱의 <strong>40%</strong>가 AI 에이전트를 내장합니다.</div>
-      <div class="stat-source">— Gartner</div>
+  <div class="insight-grid">
+    <div class="insight-reminder">
+      <div class="insight-reminder-mono">AI BUILD ECONOMY</div>
+      <div class="insight-reminder-frame" style="font-size: 34px;">사람 머릿속 룰을<br>시스템에 옮겨 적는 일.</div>
+      <div class="insight-reminder-aside">— 이게 진짜 비싼 일입니다.</div>
     </div>
-    <div class="stat-card">
-      <div class="stat-when">3년 후 · 2028</div>
-      <div class="stat-value">15%</div>
-      <div class="stat-label">일상 업무 결정</div>
-      <div class="stat-body">결정의 <strong>15%</strong>가 AI 자율 실행. 단, 도입 프로젝트 <strong>40%</strong>는 2027년까지 취소 — 데이터 비어 있는 회사가 떨어집니다.</div>
-      <div class="stat-source">— Gartner</div>
+    <div class="insight-body">
+      <div class="insight-eyebrow">팔란티어가 비싼 이유</div>
+      <div class="insight-headline">AI는 <strong>일하는 구조</strong>를 — 스스로 못 만듭니다.</div>
+      <div class="insight-context">
+        미국 <strong>팔란티어</strong>가 그 일로 비쌉니다. 데이터 옆에 회사의 <strong>판단 기준을 같이 적어주는 일</strong> — AI는 그 위에서만 돌아갑니다.
+      </div>
     </div>
-    <div class="stat-card">
-      <div class="stat-when">5년 후 · 누적</div>
-      <div class="stat-value">+53%</div>
-      <div class="stat-label">매출 성장 격차</div>
-      <div class="stat-body">데이터 통합한 회사가 안 한 회사보다 3년 누적 매출 성장 <strong>53%</strong> 빠릅니다.</div>
-      <div class="stat-source">— Deloitte</div>
-    </div>
-  </div>
-
-  <div class="stat-takeaway-bar">
-    <span class="tool-logos-inline">
-      <img class="notion-mark" src="assets/notion-logo.png" alt="Notion">
-      <img src="assets/claude-logo.png" alt="Claude">
-    </span>
-    AI는 <strong>일하는 구조</strong>를 스스로 못 만듭니다. <strong>사람 머릿속 판단 기준을 시스템에 옮겨 적는 일</strong> — 이게 진짜 비싼 일입니다. 미국 팔란티어가 그 일로 비싸고, 저도 <strong>Notion · n8n · Claude Code</strong> 들고 회사 현장에 들어가서 합니다.
   </div>
 
   <div class="foot">
-    <span class="page-no">10 / 13</span>
-    <span class="source-line">출처 · Gartner 2026 · Deloitte</span>
+    <span class="page-no">16 / 22</span>
+    <span class="source-line">참조 · Palantir Ontology layer</span>
   </div>
 </section>
 
 
-<!-- ========== 11 · 도구 혈관도 (SSOD가 푸는 자리) ========== -->
+<!-- ========== 16 · 한국에선 — 쏘드가 ========== -->
 <section class="slide">
   <div class="head">
-    <span class="head-eyebrow">SSOD가 쓰는 도구 · 4가지</span>
+    <span class="head-eyebrow">그 자리에 · 쏘드가 들어갑니다</span>
     <span class="brand-mark">SSOD</span>
   </div>
 
-  <div class="display-md">네 가지 도구로 회사의 일하는 구조를 만듭니다.</div>
-  <div class="subtitle">데이터 · 일 · 판단 — 셋을 한 자리로, 그리고 셋을 흐르게 하는 혈관.</div>
+  <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 32px;">
+    <div class="insight-eyebrow">한국에선 — 같은 일을</div>
+    <div class="display-md" style="font-size: 62px; line-height: 1.08;">
+      쏘드가 — <strong style="color: var(--coral);">현장에 들어가서</strong> 합니다.
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 28px; padding: 18px 32px; background: #ffffff; border: 1px solid var(--hairline); border-radius: 14px;">
+      <img src="assets/notion-logo.png" alt="Notion" style="height: 36px;">
+      <span style="color: var(--muted); font-size: 18px;">·</span>
+      <span style="font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 22px; font-weight: 600; letter-spacing: -0.01em; color: var(--ink);">n8n</span>
+      <span style="color: var(--muted); font-size: 18px;">·</span>
+      <img src="assets/claude-logo.png" alt="Claude" style="height: 36px;">
+    </div>
+
+    <div class="subtitle" style="max-width: 720px;">Notion · n8n · Claude Code — <strong>세 도구</strong>로 데이터·일·판단을 한 자리에 맞춥니다.</div>
+  </div>
+
+  <div class="foot">
+    <span class="page-no">17 / 22</span>
+    <span class="source-line"></span>
+  </div>
+</section>
+
+
+<!-- ========== 17 · 도구 3종 · 데이터·일·판단 ========== -->
+<section class="slide">
+  <div class="head">
+    <span class="head-eyebrow">SSOD가 쓰는 도구 · 세 자리</span>
+    <span class="brand-mark">SSOD</span>
+  </div>
+
+  <div class="display-md">세 도구로 — 데이터·일·판단을 한 자리에.</div>
+  <div class="subtitle">진단 프레임 셋에 — 도구 하나씩.</div>
 
   <div class="tool-grid">
     <div class="tool-card">
@@ -1863,22 +2178,41 @@
     </div>
   </div>
 
-  <div class="vessel-flow-connector" aria-hidden="true">
-    <span class="flow-tick">↓</span>
-    <span class="flow-tick">↓</span>
-    <span class="flow-tick">↓</span>
-    <span class="flow-label">flows through</span>
+  <div class="foot">
+    <span class="page-no">18 / 22</span>
+    <span class="source-line"></span>
+  </div>
+</section>
+
+
+<!-- ========== 18 · 혈관 · n8n (punch) ========== -->
+<section class="slide">
+  <div class="head">
+    <span class="head-eyebrow">네 번째 도구 · 셋을 잇는 혈관</span>
+    <span class="brand-mark">SSOD</span>
   </div>
 
-  <div class="vessel-bar">
-    <div class="vessel-label">혈관</div>
-    <div class="vessel-name">n8n</div>
-    <div class="vessel-desc">셋 사이로 데이터를 흐르게 하는 자동화 — 노드와 노드를 잇는 파이프라인.</div>
+  <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 36px;">
+    <div class="insight-eyebrow" style="text-align: center;">혈관 — 셋을 흐르게 하는 자리</div>
+
+    <div style="display: flex; align-items: center; justify-content: center; gap: 28px;">
+      <div style="font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 22px; color: var(--muted); letter-spacing: 0.04em;">Notion</div>
+      <span style="color: var(--coral); font-size: 24px;">↔</span>
+      <div style="font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 22px; color: var(--muted); letter-spacing: 0.04em;">엑셀 → Notion</div>
+      <span style="color: var(--coral); font-size: 24px;">↔</span>
+      <div style="font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 22px; color: var(--muted); letter-spacing: 0.04em;">Claude</div>
+    </div>
+
+    <div style="text-align: center;">
+      <div style="font-size: 132px; font-weight: 500; letter-spacing: -0.04em; line-height: 1; color: var(--coral); font-family: 'JetBrains Mono', ui-monospace, monospace;">n8n</div>
+      <div style="font-size: 20px; font-weight: 500; color: var(--ink); margin-top: 16px; letter-spacing: -0.012em;">셋 사이로 데이터를 흐르게 하는 자동화.</div>
+      <div style="font-size: 16px; color: var(--muted); margin-top: 8px; letter-spacing: -0.005em;">노드와 노드를 잇는 파이프라인 — 회사의 혈관입니다.</div>
+    </div>
   </div>
 
   <div class="foot">
-    <span class="page-no">11 / 13</span>
-    <span class="source-line">혈관 메타포 · SSOD · Notion · Claude · n8n</span>
+    <span class="page-no">19 / 22</span>
+    <span class="source-line">혈관 메타포 · n8n</span>
   </div>
 </section>
 
@@ -1937,13 +2271,13 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">12 / 13</span>
+    <span class="page-no">20 / 22</span>
     <span class="source-line"></span>
   </div>
 </section>
 
 
-<!-- ========== 13 · Closing ========== -->
+<!-- ========== 22 · Closing · 슬로건 + thesis ========== -->
 <section class="slide dark">
   <div class="head">
     <div style="display: flex; align-items: center; gap: 12px;">
@@ -1954,19 +2288,14 @@
   </div>
 
   <div class="closing-grid">
-    <div class="closing-left">
+    <div class="closing-left" style="justify-content: center;">
       <div class="display-xl">
         구조가 없으면,<br>
         AI도 없습니다.
       </div>
-      <div class="thesis-bridge"><strong>그 구조를 — 쏘드가 만듭니다.</strong></div>
-      <div class="subtitle" style="color: var(--on-dark-soft); max-width: 640px; margin-top: 18px;">
+      <div class="thesis-bridge" style="margin-top: 28px;"><strong>그 구조를 — 쏘드가 만듭니다.</strong></div>
+      <div class="subtitle" style="color: var(--on-dark-soft); max-width: 640px; margin-top: 22px;">
         일하는 구조 없는 자리에 AI만 앉혀 놓는 회사 — 더 안 만들고 싶어서요.
-      </div>
-      <div class="referral-hook">
-        <span class="referral-cue">오늘의 부탁 한 줄</span>
-        거래처·지인 중에 — <strong>ERP는 있는데 엑셀에 의존</strong>하거나, <strong>데이터·일·판단이 사장님 머리에만</strong> 있는 회사 떠오르시면 — <strong>저를 떠올려주세요.</strong>
-        <div class="referral-anchor"><strong>Gartner</strong>가 말한 AI 프로젝트 <strong>40% 취소 후보</strong>가 바로 그 회사들이에요.</div>
       </div>
     </div>
     <div class="closing-right">
@@ -1976,6 +2305,31 @@
           <span class="photo-slot-hint" style="color: var(--on-dark-soft);">발표 현장 / Notion Camp 워크숍 / 강연 사진</span>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span class="page-no">21 / 22</span>
+    <span class="source-line">2026 · 05 · 13 · BNI K-Chapter</span>
+  </div>
+</section>
+
+
+<!-- ========== 23 · Closing · referral 부탁 한 줄 (단독 punch) ========== -->
+<section class="slide dark">
+  <div class="head">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <span class="head-eyebrow">Closing · 오늘의 부탁 한 줄</span>
+      <span class="coral-dot"></span>
+    </div>
+    <span class="brand-mark" style="color: var(--on-dark);">SSOD</span>
+  </div>
+
+  <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 32px; max-width: 1080px; margin: 0 auto; width: 100%;">
+    <div class="insight-eyebrow" style="color: var(--coral);">오늘의 부탁 한 줄</div>
+
+    <div style="font-size: 54px; font-weight: 500; letter-spacing: -0.034em; line-height: 1.14; color: var(--on-dark);">
+      거래처·지인 중에 — <strong style="color: var(--coral);">ERP는 있는데 엑셀에 의존</strong>하거나, <strong style="color: var(--coral);">데이터·일·판단이 사장님 머리에만</strong> 있는 회사 떠오르시면 — <strong>저를 떠올려주세요.</strong>
     </div>
   </div>
 
@@ -1995,7 +2349,7 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">13 / 13</span>
+    <span class="page-no">22 / 22</span>
     <span class="source-line">2026 · 05 · 13 · BNI K-Chapter</span>
   </div>
 </section>
