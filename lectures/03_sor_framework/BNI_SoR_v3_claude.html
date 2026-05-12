@@ -1003,6 +1003,284 @@
   }
 
   /* =========================================================
+     Slide 7 — SSOD philosophy reveal (paper)
+     ========================================================= */
+  .ssod-reveal-headline {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .ssod-reveal-headline .ssod-letter {
+    font-family: 'Pretendard Variable', sans-serif;
+    font-size: 76px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+  /* All four letters ink — slogan 96px stays sole peak */
+  .ssod-reveal-headline .ssod-letter { color: var(--ink); }
+  /* Coral applied only as a frame accent on the last row (D), not on the headline */
+  .ssod-reveal-headline .ssod-equals {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 56px;
+    font-weight: 400;
+    color: var(--muted);
+    margin: 0 12px;
+  }
+  .ssod-reveal-headline .ssod-expansion {
+    font-size: 34px;
+    font-weight: 500;
+    color: var(--body-strong);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+  .ssod-reveal-headline .ssod-expansion strong {
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  .ssod-map-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 38px;
+  }
+  .ssod-map-row {
+    display: grid;
+    grid-template-columns: 64px 1fr 1fr 36px 220px;
+    align-items: center;
+    gap: 18px;
+    padding: 20px 24px;
+    background: var(--surface-card);
+    border-radius: var(--radius-lg);
+  }
+  .ssod-map-row .ssod-map-letter { color: var(--ink); }
+  /* Row 3 (Data) carries a coral accent via frame border, not the letter — preserves AA contrast */
+  .ssod-map-row:nth-child(3) {
+    border-left: 3px solid var(--coral);
+    padding-left: 21px; /* compensates for the 3px border */
+  }
+  .ssod-map-letter {
+    font-family: 'Pretendard Variable', sans-serif;
+    font-size: 56px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    text-align: center;
+  }
+  .ssod-map-english {
+    font-size: 19px;
+    color: var(--body);
+    letter-spacing: -0.01em;
+  }
+  .ssod-map-english strong {
+    color: var(--ink);
+    font-weight: 700;
+  }
+  .ssod-map-korean {
+    font-size: 18px;
+    color: var(--body-strong);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  .ssod-map-arrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    color: var(--muted);
+    text-align: center;
+  }
+  .ssod-map-frame {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 12px 18px;
+    background: var(--canvas);
+    border-radius: var(--radius-md);
+    justify-content: flex-end;
+  }
+  .ssod-map-frame .frame-tag {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .ssod-map-frame .frame-mono-sm {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0;
+  }
+
+  .ssod-reveal-footer {
+    margin-top: 32px;
+    padding-top: 18px;
+    border-top: 2px solid var(--coral);
+    font-size: 17px;
+    color: var(--body-strong);
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+  }
+  .ssod-reveal-footer strong {
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  /* =========================================================
+     Slide 11 — 도구 혈관도 (Tool stack with n8n as vessel)
+     ========================================================= */
+  .tool-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 18px;
+    margin-top: 24px;
+  }
+  .tool-card {
+    background: var(--surface-card);
+    border-radius: var(--radius-lg);
+    padding: 22px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .tool-card .tool-eyebrow {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--hairline);
+    margin-bottom: 8px;
+  }
+  .tool-card .tool-frame {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .tool-card .tool-mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+  .tool-card .tool-logo-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+  }
+  .tool-card .tool-logo {
+    height: 32px;
+    width: auto;
+    object-fit: contain;
+  }
+  .tool-card .tool-name {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+  .tool-card .tool-name-sm {
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+  .tool-card .tool-letter-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px; height: 32px;
+    background: var(--surface-dark);
+    color: var(--canvas);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: var(--radius-sm);
+    letter-spacing: 0;
+  }
+  .tool-card .tool-arrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    color: var(--coral);
+    font-weight: 600;
+  }
+  .tool-card .tool-role {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--body-strong);
+    letter-spacing: -0.01em;
+  }
+  .tool-card .tool-detail {
+    font-size: 13.5px;
+    color: var(--body);
+    line-height: 1.5;
+  }
+
+  .vessel-flow-connector {
+    margin: 14px 0 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 18px;
+    text-align: center;
+  }
+  .vessel-flow-connector .flow-tick {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    color: var(--coral);
+    line-height: 1;
+  }
+  .vessel-flow-connector .flow-label {
+    grid-column: 1 / -1;
+    margin-top: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--coral);
+  }
+
+  .vessel-bar {
+    margin-top: 8px;
+    padding: 22px 28px;
+    background: var(--surface-dark);
+    color: var(--on-dark);
+    border-radius: var(--radius-lg);
+    display: grid;
+    grid-template-columns: 110px auto 1fr;
+    align-items: center;
+    gap: 24px;
+    border-left: 3px solid var(--coral);
+  }
+  .vessel-bar .vessel-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--coral);
+    letter-spacing: 0.22em;
+  }
+  .vessel-bar .vessel-label::before {
+    content: 'VESSEL · ';
+    color: var(--on-dark-soft);
+    margin-right: 2px;
+  }
+  .vessel-bar .vessel-name {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--on-dark);
+    letter-spacing: -0.02em;
+  }
+  .vessel-bar .vessel-desc {
+    font-size: 14px;
+    color: var(--on-dark-soft);
+    line-height: 1.55;
+  }
+
+  /* =========================================================
      Print / fullscreen presentation mode
      ========================================================= */
   @media print {
@@ -1072,7 +1350,7 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">01 / 11</span>
+    <span class="page-no">01 / 13</span>
     <span class="source-line">2026 · 05 · 13</span>
   </div>
 </section>
@@ -1127,7 +1405,7 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">02 / 11</span>
+    <span class="page-no">02 / 13</span>
     <span class="source-line"></span>
   </div>
 </section>
@@ -1163,7 +1441,7 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">03 / 11</span>
+    <span class="page-no">03 / 13</span>
     <span class="source-line"></span>
   </div>
 </section>
@@ -1209,7 +1487,7 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">04 / 11</span>
+    <span class="page-no">04 / 13</span>
     <span class="source-line"></span>
   </div>
 </section>
@@ -1255,7 +1533,7 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">05 / 11</span>
+    <span class="page-no">05 / 13</span>
     <span class="source-line"></span>
   </div>
 </section>
@@ -1302,13 +1580,71 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">06 / 11</span>
+    <span class="page-no">06 / 13</span>
     <span class="source-line"></span>
   </div>
 </section>
 
 
-<!-- ========== 07 · 슬로건 cover ========== -->
+<!-- ========== 07 · SSOD 브랜드 의미 reveal ========== -->
+<section class="slide paper">
+  <div class="head">
+    <span class="head-eyebrow">브랜드 의미 · 회사 이름과 프레임</span>
+    <span class="brand-mark">SSOD</span>
+  </div>
+
+  <div class="ssod-reveal-headline">
+    <span class="ssod-letter">S</span><span class="ssod-letter">S</span><span class="ssod-letter">O</span><span class="ssod-letter">D</span>
+    <span class="ssod-equals">=</span>
+    <span class="ssod-expansion">Sync with <strong>Self</strong> · <strong>Other</strong> · <strong>Data</strong></span>
+  </div>
+  <div class="subtitle">회사 이름 자체가 — 이 셋을 동기화하는 일입니다.</div>
+
+  <div class="ssod-map-grid">
+    <div class="ssod-map-row">
+      <div class="ssod-map-letter">S</div>
+      <div class="ssod-map-english">Sync with <strong>Self</strong></div>
+      <div class="ssod-map-korean">나 자신과의 정렬</div>
+      <div class="ssod-map-arrow">→</div>
+      <div class="ssod-map-frame">
+        <div class="frame-tag">판단</div>
+        <div class="frame-mono-sm">SoI</div>
+      </div>
+    </div>
+    <div class="ssod-map-row">
+      <div class="ssod-map-letter">S</div>
+      <div class="ssod-map-english">Sync with <strong>Other</strong></div>
+      <div class="ssod-map-korean">사람 · 조직과의 정렬</div>
+      <div class="ssod-map-arrow">→</div>
+      <div class="ssod-map-frame">
+        <div class="frame-tag">일하는 곳</div>
+        <div class="frame-mono-sm">SoE</div>
+      </div>
+    </div>
+    <div class="ssod-map-row">
+      <div class="ssod-map-letter">D</div>
+      <div class="ssod-map-english">Sync with <strong>Data</strong></div>
+      <div class="ssod-map-korean">데이터와의 정렬</div>
+      <div class="ssod-map-arrow">→</div>
+      <div class="ssod-map-frame">
+        <div class="frame-tag">데이터</div>
+        <div class="frame-mono-sm">SoR</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ssod-reveal-footer">
+    개인 · 조직 · 데이터 — 셋이 정렬되면 <strong>AI도 그 회사를 시작할 수 있습니다.</strong>
+  </div>
+
+  <div class="foot">
+    <span class="page-no">07 / 13</span>
+    <span class="source-line"></span>
+  </div>
+</section>
+
+
+<!-- ========== 08 · 슬로건 cover ========== -->
 <section class="slide dark quote-slide">
   <div class="head">
     <div style="display: flex; align-items: center; gap: 12px;">
@@ -1336,13 +1672,13 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">07 / 11</span>
+    <span class="page-no">08 / 13</span>
     <span class="source-line"></span>
   </div>
 </section>
 
 
-<!-- ========== 08 · 사례 compare ========== -->
+<!-- ========== 09 · 사례 compare ========== -->
 <section class="slide">
   <div class="head">
     <span class="head-eyebrow">사례 · BEFORE → AFTER</span>
@@ -1383,13 +1719,13 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">08 / 11</span>
+    <span class="page-no">09 / 13</span>
     <span class="source-line">두 회사 합성 · NDA 익명</span>
   </div>
 </section>
 
 
-<!-- ========== 09 · AI 시대 timeline ========== -->
+<!-- ========== 10 · AI 시대 timeline ========== -->
 <section class="slide paper">
   <div class="head">
     <span class="head-eyebrow">AI 시대 · 1년 · 3년 · 5년 풍경</span>
@@ -1438,13 +1774,75 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">09 / 11</span>
+    <span class="page-no">10 / 13</span>
     <span class="source-line">출처 · Gartner 2026 · Deloitte</span>
   </div>
 </section>
 
 
-<!-- ========== 10 · 함께한 일들 (photo wall) ========== -->
+<!-- ========== 11 · 도구 혈관도 (SSOD가 푸는 자리) ========== -->
+<section class="slide">
+  <div class="head">
+    <span class="head-eyebrow">SSOD가 푸는 자리 · 도구 4개</span>
+    <span class="brand-mark">SSOD</span>
+  </div>
+
+  <div class="display-md">도구 네 가지로 셋을 잇습니다.</div>
+  <div class="subtitle">개인(SoI) · 조직(SoE) · 데이터(SoR) — 그리고 셋을 흐르게 하는 혈관.</div>
+
+  <div class="tool-grid">
+    <div class="tool-card">
+      <div class="tool-eyebrow"><span class="tool-frame">일하는 곳</span><span class="tool-mono">SoE</span></div>
+      <div class="tool-logo-row">
+        <img class="tool-logo" src="assets/notion-logo.png" alt="Notion">
+        <div class="tool-name">Notion</div>
+      </div>
+      <div class="tool-role">메시지 · 결재 · 문서</div>
+      <div class="tool-detail">사람들이 만나는 자리를 한 곳에 모읍니다.</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-eyebrow"><span class="tool-frame">데이터</span><span class="tool-mono">SoR</span></div>
+      <div class="tool-logo-row">
+        <span class="tool-letter-mark">XL</span>
+        <span class="tool-arrow">→</span>
+        <img class="tool-logo" src="assets/notion-logo.png" alt="Notion">
+        <div class="tool-name tool-name-sm">엑셀 → Notion</div>
+      </div>
+      <div class="tool-role">흩어진 시트 통합</div>
+      <div class="tool-detail">회사 곳곳에 흩어진 엑셀들을 한 자리로 모아옵니다.</div>
+    </div>
+    <div class="tool-card">
+      <div class="tool-eyebrow"><span class="tool-frame">판단</span><span class="tool-mono">SoI</span></div>
+      <div class="tool-logo-row">
+        <img class="tool-logo" src="assets/claude-logo.png" alt="Claude">
+        <div class="tool-name">Claude</div>
+      </div>
+      <div class="tool-role">룰 → 코드</div>
+      <div class="tool-detail">사람 머릿속 판단 기준을 시스템에 옮겨 적습니다.</div>
+    </div>
+  </div>
+
+  <div class="vessel-flow-connector" aria-hidden="true">
+    <span class="flow-tick">↓</span>
+    <span class="flow-tick">↓</span>
+    <span class="flow-tick">↓</span>
+    <span class="flow-label">flows through</span>
+  </div>
+
+  <div class="vessel-bar">
+    <div class="vessel-label">혈관</div>
+    <div class="vessel-name">n8n</div>
+    <div class="vessel-desc">셋 사이로 데이터를 흐르게 하는 자동화 — 노드와 노드를 잇는 파이프라인.</div>
+  </div>
+
+  <div class="foot">
+    <span class="page-no">11 / 13</span>
+    <span class="source-line">SSOD 도구 스택 · Notion · Claude · n8n</span>
+  </div>
+</section>
+
+
+<!-- ========== 12 · 함께한 일들 (photo wall) ========== -->
 <section class="slide">
   <div class="head">
     <span class="head-eyebrow">함께한 일들 · 만들고 있는 자리</span>
@@ -1498,13 +1896,13 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">10 / 11</span>
+    <span class="page-no">12 / 13</span>
     <span class="source-line"></span>
   </div>
 </section>
 
 
-<!-- ========== 11 · Closing ========== -->
+<!-- ========== 13 · Closing ========== -->
 <section class="slide dark">
   <div class="head">
     <div style="display: flex; align-items: center; gap: 12px;">
@@ -1554,7 +1952,7 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">11 / 11</span>
+    <span class="page-no">13 / 13</span>
     <span class="source-line">2026 · 05 · 13 · BNI K-Chapter</span>
   </div>
 </section>
