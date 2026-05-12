@@ -1442,6 +1442,82 @@
     line-height: 1.5;
   }
 
+  /* logo-wall — slide 03 (자기소개 직후, 함께한 자리들) */
+  .logo-wall {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-top: 28px;
+  }
+  .logo-card {
+    background: var(--surface-card);
+    border-radius: var(--radius-md);
+    padding: 18px 16px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    gap: 10px;
+    min-height: 178px;
+  }
+  .logo-card .logo-card-frame {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 500;
+    color: var(--coral);
+    letter-spacing: 0.06em;
+    text-transform: lowercase;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--hairline);
+    width: 100%;
+  }
+  .logo-card .logo-card-img {
+    height: 44px;
+    width: auto;
+    object-fit: contain;
+    margin-top: 6px;
+    margin-bottom: 4px;
+  }
+  .logo-card .logo-card-letter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    margin-top: 6px;
+    margin-bottom: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.012em;
+  }
+  .logo-card .logo-card-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.012em;
+    line-height: 1.25;
+  }
+  .logo-card .logo-card-role {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: -0.005em;
+    line-height: 1.4;
+  }
+  .logo-card.logo-card-collab {
+    background: var(--canvas);
+    border: 1px dashed var(--hairline);
+  }
+  .logo-card.logo-card-placeholder {
+    background: var(--canvas);
+    border: 1px dashed var(--hairline);
+    opacity: 0.86;
+  }
+  .logo-card.logo-card-placeholder .logo-card-letter {
+    color: var(--muted);
+  }
+
   .vessel-flow-connector {
     margin: 14px 0 0;
     display: grid;
@@ -1572,37 +1648,109 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">01 / 22</span>
+    <span class="page-no">01 / 23</span>
     <span class="source-line">2026 · 05 · 13</span>
   </div>
 </section>
 
 
-<!-- ========== 02 · 자기소개 (인사 + 하는 일) ========== -->
+<!-- ========== 02 · 자기소개 (인사 + 하는 일) — 단일 컬럼 중앙 정렬 ========== -->
 <section class="slide">
   <div class="head">
     <span class="head-eyebrow">발표자 · 자기소개</span>
     <span class="brand-mark">SSOD</span>
   </div>
 
-  <div class="intro-grid">
-    <div class="intro-left">
-      <div class="intro-name">김지명</div>
-      <div class="intro-role">쏘드 컴퍼니 · 대표</div>
-      <div class="intro-pill">B2B 7년차</div>
+  <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 28px;">
+    <div>
+      <div style="font-size: 96px; font-weight: 600; letter-spacing: -0.04em; line-height: 1; color: var(--ink);">김지명</div>
+      <div style="font-size: 18px; font-weight: 500; color: var(--muted); margin-top: 14px; letter-spacing: -0.012em;">쏘드 컴퍼니 · 대표</div>
     </div>
-    <div class="intro-right" style="justify-content: center;">
-      <div class="intro-row" style="border-top: none; padding-top: 0;">
-        <div class="intro-label">하는 일</div>
-        <div class="intro-headline">회사의<br>일하는 구조를 만듭니다.</div>
-        <div class="intro-aside" style="margin-top: 12px;">데이터 · 일 · 판단 — 셋을 한 자리에.</div>
+
+    <div class="intro-pill" style="margin: 0; align-self: center;">B2B 7년차</div>
+
+    <div style="width: 64px; height: 1px; background: var(--hairline); margin: 8px 0;"></div>
+
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 14px;">
+      <div style="font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; color: var(--muted); letter-spacing: 0.08em; text-transform: lowercase;">하는 일</div>
+      <div style="font-size: 40px; font-weight: 500; letter-spacing: -0.034em; line-height: 1.16; color: var(--ink);">
+        회사의 <strong style="color: var(--coral); font-weight: 600;">일하는 구조</strong>를 만듭니다.
       </div>
+      <div style="font-size: 18px; font-weight: 500; color: var(--muted); letter-spacing: -0.012em;">데이터 · 일 · 판단 — 셋을 한 자리에.</div>
     </div>
   </div>
 
   <div class="foot">
-    <span class="page-no">02 / 22</span>
+    <span class="page-no">02 / 23</span>
     <span class="source-line"></span>
+  </div>
+</section>
+
+
+<!-- ========== 03 · 함께한 자리들 (logo wall) — NEW ========== -->
+<section class="slide">
+  <div class="head">
+    <span class="head-eyebrow">함께한 자리들 · 도구 · 협업 · 강연</span>
+    <span class="brand-mark">SSOD</span>
+  </div>
+
+  <div class="display-md" style="text-align: center;">같은 진단 렌즈로 — 여러 자리에서.</div>
+  <div class="subtitle" style="text-align: center;">도구 파트너 · 강연 협업 · 컨설팅 현장.</div>
+
+  <div class="logo-wall">
+    <div class="logo-card">
+      <div class="logo-card-frame">도구 · 일하는 곳</div>
+      <img class="logo-card-img" src="assets/notion-logo.png" alt="Notion" style="height: 44px;">
+      <div class="logo-card-name">Notion</div>
+      <div class="logo-card-role">글로벌 공식 앰버서더</div>
+    </div>
+    <div class="logo-card">
+      <div class="logo-card-frame">도구 · 혈관</div>
+      <img class="logo-card-img" src="assets/n8n_full_black_logo.png" alt="n8n" style="height: 38px;">
+      <div class="logo-card-name">n8n</div>
+      <div class="logo-card-role">글로벌 공식 앰버서더</div>
+    </div>
+    <div class="logo-card">
+      <div class="logo-card-frame">도구 · 판단</div>
+      <img class="logo-card-img" src="assets/claude-logo.png" alt="Claude" style="height: 44px;">
+      <div class="logo-card-name">Claude</div>
+      <div class="logo-card-role">Anthropic · 코드/룰 자동화</div>
+    </div>
+    <div class="logo-card">
+      <div class="logo-card-frame">도구 · 데이터 변환</div>
+      <img class="logo-card-img" src="assets/microsoft-excel-new.png" alt="Microsoft Excel" style="height: 44px;">
+      <div class="logo-card-name">Microsoft Excel</div>
+      <div class="logo-card-role">흩어진 시트 → Notion DB</div>
+    </div>
+    <div class="logo-card logo-card-collab">
+      <div class="logo-card-frame">강연 · 협업</div>
+      <div class="logo-card-letter">N·C</div>
+      <div class="logo-card-name">Notion Camp HR</div>
+      <div class="logo-card-role">2025-12 본사 워크숍 협업</div>
+    </div>
+    <div class="logo-card logo-card-placeholder">
+      <div class="logo-card-frame">컨설팅 현장 (NDA)</div>
+      <div class="logo-card-letter">···</div>
+      <div class="logo-card-name">상장사 · 중견기업</div>
+      <div class="logo-card-role">6개월 onsite · 익명</div>
+    </div>
+    <div class="logo-card logo-card-placeholder">
+      <div class="logo-card-frame">강연 · 공식</div>
+      <div class="logo-card-letter">·n8n·</div>
+      <div class="logo-card-name">n8n 공식 행사</div>
+      <div class="logo-card-role">앰버서더 강연</div>
+    </div>
+    <div class="logo-card logo-card-placeholder">
+      <div class="logo-card-frame">자유 슬롯</div>
+      <div class="logo-card-letter">+</div>
+      <div class="logo-card-name">사용자 추가 대기</div>
+      <div class="logo-card-role">고객사 로고 drop 자리</div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span class="page-no">03 / 23</span>
+    <span class="source-line">NDA 보류 고객사는 익명 처리 · 추가 슬롯은 사용자 drop 대기</span>
   </div>
 </section>
 
@@ -1632,7 +1780,7 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">03 / 22</span>
+    <span class="page-no">04 / 23</span>
     <span class="source-line"></span>
   </div>
 </section>
@@ -1668,7 +1816,7 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">04 / 22</span>
+    <span class="page-no">05 / 23</span>
     <span class="source-line"></span>
   </div>
 </section>
@@ -1704,7 +1852,7 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">05 / 22</span>
+    <span class="page-no">06 / 23</span>
     <span class="source-line"></span>
   </div>
 </section>
@@ -1743,7 +1891,7 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">06 / 22</span>
+    <span class="page-no">07 / 23</span>
     <span class="source-line"></span>
   </div>
 </section>
@@ -1773,7 +1921,7 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">07 / 22</span>
+    <span class="page-no">08 / 23</span>
     <span class="source-line"></span>
   </div>
 </section>
@@ -1812,7 +1960,7 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">08 / 22</span>
+    <span class="page-no">09 / 23</span>
     <span class="source-line"></span>
   </div>
 </section>
@@ -1842,7 +1990,7 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">09 / 22</span>
+    <span class="page-no">10 / 23</span>
     <span class="source-line"></span>
   </div>
 </section>
@@ -1881,7 +2029,7 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">10 / 22</span>
+    <span class="page-no">11 / 23</span>
     <span class="source-line"></span>
   </div>
 </section>
@@ -1913,7 +2061,7 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">11 / 22</span>
+    <span class="page-no">12 / 23</span>
     <span class="source-line"></span>
   </div>
 </section>
@@ -1936,7 +2084,7 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">12 / 22</span>
+    <span class="page-no">13 / 23</span>
     <span class="source-line"></span>
   </div>
 </section>
@@ -1989,7 +2137,7 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">13 / 22</span>
+    <span class="page-no">14 / 23</span>
     <span class="source-line"></span>
   </div>
 </section>
@@ -2023,7 +2171,7 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">14 / 22</span>
+    <span class="page-no">15 / 23</span>
     <span class="source-line"></span>
   </div>
 </section>
@@ -2070,7 +2218,7 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">15 / 22</span>
+    <span class="page-no">16 / 23</span>
     <span class="source-line">두 회사 합성 · NDA 익명</span>
   </div>
 </section>
@@ -2099,7 +2247,7 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">16 / 22</span>
+    <span class="page-no">17 / 23</span>
     <span class="source-line">참조 · Palantir Ontology layer</span>
   </div>
 </section>
@@ -2130,7 +2278,7 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">17 / 22</span>
+    <span class="page-no">18 / 23</span>
     <span class="source-line"></span>
   </div>
 </section>
@@ -2179,7 +2327,7 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">18 / 22</span>
+    <span class="page-no">19 / 23</span>
     <span class="source-line"></span>
   </div>
 </section>
@@ -2221,7 +2369,7 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">19 / 22</span>
+    <span class="page-no">20 / 23</span>
     <span class="source-line">혈관 메타포 · n8n</span>
   </div>
 </section>
@@ -2281,7 +2429,7 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">20 / 22</span>
+    <span class="page-no">21 / 23</span>
     <span class="source-line"></span>
   </div>
 </section>
@@ -2319,7 +2467,7 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">21 / 22</span>
+    <span class="page-no">22 / 23</span>
     <span class="source-line">2026 · 05 · 13 · BNI K-Chapter</span>
   </div>
 </section>
@@ -2359,7 +2507,7 @@
   </div>
 
   <div class="foot">
-    <span class="page-no">22 / 22</span>
+    <span class="page-no">23 / 23</span>
     <span class="source-line">2026 · 05 · 13 · BNI K-Chapter</span>
   </div>
 </section>
