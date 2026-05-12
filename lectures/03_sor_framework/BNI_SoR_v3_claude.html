@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>구조가 없으면, AI도 없습니다 — SoR · SoE · SoI · BNI K-Chapter · v3 Claude tone</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-jp-dynamic-subset.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    /* Claude design tokens */
+    --canvas: #faf9f5;
+    --surface-soft: #f5f0e8;
+    --surface-card: #efe9de;
+    --surface-cream-strong: #e8e0d2;
+    --surface-dark: #181715;
+    --surface-dark-elevated: #252320;
+    --surface-dark-soft: #1f1e1b;
+
+    --ink: #141413;
+    --body-strong: #252523;
+    --body: #3d3d3a;
+    --muted: #6c6a64;
+    --muted-soft: #8e8b82;
+
+    --on-primary: #ffffff;
+    --on-dark: #faf9f5;
+    --on-dark-soft: #a09d96;
+
+    --coral: #cc785c;
+    --coral-active: #a9583e;
+
+    --hairline: #e6dfd8;
+    --hairline-soft: #ebe6df;
+    --hairline-dark: #2d2b27;
+  }
+
+  html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body {
+    font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--ink);
+    background: #1a1a1a;
+    line-height: 1.55;
+    letter-spacing: -0.01em;
+    font-weight: 400;
+  }
+
+  .deck {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    padding: 28px 0 88px;
+  }
+
+  /* Slide frame: 1280 x 720 — 16:9 */
+  .slide {
+    width: 1280px;
+    height: 720px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 12px 48px rgba(0,0,0,0.32);
+    padding: 56px 80px 48px;
+    display: flex;
+    flex-direction: column;
+    background: var(--canvas);
+    color: var(--ink);
+  }
+
+  .slide.paper { background: var(--surface-soft); }
+  .slide.dark {
+    background: var(--surface-dark);
+    color: var(--on-dark);
+  }
+
+  /* Slide head: page number + label / right-side mark */
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--hairline);
+    margin-bottom: 48px;
+  }
+  .slide.dark .head { border-bottom-color: var(--hairline-dark); }
+
+  .page-no {
+    font-family: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+  }
+  .slide.dark .page-no { color: var(--on-dark-soft); }
+
+  .head-eyebrow {
+    font-family: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .slide.dark .head-eyebrow { color: var(--on-dark-soft); }
+
+  .ambassador-badges {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .ambassador-badges img {
+    height: 32px;
+    width: auto;
+    display: block;
+    border-radius: 4px;
+  }
+
+  /* Qualification card badge image */
+  .qual-badge {
+    display: block;
+    height: 44px;
+    width: auto;
+    margin-bottom: 18px;
+    border-radius: 5px;
+  }
+
+  /* Definition card eyebrow icon (coral-filtered from gold) */
+  .def-eyebrow-row {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 14px;
+  }
+  .def-eyebrow-row .def-eyebrow {
+    margin-bottom: 0;
+  }
+  .def-icon {
+    width: 18px;
+    height: 18px;
+    display: block;
+    /* gold (#C18E3C) → coral (#cc785c) approximation */
+    filter: brightness(0) saturate(100%) invert(54%) sepia(46%) saturate(643%) hue-rotate(335deg) brightness(91%) contrast(84%);
+  }
+
+  /* Inline tool logos (s9 take-away bar) */
+  .tool-logos-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: 6px;
+    vertical-align: middle;
+    transform: translateY(-1px);
+  }
+  .tool-logos-inline img {
+    height: 18px;
+    width: auto;
+    display: block;
+  }
+  .tool-logos-inline img.notion-mark {
+    height: 16px;
+  }
+
+  /* Headlines — Pretendard 400 with tight tracking (Copernicus stand-in) */
+  .display-xl {
+    font-size: 76px;
+    font-weight: 500;
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+    color: var(--ink);
+  }
+  .slide.dark .display-xl { color: var(--on-dark); }
+
+  .display-lg {
+    font-size: 56px;
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+  }
+
+  .display-md {
+    font-size: 42px;
+    font-weight: 500;
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+  }
+
+  .display-sm {
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  .title-lg { font-size: 22px; font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; }
+  .title-md { font-size: 18px; font-weight: 600; line-height: 1.4; letter-spacing: -0.005em; }
+  .title-sm { font-size: 15px; font-weight: 600; line-height: 1.4; letter-spacing: 0; }
+
+  .body-md { font-size: 16px; font-weight: 400; line-height: 1.65; color: var(--body); }
+  .body-sm { font-size: 14px; font-weight: 400; line-height: 1.6; color: var(--body); }
+  .slide.dark .body-md, .slide.dark .body-sm { color: var(--on-dark-soft); }
+
+  .caption-mono {
+    font-family: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .slide.dark .caption-mono { color: var(--on-dark-soft); }
+
+  .subtitle {
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.55;
+    color: var(--body);
+    margin-top: 18px;
+    max-width: 880px;
+  }
+  .slide.dark .subtitle { color: var(--on-dark-soft); }
+
+  /* Coral accent dot */
+  .coral-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--coral);
+    display: inline-block;
+  }
+  .coral-line {
+    width: 32px; height: 2px;
+    background: var(--coral);
+    display: inline-block;
+  }
+
+  /* Footer */
+  .foot {
+    position: absolute;
+    left: 80px; right: 80px;
+    bottom: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    color: var(--muted-soft);
+    text-transform: uppercase;
+  }
+  .slide.dark .foot { color: var(--on-dark-soft); }
+
+  .foot .ssod-wordmark { color: var(--ink); font-weight: 600; letter-spacing: 0.1em; }
+  .slide.dark .foot .ssod-wordmark { color: var(--on-dark); }
+
+  /* =========================================================
+     Slide 1 — Cover (dark)
+     ========================================================= */
+  .cover .display-xl { margin-top: 24px; }
+  .cover-meta {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr 1.4fr;
+    gap: 56px;
+    margin-top: auto;
+    padding-bottom: 16px;
+  }
+  .cover-meta .meta-row .label {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10.5px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--on-dark-soft);
+    margin-bottom: 8px;
+  }
+  .cover-meta .meta-row .value {
+    font-size: 15px; font-weight: 500; line-height: 1.45; color: var(--on-dark);
+    letter-spacing: -0.005em;
+  }
+
+  /* =========================================================
+     Slide 2 — 자기소개 (cream, 2-column feature cards)
+     ========================================================= */
+  .qualification-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin-top: 40px;
+  }
+  .qual-card {
+    background: var(--surface-card);
+    border-radius: 12px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .qual-card .qual-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .qual-card .qual-title {
+    font-size: 22px; font-weight: 600;
+    letter-spacing: -0.015em; color: var(--ink);
+  }
+  .qual-card .qual-subtitle {
+    font-size: 13.5px; color: var(--muted);
+    margin-bottom: 18px;
+  }
+  .qual-card .qual-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .qual-card .qual-list li {
+    font-size: 14.5px; line-height: 1.55;
+    color: var(--body);
+    padding-left: 18px;
+    position: relative;
+  }
+  .qual-card .qual-list li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0.65em;
+    width: 8px; height: 1px;
+    background: var(--muted-soft);
+  }
+  .qual-card .qual-list li strong {
+    color: var(--ink); font-weight: 600;
+  }
+
+  /* =========================================================
+     Slide 3 — 오프닝 훅 (paper, 3 questions)
+     ========================================================= */
+  .question-list {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin-top: 36px;
+  }
+  .q-row {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    align-items: baseline;
+    gap: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .q-row:last-child { border-bottom: none; }
+  .q-row .q-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; font-weight: 500;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+  }
+  .q-row .q-prompt {
+    font-size: 26px; font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: -0.018em;
+    color: var(--ink);
+  }
+  .audience-callout {
+    margin-top: 32px;
+    padding: 20px 24px;
+    background: var(--canvas);
+    border-left: 2px solid var(--coral);
+    border-radius: 4px;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--body);
+  }
+  .audience-callout strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* =========================================================
+     Slides 4·5·6 — 진단 프레임 definition cards (cream)
+     ========================================================= */
+  .definition-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin-top: 28px;
+    flex: 1;
+  }
+  .def-card {
+    background: var(--surface-card);
+    border-radius: 12px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+  }
+  .def-card.with-accent {
+    border-left: 2px solid var(--coral);
+  }
+  .def-card .def-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .def-card .def-title {
+    font-size: 22px; font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .def-card .def-subtitle {
+    font-size: 13.5px;
+    color: var(--muted);
+    margin-top: 6px;
+    margin-bottom: 22px;
+  }
+  .def-card .def-keywords {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .def-card .def-keywords li {
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--body);
+    padding-left: 22px;
+    position: relative;
+  }
+  .def-card .def-keywords li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0.7em;
+    width: 12px; height: 1px;
+    background: var(--muted-soft);
+  }
+  .def-card .def-insight {
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--body-strong);
+    letter-spacing: -0.005em;
+  }
+  .def-card .def-insight strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* Dark inset inside cream card (slide 6) */
+  .dark-inset {
+    background: var(--surface-dark);
+    color: var(--on-dark);
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-top: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13.5px;
+    line-height: 1.7;
+    letter-spacing: -0.005em;
+  }
+  .dark-inset .quote-line {
+    color: var(--on-dark);
+  }
+  .dark-inset .quote-meta {
+    color: var(--on-dark-soft);
+    margin-top: 6px;
+    font-size: 12.5px;
+  }
+
+  /* Slide 4·5·6 SoR/SoE/SoI big number label in headline */
+  .frame-headline {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+  .frame-headline .frame-no {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0;
+  }
+  .frame-headline .frame-no.coral { color: var(--coral); }
+  .frame-headline .frame-mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0;
+    margin-left: 6px;
+  }
+
+  /* =========================================================
+     Slide 7 — Quote cover (dark)
+     ========================================================= */
+  .quote-slide {
+    justify-content: center;
+  }
+  .quote-slide .quote-context-above {
+    font-size: 13.5px;
+    color: var(--on-dark-soft);
+    margin-bottom: 36px;
+    letter-spacing: 0.02em;
+  }
+  .quote-slide .display-xl {
+    font-size: 96px;
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+  }
+  .quote-slide .quote-context-below {
+    font-size: 17px;
+    color: var(--on-dark-soft);
+    margin-top: 36px;
+    max-width: 900px;
+    line-height: 1.55;
+  }
+  .quote-slide .quote-accent {
+    margin-top: 28px;
+  }
+
+  /* =========================================================
+     Slide 8 — Compare BEFORE / AFTER
+     ========================================================= */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 22px;
+  }
+  .compare-card {
+    background: var(--surface-card);
+    border-radius: 12px;
+    padding: 26px 28px;
+    display: flex;
+    flex-direction: column;
+  }
+  .compare-card.after {
+    border-left: 2px solid var(--coral);
+  }
+  .compare-card .ba-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .compare-card.after .ba-label { color: var(--coral); }
+  .compare-card .ba-title {
+    font-size: 22px; font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+  .compare-card .ba-subtitle {
+    font-size: 13.5px;
+    color: var(--muted);
+    margin-top: 6px;
+    margin-bottom: 20px;
+  }
+  .compare-card .ba-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    flex: 1;
+  }
+  .compare-card .ba-bullets li {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--body);
+    padding-left: 20px;
+    position: relative;
+  }
+  .compare-card .ba-bullets li::before {
+    content: '→';
+    position: absolute;
+    left: 0; top: 0;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--muted-soft);
+    font-size: 13px;
+  }
+  .compare-card.after .ba-bullets li::before { color: var(--coral); }
+  .compare-card .ba-takeaway {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--hairline);
+    font-size: 14px;
+    color: var(--body-strong);
+    font-weight: 500;
+    letter-spacing: -0.005em;
+  }
+  .compare-footer {
+    margin-top: 18px;
+    margin-bottom: 36px;
+    padding: 16px 22px;
+    background: var(--surface-soft);
+    border-radius: 8px;
+    border-left: 2px solid var(--ink);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink);
+    font-weight: 500;
+    letter-spacing: -0.005em;
+  }
+
+  /* =========================================================
+     Slide 9 — Timeline / Stat grid (paper)
+     ========================================================= */
+  .timeline-line {
+    position: relative;
+    height: 1px;
+    background: var(--hairline);
+    margin: 36px 0 0 0;
+  }
+  .timeline-line .point {
+    position: absolute;
+    top: -4px;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--coral);
+  }
+  .timeline-line .point.p1 { left: calc(16.6% - 4.5px); }
+  .timeline-line .point.p2 { left: calc(50% - 4.5px); }
+  .timeline-line .point.p3 { left: calc(83.3% - 4.5px); }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 28px;
+    margin-top: 28px;
+    flex: 1;
+  }
+  .stat-card {
+    display: flex;
+    flex-direction: column;
+    padding: 4px 8px;
+  }
+  .stat-card .stat-when {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .stat-card .stat-value {
+    font-size: 92px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .stat-card .stat-label {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+    margin-bottom: 14px;
+  }
+  .stat-card .stat-body {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--body);
+  }
+  .stat-card .stat-body strong { color: var(--ink); font-weight: 600; }
+  .stat-card .stat-source {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    color: var(--muted-soft);
+    text-transform: uppercase;
+    margin-top: 12px;
+  }
+  .stat-takeaway-bar {
+    margin-top: 18px;
+    padding: 16px 22px;
+    background: var(--canvas);
+    border-radius: 8px;
+    border-left: 2px solid var(--coral);
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .stat-takeaway-bar strong { font-weight: 600; }
+
+  /* =========================================================
+     Slide 10 — Closing
+     ========================================================= */
+  .closing-meta {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1.6fr;
+    gap: 48px;
+    margin-top: auto;
+    padding-bottom: 14px;
+  }
+  .closing-meta .meta-row .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--on-dark-soft);
+    margin-bottom: 8px;
+  }
+  .closing-meta .meta-row .value {
+    font-size: 15px; font-weight: 500; line-height: 1.45;
+    color: var(--on-dark);
+    letter-spacing: -0.005em;
+  }
+
+  /* =========================================================
+     Print / fullscreen presentation mode
+     ========================================================= */
+  @media print {
+    body { background: #fff; }
+    .deck { gap: 0; padding: 0; }
+    .slide { box-shadow: none; page-break-after: always; }
+  }
+  body.present {
+    background: #000;
+  }
+  body.present .deck {
+    padding: 0; gap: 0;
+    width: 100vw; height: 100vh;
+    overflow: hidden;
+  }
+  body.present .slide {
+    display: none;
+    width: 100vw; height: 100vh;
+    box-shadow: none;
+    padding: 4vw 6vw;
+  }
+  body.present .slide.active {
+    display: flex;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+<!-- ========== 01 · COVER ========== -->
+<section class="slide dark cover">
+  <div class="head">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <span class="page-no">01 / 10</span>
+      <span class="coral-dot"></span>
+    </div>
+    <span class="ambassador-badges">
+      <img src="assets/notion-ambassador-badge.png" alt="Notion Official Ambassador">
+      <img src="assets/n8n-amber-ssod-black.png" alt="n8n Official Ambassador">
+    </span>
+  </div>
+
+  <div class="display-xl" style="margin-top: 8px;">
+    구조가 없으면,<br>
+    AI도 없습니다.
+  </div>
+
+  <div class="subtitle" style="color: var(--on-dark-soft); max-width: 720px; margin-top: 28px;">
+    SoR · SoE · SoI — 회사 안에 AI가 일할 수 있는 자리
+  </div>
+
+  <div class="cover-meta">
+    <div class="meta-row">
+      <div class="label">발표</div>
+      <div class="value">김지명<br><span style="color: var(--on-dark-soft); font-weight: 400;">쏘드 컴퍼니</span></div>
+    </div>
+    <div class="meta-row">
+      <div class="label">자격</div>
+      <div class="value">Notion · n8n 글로벌 공식 앰버서더<br><span style="color: var(--on-dark-soft); font-weight: 400;">한국 1인 (2026.05 기준)</span></div>
+    </div>
+    <div class="meta-row">
+      <div class="label">시간 · 청중</div>
+      <div class="value">BNI K-Chapter<br><span style="color: var(--on-dark-soft); font-weight: 400;">10분 Feature Presentation</span></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span class="ssod-wordmark">SSOD</span>
+    <span>2026 · 05 · 13</span>
+  </div>
+</section>
+
+
+<!-- ========== 02 · 자기소개 ========== -->
+<section class="slide">
+  <div class="head">
+    <span class="page-no">02 / 10</span>
+    <span class="head-eyebrow">발표자 · 자기소개</span>
+  </div>
+
+  <div class="display-md">쏘드 컴퍼니의 김지명입니다.</div>
+  <div class="subtitle">
+    B2B 7년. 직원 10명 팀부터 수천억 매출 코스닥 상장사까지 — <strong style="color: var(--ink);">회사 안에 AI가 일할 수 있는 구조</strong>를 만듭니다.
+  </div>
+
+  <div class="qualification-grid">
+    <div class="qual-card">
+      <div class="qual-label">자격 · 01</div>
+      <img class="qual-badge" src="assets/notion-ambassador-badge.png" alt="Notion Official Ambassador">
+      <div class="qual-title">Notion 글로벌 공식 앰버서더</div>
+      <div class="qual-subtitle">노션 본사 공식 인증</div>
+      <ul class="qual-list">
+        <li><strong>한국 1인</strong> — n8n과 둘 다 가진 사람 (2026.05 기준)</li>
+        <li>Notion 본사 협업 — <strong>Notion Camp HR</strong> 워크숍 공동 진행</li>
+        <li>유튜브 노션·AI 콘텐츠 구독자 <strong>4,750명</strong></li>
+      </ul>
+    </div>
+    <div class="qual-card">
+      <div class="qual-label">자격 · 02</div>
+      <img class="qual-badge" src="assets/n8n-amber-ssod-black.png" alt="n8n Official Ambassador">
+      <div class="qual-title">n8n 글로벌 공식 앰버서더</div>
+      <div class="qual-subtitle">워크플로우 자동화 분야</div>
+      <ul class="qual-list">
+        <li>도구 셋 — <strong>Notion · n8n · Claude Code</strong></li>
+        <li>B2B 컨설팅 <strong>7년</strong> — AI가 들어올 자리 설계</li>
+        <li>지금 자리 — <strong>연매출 수천억대 코스닥 상장사</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>02 · 발표자 소개</span>
+    <span class="ssod-wordmark">SSOD</span>
+  </div>
+</section>
+
+
+<!-- ========== 03 · 오프닝 훅 ========== -->
+<section class="slide paper">
+  <div class="head">
+    <span class="page-no">03 / 10</span>
+    <span class="head-eyebrow">오프닝 · 세 가지 질문</span>
+  </div>
+
+  <div class="display-md">본론 전에, 세 가지만 묻겠습니다.</div>
+  <div class="subtitle">하나라도 "음, 어디 있더라…" 하셨다면 — 그 회사에 ChatGPT 깔아도 일이 크게 바뀌진 않습니다.</div>
+
+  <div class="question-list">
+    <div class="q-row">
+      <div class="q-label">Q · 1</div>
+      <div class="q-prompt">어제 결정한 일이 — 어디 적혀 있습니까?</div>
+    </div>
+    <div class="q-row">
+      <div class="q-label">Q · 2</div>
+      <div class="q-prompt">어제 들어온 견적 요청은 — 어디로 갔습니까?</div>
+    </div>
+    <div class="q-row">
+      <div class="q-label">Q · 3</div>
+      <div class="q-prompt">지난달 가장 큰 매출은 누가 가져왔는지 — 한 번에 답이 나옵니까?</div>
+    </div>
+  </div>
+
+  <div class="audience-callout">
+    세무사 → <strong>거래처 자료</strong> · F&B 사장 → <strong>어제 매출</strong> · 디자이너 → <strong>작년 견적</strong> — 직군은 달라도 <strong>같은 질문</strong>입니다.
+  </div>
+
+  <div class="foot">
+    <span>03 · 오프닝 훅</span>
+    <span class="ssod-wordmark">SSOD</span>
+  </div>
+</section>
+
+
+<!-- ========== 04 · SoR ========== -->
+<section class="slide">
+  <div class="head">
+    <span class="page-no">04 / 10</span>
+    <span class="head-eyebrow">진단 프레임 · 01</span>
+  </div>
+
+  <div class="frame-headline">
+    <span class="frame-no">①</span>
+    <span class="display-md">데이터</span>
+    <span class="frame-mono">— SoR</span>
+  </div>
+  <div class="subtitle">System of Record · 회사에 사실로 적힌 모든 것</div>
+
+  <div class="definition-grid">
+    <div class="def-card">
+      <div class="def-eyebrow-row">
+        <img class="def-icon" src="assets/icon-chart.png" alt="">
+        <div class="def-eyebrow">정의</div>
+      </div>
+      <div class="def-title">진짜 사실이 모인 곳</div>
+      <div class="def-subtitle">변하지 않는 기록</div>
+      <ul class="def-keywords">
+        <li>어제 누가 뭘 샀고, 재고가 얼마고, 단골이 누군지</li>
+        <li>ERP · 회계 시스템 · 고객 명단 · 거래 기록</li>
+        <li>변경되면 안 되는 사내 표준 정보</li>
+      </ul>
+    </div>
+    <div class="def-card with-accent">
+      <div class="def-eyebrow">통찰</div>
+      <div class="def-title">데이터만으로는 부족합니다</div>
+      <div class="def-subtitle">다음 슬라이드에서 이어집니다</div>
+      <div class="def-insight">
+        SoR에는 <strong>거래 데이터뿐만 아니라</strong> — 우리 회사가 <strong>어떻게 판단하는지</strong>도 같이 적혀 있어야 합니다.<br><br>
+        이게 빠진 회사가 가장 많습니다.
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>04 · 데이터 — SoR</span>
+    <span class="ssod-wordmark">SSOD</span>
+  </div>
+</section>
+
+
+<!-- ========== 05 · SoE ========== -->
+<section class="slide">
+  <div class="head">
+    <span class="page-no">05 / 10</span>
+    <span class="head-eyebrow">진단 프레임 · 02</span>
+  </div>
+
+  <div class="frame-headline">
+    <span class="frame-no">②</span>
+    <span class="display-md">일하는 곳</span>
+    <span class="frame-mono">— SoE</span>
+  </div>
+  <div class="subtitle">System of Engagement · 메시지가 오가고, 결정이 내려지는 곳</div>
+
+  <div class="definition-grid">
+    <div class="def-card">
+      <div class="def-eyebrow-row">
+        <img class="def-icon" src="assets/icon-users.png" alt="">
+        <div class="def-eyebrow">정의</div>
+      </div>
+      <div class="def-title">사람과 사람이 만나는 디지털 공간</div>
+      <div class="def-subtitle">직원들이 진짜로 일하는 자리</div>
+      <ul class="def-keywords">
+        <li>카톡방 · 슬랙 · 노션</li>
+        <li>이메일 · 결재 시스템 · 협업 도구</li>
+        <li>알림 · 요청 · 응답 · 승인이 흐르는 통로</li>
+      </ul>
+    </div>
+    <div class="def-card with-accent">
+      <div class="def-eyebrow">통찰</div>
+      <div class="def-title">AI는 이 공간 안으로 들어와야 합니다</div>
+      <div class="def-subtitle">밖에서 부르면 안 만나집니다</div>
+      <div class="def-insight">
+        AI 에이전트가 일하려면 — <strong>사람들이 이미 모여 있는 공간</strong> 안에서 호출되고 응답해야 합니다.<br><br>
+        "AI 콘솔 열어서 명령" 모델은 무너집니다.
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>05 · 일하는 곳 — SoE</span>
+    <span class="ssod-wordmark">SSOD</span>
+  </div>
+</section>
+
+
+<!-- ========== 06 · SoI ========== -->
+<section class="slide">
+  <div class="head">
+    <span class="page-no">06 / 10</span>
+    <span class="head-eyebrow">진단 프레임 · 03 · 핵심</span>
+  </div>
+
+  <div class="frame-headline">
+    <span class="frame-no coral">③</span>
+    <span class="display-md">판단</span>
+    <span class="frame-mono">— SoI</span>
+  </div>
+  <div class="subtitle">System of Intelligence · 데이터를 보고 결정으로 바꿔주는 자리</div>
+
+  <div class="definition-grid">
+    <div class="def-card">
+      <div class="def-eyebrow-row">
+        <img class="def-icon" src="assets/icon-robot.png" alt="">
+        <div class="def-eyebrow">정의</div>
+      </div>
+      <div class="def-title">결정이 나오는 자리</div>
+      <div class="def-subtitle">데이터 → 의미 → 행동</div>
+      <ul class="def-keywords">
+        <li>"어제 매출 안 좋네, 오늘 이거 더 들이자."</li>
+        <li>옛날엔 — 사장님이 그 자리에 있었음</li>
+        <li>지금은 — 대시보드 · AI 에이전트가 받고 있음</li>
+      </ul>
+    </div>
+    <div class="def-card with-accent">
+      <div class="def-eyebrow">핵심 통찰</div>
+      <div class="def-title">사람 머릿속 룰이<br>데이터 옆에 같이 적혀야 합니다</div>
+      <div class="def-subtitle">이게 빠진 회사가 가장 많습니다</div>
+      <div class="dark-inset">
+        <div class="quote-line">"이 단골은 신상 빨리 알린다"</div>
+        <div class="quote-line">"재고 30% 이하면 발주"</div>
+        <div class="quote-meta">— 이런 기준이 데이터 옆에 같이 적혀야 AI가 그 자리를 받습니다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>06 · 판단 — SoI</span>
+    <span class="ssod-wordmark">SSOD</span>
+  </div>
+</section>
+
+
+<!-- ========== 07 · 슬로건 cover ========== -->
+<section class="slide dark quote-slide">
+  <div class="head">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <span class="page-no">07 / 10</span>
+      <span class="coral-dot"></span>
+    </div>
+    <span class="head-eyebrow">한 줄 · take-away</span>
+  </div>
+
+  <div style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
+    <div class="quote-context-above">
+      데이터는 사장님 노트북에 · 일은 카톡방에 · 판단은 사장님 머릿속에
+    </div>
+
+    <div class="display-xl" style="font-size: 92px; line-height: 1.02; letter-spacing: -0.04em;">
+      구조가 없으면,<br>
+      AI도 없습니다.
+    </div>
+
+    <span class="coral-line quote-accent"></span>
+
+    <div class="quote-context-below">
+      데이터(SoR) · 일하는 공간(SoE) · 판단(SoI) — 셋이 끊겨 있으면 <strong style="color: var(--on-dark);">시작 자체가 안 됩니다.</strong>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span class="ssod-wordmark">SSOD</span>
+    <span>07 · 한 줄 요약</span>
+  </div>
+</section>
+
+
+<!-- ========== 08 · 사례 compare ========== -->
+<section class="slide">
+  <div class="head">
+    <span class="page-no">08 / 10</span>
+    <span class="head-eyebrow">사례 · BEFORE → AFTER</span>
+  </div>
+
+  <div class="display-md">사례 — 두 회사 이야기를 섞었습니다.</div>
+  <div class="subtitle">둘 다 수천억 매출 코스닥 상장사. 한 회사를 그대로 노출하기 어려워서 — 진단 패턴이 똑같은 두 곳을 합쳐서 풉니다.</div>
+
+  <div class="compare-grid">
+    <div class="compare-card">
+      <div class="ba-label">Before</div>
+      <div class="ba-title">데이터는 있었습니다</div>
+      <div class="ba-subtitle">SoR · SoE 둘 다 정상</div>
+      <ul class="ba-bullets">
+        <li>ERP에 매출·재고·운영 매일 정확히 적재</li>
+        <li>결재·보고 라인 모두 시스템화</li>
+        <li>그런데 — 데이터 뽑을 줄 아는 사람이 <strong>한 명</strong></li>
+        <li>그 사람 휴가 = 임원도 <strong>어제를 모름</strong></li>
+      </ul>
+      <div class="ba-takeaway">→ 판단(SoI)이 사람 한 명에 묶여 있었던 셈.</div>
+    </div>
+    <div class="compare-card after">
+      <div class="ba-label">After</div>
+      <div class="ba-title">노션·n8n으로 SoI 풀어내기</div>
+      <div class="ba-subtitle">기다림이 사라진 회사</div>
+      <ul class="ba-bullets">
+        <li>ERP 숫자 → 노션 데이터베이스 <strong>자동 파이프라인</strong></li>
+        <li>본사·현장·임원 동선을 노션 안으로 통일</li>
+        <li>매일 출근 전, 어제 지표가 <strong>임원 화면에 정리</strong></li>
+        <li>이상 발견 시 — 현장 부서에 <strong>업무 자동 분배</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="compare-footer">
+    규모가 달라도 진단 질문 셋은 같습니다. <strong>세무사 3명도, 수백명 회사도</strong> — 데이터·룰·판단 끊겨 있으면 AI는 똑같이 못 들어옵니다.
+  </div>
+
+  <div class="foot">
+    <span>08 · 사례 — 두 회사 합성 · NDA 익명</span>
+    <span class="ssod-wordmark">SSOD</span>
+  </div>
+</section>
+
+
+<!-- ========== 09 · AI 시대 timeline ========== -->
+<section class="slide paper">
+  <div class="head">
+    <span class="page-no">09 / 10</span>
+    <span class="head-eyebrow">AI 시대 · 1년 · 3년 · 5년 풍경</span>
+  </div>
+
+  <div class="display-md">데이터·룰 정리된 회사만 받습니다.</div>
+  <div class="subtitle">풍경은 발화로, 숫자는 슬라이드로.</div>
+
+  <div class="timeline-line">
+    <span class="point p1"></span>
+    <span class="point p2"></span>
+    <span class="point p3"></span>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-when">1년 후 · 2026</div>
+      <div class="stat-value">40%</div>
+      <div class="stat-label">앱 10개 중 4개</div>
+      <div class="stat-body">회사에서 쓰는 앱의 <strong>40%</strong>가 AI 에이전트를 내장합니다.</div>
+      <div class="stat-source">— Gartner</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-when">3년 후 · 2028</div>
+      <div class="stat-value">15%</div>
+      <div class="stat-label">일상 업무 결정</div>
+      <div class="stat-body">결정의 <strong>15%</strong>가 AI 자율 실행. 단, 도입 프로젝트 <strong>40%</strong>는 2027년까지 취소 — 데이터 비어 있는 회사가 떨어집니다.</div>
+      <div class="stat-source">— Gartner</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-when">5년 후 · 누적</div>
+      <div class="stat-value">+53%</div>
+      <div class="stat-label">매출 성장 격차</div>
+      <div class="stat-body">데이터 통합한 회사가 안 한 회사보다 3년 누적 매출 성장 <strong>53%</strong> 빠릅니다.</div>
+      <div class="stat-source">— Deloitte</div>
+    </div>
+  </div>
+
+  <div class="stat-takeaway-bar">
+    <span class="tool-logos-inline">
+      <img class="notion-mark" src="assets/notion-logo.png" alt="Notion">
+      <img src="assets/claude-logo.png" alt="Claude">
+    </span>
+    AI는 SoI를 만들지 못합니다. <strong>사람 머릿속 룰을 끄집어내서 시스템에 옮겨 적는 일</strong> — 이게 진짜 비싼 일입니다. 미국 팔란티어가 그 일로 비싸고, 저도 <strong>Notion · n8n · Claude Code</strong> 들고 그 일을 합니다.
+  </div>
+
+  <div class="foot">
+    <span>09 · AI 시대 전망</span>
+    <span class="ssod-wordmark">SSOD</span>
+  </div>
+</section>
+
+
+<!-- ========== 10 · Closing ========== -->
+<section class="slide dark">
+  <div class="head">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <span class="page-no">10 / 10</span>
+      <span class="coral-dot"></span>
+    </div>
+    <span class="ambassador-badges">
+      <img src="assets/notion-ambassador-badge.png" alt="Notion Official Ambassador">
+      <img src="assets/n8n-amber-ssod-black.png" alt="n8n Official Ambassador">
+    </span>
+  </div>
+
+  <div class="display-xl" style="margin-top: 12px;">
+    구조가 없으면,<br>
+    AI도 없습니다.
+  </div>
+
+  <div class="subtitle" style="color: var(--on-dark-soft); max-width: 820px; margin-top: 32px;">
+    수백명 넘는 회사가 AI 시대 준비를 시작하는 일 — <strong style="color: var(--on-dark);">저는 그 일을 합니다.</strong><br>
+    데이터도 룰도 없는 자리에 AI만 앉혀 놓는 회사, 더 안 만들고 싶어서요.
+  </div>
+
+  <div class="closing-meta">
+    <div class="meta-row">
+      <div class="label">발표자</div>
+      <div class="value">김지명<br><span style="color: var(--on-dark-soft); font-weight: 400;">쏘드 컴퍼니</span></div>
+    </div>
+    <div class="meta-row">
+      <div class="label">오늘의 한 줄</div>
+      <div class="value">구조가 없으면 AI도 없습니다<br><span style="color: var(--on-dark-soft); font-weight: 400;">SoR · SoE · SoI</span></div>
+    </div>
+    <div class="meta-row">
+      <div class="label">참고 자원</div>
+      <div class="value">Gartner 2026 · Deloitte · Palantir Ontology<br><span style="color: var(--on-dark-soft); font-weight: 400;">— 발화 인용 출처</span></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span class="ssod-wordmark">SSOD</span>
+    <span>2026 · 05 · 13 · BNI K-Chapter</span>
+  </div>
+</section>
+
+</div>
+
+<script>
+  // Presentation mode: P toggles fullscreen single-slide; ←/→/Space navigates
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.slide');
+
+  function setActive(i) {
+    slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
+    currentSlide = i;
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'p' || e.key === 'P') {
+      document.body.classList.toggle('present');
+      if (document.body.classList.contains('present')) {
+        setActive(currentSlide);
+        if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+      }
+    }
+    if (!document.body.classList.contains('present')) return;
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault();
+      if (currentSlide < slides.length - 1) setActive(currentSlide + 1);
+    }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      if (currentSlide > 0) setActive(currentSlide - 1);
+    }
+    if (e.key === 'Home') { e.preventDefault(); setActive(0); }
+    if (e.key === 'End') { e.preventDefault(); setActive(slides.length - 1); }
+  });
+</script>
+
+</body>
+</html>
