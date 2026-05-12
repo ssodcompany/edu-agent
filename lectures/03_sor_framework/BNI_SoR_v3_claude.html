@@ -259,15 +259,20 @@
   .foot .ssod-wordmark { color: var(--ink); font-weight: 600; letter-spacing: 0.1em; }
   .slide.dark .foot .ssod-wordmark { color: var(--on-dark); }
 
-  /* head right slot — SSOD brand wordmark (non-cover slides) */
+  /* head right slot — SSOD brand mark (SVG mask, currentColor adapts to light/dark) */
   .head .brand-mark {
-    font-family: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    color: var(--ink);
+    display: inline-block;
+    width: 56px;
+    height: 22px;
+    background-color: var(--ink);
+    -webkit-mask: url('assets/ssod-logo-mono.svg') no-repeat right center / contain;
+            mask: url('assets/ssod-logo-mono.svg') no-repeat right center / contain;
+    font-size: 0; /* hide text fallback */
+    line-height: 0;
+    color: transparent;
+    vertical-align: middle;
   }
-  .slide.dark .head .brand-mark { color: var(--on-dark); }
+  .slide.dark .head .brand-mark { background-color: var(--on-dark); }
 
   /* foot left slot — page number inherits foot color */
   .foot .page-no { color: inherit; font-size: 10.5px; letter-spacing: 0.14em; }
@@ -1341,7 +1346,7 @@
     </div>
     <div class="meta-row">
       <div class="label">자격</div>
-      <div class="value">Notion · n8n 글로벌 공식 앰버서더<br><span style="color: var(--on-dark-soft); font-weight: 400;">한국 1인 (2026.05 기준)</span></div>
+      <div class="value">Notion · n8n 글로벌 공식 앰버서더<br><span style="color: var(--on-dark-soft); font-weight: 400;">B2B 업무 시스템 7년차</span></div>
     </div>
     <div class="meta-row">
       <div class="label">시간 · 청중</div>
@@ -1685,8 +1690,8 @@
     <span class="brand-mark">SSOD</span>
   </div>
 
-  <div class="display-md">사례 — 두 회사 이야기를 섞었습니다.</div>
-  <div class="subtitle">둘 다 수천억 매출 코스닥 상장사. 한 회사를 그대로 노출하기 어려워서 — 진단 패턴이 똑같은 두 곳을 합쳐서 풉니다.</div>
+  <div class="display-md">데이터·일·판단이 끊긴 회사 — 어떻게 풉니까.</div>
+  <div class="subtitle">상장사·중견기업 onsite 진단 — Before에서 After로.</div>
 
   <div class="compare-grid">
     <div class="compare-card">
@@ -1837,7 +1842,7 @@
 
   <div class="foot">
     <span class="page-no">11 / 13</span>
-    <span class="source-line">SSOD 도구 스택 · Notion · Claude · n8n</span>
+    <span class="source-line">혈관 메타포 · SSOD · Notion · Claude · n8n</span>
   </div>
 </section>
 
@@ -1860,8 +1865,8 @@
           <span class="photo-slot-hint">Notion Camp HR<br>2025-12 · 본사 협업</span>
         </div>
       </div>
-      <div class="photo-item-title">Notion Camp HR</div>
-      <div class="photo-item-sub">Notion 본사 공식 워크숍</div>
+      <div class="photo-item-title">Notion 본사와 HR 시스템 정리</div>
+      <div class="photo-item-sub">Notion Camp · 공식 워크숍</div>
     </div>
     <div class="photo-item">
       <div class="photo-slot">
@@ -1870,8 +1875,8 @@
           <span class="photo-slot-hint">기업 컨설팅<br>상장사·중견기업 onsite</span>
         </div>
       </div>
-      <div class="photo-item-title">기업 컨설팅</div>
-      <div class="photo-item-sub">상장사·중견기업 onsite 진단</div>
+      <div class="photo-item-title">상장사 데이터·일·판단 잇기</div>
+      <div class="photo-item-sub">상장사·중견기업 onsite 6개월</div>
     </div>
     <div class="photo-item">
       <div class="photo-slot">
@@ -1880,7 +1885,7 @@
           <span class="photo-slot-hint">강연 · 세미나<br>n8n · Notion 공식</span>
         </div>
       </div>
-      <div class="photo-item-title">강연 · 세미나</div>
+      <div class="photo-item-title">진단 렌즈 강연으로 공유</div>
       <div class="photo-item-sub">n8n · Notion 공식 행사</div>
     </div>
     <div class="photo-item">
@@ -1890,8 +1895,8 @@
           <span class="photo-slot-hint">자유 슬롯<br>유튜브·고객사 등</span>
         </div>
       </div>
-      <div class="photo-item-title">유튜브 · 그 외</div>
-      <div class="photo-item-sub">SSOD with Notion 4,750 구독자</div>
+      <div class="photo-item-title">구독자와 진단 렌즈 공유</div>
+      <div class="photo-item-sub">SSOD with Notion · 4,750명</div>
     </div>
   </div>
 
@@ -1923,7 +1928,7 @@
       </div>
       <div class="referral-hook">
         <span class="referral-cue">오늘의 부탁 한 줄</span>
-        거래처·지인 중에 <strong>데이터·일·판단 흩어진 사장님</strong> 떠오르시면 — <strong>저를 떠올려주세요.</strong>
+        거래처·지인 중에 — <strong>ERP는 있는데 엑셀에 의존</strong>하거나, <strong>데이터·일·판단이 사장님 머리에만</strong> 있는 회사 떠오르시면 — <strong>저를 떠올려주세요.</strong>
       </div>
     </div>
     <div class="closing-right">
