@@ -987,6 +987,20 @@
     display: block;
     margin-bottom: 8px;
   }
+  .referral-hook .referral-anchor {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(204, 120, 92, 0.25);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--on-dark-soft);
+    letter-spacing: -0.005em;
+    line-height: 1.5;
+  }
+  .referral-hook .referral-anchor strong {
+    color: var(--coral);
+    font-weight: 600;
+  }
   .closing-meta {
     display: grid;
     grid-template-columns: 1fr 1.2fr 1.6fr;
@@ -1005,6 +1019,28 @@
     font-size: 15px; font-weight: 500; line-height: 1.45;
     color: var(--on-dark);
     letter-spacing: -0.005em;
+  }
+  .closing-meta .meta-row.thesis-row .value {
+    color: var(--coral);
+    font-weight: 600;
+  }
+  .closing-meta .meta-row.thesis-row .label {
+    color: var(--coral);
+  }
+
+  .thesis-bridge {
+    margin-top: 18px;
+    padding: 10px 0 0;
+    border-top: 2px solid var(--coral);
+    font-size: 20px;
+    color: var(--on-dark);
+    letter-spacing: -0.015em;
+    line-height: 1.35;
+    max-width: 580px;
+  }
+  .thesis-bridge strong {
+    font-weight: 700;
+    color: var(--coral);
   }
 
   /* =========================================================
@@ -1372,7 +1408,7 @@
     <div class="intro-left">
       <div class="intro-name">김지명</div>
       <div class="intro-role">쏘드 컴퍼니 · 대표</div>
-      <div class="intro-pill">둘 다 공식 · 한국 1인</div>
+      <div class="intro-pill">B2B 7년차 · 글로벌 이중 앰버서더</div>
       <div class="intro-amber-cards">
         <div class="amber-card">
           <img class="amber-badge" src="assets/notion-ambassador-badge.png" alt="Notion Official Ambassador">
@@ -1603,7 +1639,7 @@
     <span class="ssod-equals">=</span>
     <span class="ssod-expansion">Sync with <strong>Self</strong> · <strong>Other</strong> · <strong>Data</strong></span>
   </div>
-  <div class="subtitle">회사 이름 자체가 — 개인 · 조직 · 데이터를 한 자리에 맞춰서 <strong>일하는 구조</strong>를 만드는 일입니다.</div>
+  <div class="subtitle">회사 이름 자체가 — 개인 · 조직 · 데이터를 한 자리에 맞춰서 일하는 구조를 만드는 일입니다.</div>
 
   <div class="ssod-map-grid">
     <div class="ssod-map-row">
@@ -1788,7 +1824,7 @@
 <!-- ========== 11 · 도구 혈관도 (SSOD가 푸는 자리) ========== -->
 <section class="slide">
   <div class="head">
-    <span class="head-eyebrow">일하는 구조를 만드는 도구 · 4가지</span>
+    <span class="head-eyebrow">SSOD가 쓰는 도구 · 4가지</span>
     <span class="brand-mark">SSOD</span>
   </div>
 
@@ -1923,12 +1959,14 @@
         구조가 없으면,<br>
         AI도 없습니다.
       </div>
-      <div class="subtitle" style="color: var(--on-dark-soft); max-width: 640px; margin-top: 24px;">
-        일하는 구조 없는 자리에 AI만 앉혀 놓는 회사 — 더 안 만들고 싶어서요. <strong style="color: var(--on-dark);">쏘드는 회사의 일하는 구조를 만듭니다.</strong>
+      <div class="thesis-bridge"><strong>그 구조를 — 쏘드가 만듭니다.</strong></div>
+      <div class="subtitle" style="color: var(--on-dark-soft); max-width: 640px; margin-top: 18px;">
+        일하는 구조 없는 자리에 AI만 앉혀 놓는 회사 — 더 안 만들고 싶어서요.
       </div>
       <div class="referral-hook">
         <span class="referral-cue">오늘의 부탁 한 줄</span>
         거래처·지인 중에 — <strong>ERP는 있는데 엑셀에 의존</strong>하거나, <strong>데이터·일·판단이 사장님 머리에만</strong> 있는 회사 떠오르시면 — <strong>저를 떠올려주세요.</strong>
+        <div class="referral-anchor"><strong>Gartner</strong>가 말한 AI 프로젝트 <strong>40% 취소 후보</strong>가 바로 그 회사들이에요.</div>
       </div>
     </div>
     <div class="closing-right">
@@ -1946,7 +1984,7 @@
       <div class="label">발표자</div>
       <div class="value">김지명<br><span style="color: var(--on-dark-soft); font-weight: 400;">쏘드 컴퍼니 대표</span></div>
     </div>
-    <div class="meta-row">
+    <div class="meta-row thesis-row">
       <div class="label">하는 일</div>
       <div class="value">회사의 일하는 구조 만들기<br><span style="color: var(--on-dark-soft); font-weight: 400;">Notion · n8n · Claude Code</span></div>
     </div>
