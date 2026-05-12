@@ -1,0 +1,206 @@
+{
+  "presentation": {
+    "title": "구조가 없으면, AI도 없습니다 — SoR / SoE / SoI",
+    "author": "김지명 · 쏘드 컴퍼니",
+    "date": "2026-05-13",
+    "duration": "10분",
+    "audience": "BNI K챕터 멤버 (자영업·전문직 다양)",
+    "structure": "10장 v2 — notion 톤 (sticky dots + pastel cards + hero band + purple pill)",
+    "aspect_ratio": "16:9",
+    "theme": {
+      "bg_color": "FFFFFF",
+      "section_bg": "0A1530",
+      "title_color": "5645D4",
+      "body_color": "1A1A1A",
+      "charcoal": "37352F",
+      "accent_color": "5645D4",
+      "muted_color": "787671",
+      "card_bg": "FAFAF9",
+      "hairline": "E5E3DF",
+      "on_dark": "FFFFFF",
+      "on_dark_muted": "A4A097",
+      "font_title": "Pretendard Variable",
+      "font_body": "Pretendard Variable"
+    }
+  },
+  "slides": [
+    {
+      "type": "notion_hero",
+      "eyebrow": "BNI K-CHAPTER · 10분 FEATURE PRESENTATION",
+      "title": "구조가 없으면,\nAI도 없습니다.",
+      "subtitle": "SoR · SoE · SoI — 회사 안에 AI가 일할 수 있는 자리",
+      "pill_text": "쏘드 컴퍼니 · 김지명",
+      "notes": "(착석하는 동안 띄워두기. 시작 시 깊게 호흡하고 자기소개로.)"
+    },
+    {
+      "type": "notion_intro",
+      "eyebrow": "INTRO",
+      "title": "쏘드 컴퍼니의\n김지명입니다",
+      "subtitle": "B2B로 회사 업무시스템 만드는 일을 7년째 — 직원 10명 팀부터 수천억 매출 코스닥 상장사까지. 도구는 Notion · n8n · Claude Code.",
+      "cards": [
+        {"tint": "lavender", "label": "GLOBAL AMBASSADOR", "value": "Notion 글로벌 공식\n앰버서더", "dot_color": "5645D4"},
+        {"tint": "peach", "label": "GLOBAL AMBASSADOR", "value": "n8n 글로벌 공식\n앰버서더", "dot_color": "DD5B00"},
+        {"tint": "mint", "label": "한국에서 둘 다 가진 사람", "value": "저 한 명입니다", "dot_color": "1AAE39"},
+        {"tint": "sky", "label": "YOUTUBE · NOTION CAMP", "value": "4,750명 · Notion과\n협업 워크숍 진행", "dot_color": "0075DE"}
+      ],
+      "footer": "지금 자리 — 연매출 수천억대 코스닥 상장사",
+      "notes": "0:00~0:30. 자랑 톤 0, 권위 1회만. 좌측 hero 텍스트 보면서 우측 카드 4개 한 번에 가르키며 발화."
+    },
+    {
+      "type": "notion_question",
+      "eyebrow": "OPENING HOOK",
+      "title": "본론 전에,\n세 가지만 묻겠습니다.",
+      "questions": [
+        "어제 결정한 일이 — 어디 적혀 있습니까?",
+        "어제 들어온 견적 요청은 — 어디로 갔습니까?",
+        "지난달 가장 큰 매출은 누가 가져왔는지 — 한 번에 답이 나옵니까?"
+      ],
+      "footer": "세무사·F&B·디자이너 — 다 같은 질문입니다. 하나라도 \"어디 있더라…\" 하셨다면, ChatGPT 깔아도 일이 크게 바뀌진 않습니다.",
+      "notes": "0:30~1:00. 청중 회사로 끌어들이기. 직업별 트리거. 좌측 dot 세 번 가르키며 한 문장씩."
+    },
+    {
+      "type": "notion_concept",
+      "eyebrow": "01 / 03 · SYSTEM OF RECORD",
+      "title": "데이터",
+      "subtitle": "SoR — 회사에 사실로 적혀 있는 모든 것",
+      "tint": "peach",
+      "accent_dot_color": "DD5B00",
+      "body_lines": [
+        "어제 누가 뭘 샀고, 재고가 얼마고, 단골이 누군지.",
+        "",
+        "ERP · 회계 시스템 · 고객 명단 · 거래 기록.",
+        "회사의 진짜 사실이 모인 곳."
+      ],
+      "callout": "✱ 단, 사실만으로는 부족합니다 — 다음 장에서.",
+      "notes": "1:00~1:45. SoR는 단순 데이터가 아니라 룰까지 같이 적혀 있어야. 다음 장으로 다리."
+    },
+    {
+      "type": "notion_concept",
+      "eyebrow": "02 / 03 · SYSTEM OF ENGAGEMENT",
+      "title": "일하는 곳",
+      "subtitle": "SoE — 직원들이 진짜로 일하는 공간",
+      "tint": "mint",
+      "accent_dot_color": "1AAE39",
+      "body_lines": [
+        "카톡방 · 슬랙 · 노션 · 이메일 · 결재 시스템.",
+        "",
+        "메시지가 오가고,",
+        "결정이 내려지는 곳."
+      ],
+      "callout": "→ AI 에이전트가 일하려면 이 공간 안으로 들어와야 합니다.",
+      "notes": "1:45~2:15. SoE는 사람들이 모이는 공간. 카톡방·노션·결재. AI 에이전트가 들어올 입구."
+    },
+    {
+      "type": "notion_concept",
+      "eyebrow": "03 / 03 · SYSTEM OF INTELLIGENCE",
+      "title": "판단",
+      "subtitle": "SoI — 데이터를 보고 결정으로 바꾸는 자리",
+      "tint": "lavender",
+      "accent_dot_color": "5645D4",
+      "body_lines": [
+        "\"어제 매출 안 좋네, 오늘 이거 더 들이자.\"",
+        "",
+        "옛날엔 — 사장님이 그 자리에 있었습니다.",
+        "지금은 — 대시보드·AI 에이전트가 그 역할을 받고 있습니다.",
+        "",
+        "사람이든 시스템이든 — 결국 판단이 나오는 자리."
+      ],
+      "callout": "✱ 사람이 판단할 때는 룰이 그 사람 머리에 있습니다. AI가 받으려면, 그 룰이 데이터 옆에 같이 적혀 있어야 합니다.",
+      "notes": "2:15~3:15. SoI 핵심 통찰. '사람이든 시스템이든'. 룰이 데이터 옆에 같이 — SSOD 핵심 통찰. SoR=데이터+룰."
+    },
+    {
+      "type": "notion_quote",
+      "eyebrow": "TAKE-AWAY",
+      "quote": "구조가 없으면,\nAI도 없습니다.",
+      "attribution": "데이터(SoR) · 일하는 공간(SoE) · 판단(SoI) — 셋이 끊겨 있으면 시작 자체가 안 됩니다.",
+      "notes": "3:15~3:30. 진단 프레임 끝. 슬로건. 2초 침묵 후 사례로."
+    },
+    {
+      "type": "notion_case",
+      "eyebrow": "CASE · 두 회사 합성 (NDA)",
+      "title": "둘 다 수천억 매출 코스닥 상장사 — 진단 패턴이 똑같았던 두 곳",
+      "left": {
+        "label": "BEFORE",
+        "tint": "rose",
+        "lines": [
+          "● 데이터(SoR)는 있었습니다",
+          "  ERP에 매출·재고·운영 지표 매일 정확히 쌓임",
+          "",
+          "● 일하는 공간(SoE)도 있었습니다",
+          "  결재·보고 라인 모두 시스템화",
+          "",
+          "● 그런데 —",
+          "  \"어제 어디가 가장 잘 됐지\" 물으면",
+          "  그 데이터 뽑을 줄 아는 사람이 회사에 한 명.",
+          "",
+          "→ 임원도 어제를 모릅니다.",
+          "    판단(SoI)이 사람 한 명에 묶여 있었던 거죠."
+        ]
+      },
+      "right": {
+        "label": "AFTER",
+        "tint": "mint",
+        "lines": [
+          "● ERP 숫자 → 노션 데이터베이스 자동 파이프라인",
+          "",
+          "● 본사·현장·임원 동선을 노션 안으로 통일",
+          "    (데이터·일 정리)",
+          "",
+          "● 매일 출근 전, 어제 지표가 임원 화면에 정리",
+          "    (판단 자리 자동화)",
+          "",
+          "● SoI 한 단계 더 — 이상한 곳 발견 시 현장 담당 부서에 업무 자동 분배",
+          "",
+          "→ 기다림이 사라졌습니다."
+        ]
+      },
+      "footer": "→ 규모가 달라도 진단 질문 셋은 같습니다. 세무사 3명도, 수백명 회사도 — AI는 똑같이 못 들어옵니다.",
+      "notes": "3:30~6:30. 두 회사 합성 명시. NDA 안전 + narrative 신뢰. 좌(rose)→우(mint) 흐름으로 시각 가이드."
+    },
+    {
+      "type": "notion_stat_grid",
+      "eyebrow": "AI 시대 — 풍경 3개",
+      "title": "1년 · 3년 · 5년 후 — 무엇이 달라지는가",
+      "subtitle": "데이터·룰 정리된 회사만 AI를 받습니다.",
+      "stats": [
+        {
+          "tint": "sky",
+          "label": "1년 후 · 2026 전망",
+          "value": "40%",
+          "value_color": "0075DE",
+          "dot_color": "0075DE",
+          "body": "회사에서 쓰는 앱 10개 중 4개가 AI 에이전트 내장.",
+          "source": "Gartner"
+        },
+        {
+          "tint": "peach",
+          "label": "3년 후 · 2028",
+          "value": "15%",
+          "value_color": "DD5B00",
+          "dot_color": "DD5B00",
+          "body": "일상 업무 결정의 15%가 AI 자율 실행 (2024년 0%). 단, 도입 프로젝트 40%가 2027년까지 취소.",
+          "source": "Gartner"
+        },
+        {
+          "tint": "mint",
+          "label": "5년 후 · 3년 누적",
+          "value": "+53%",
+          "value_color": "1AAE39",
+          "dot_color": "1AAE39",
+          "body": "데이터 통합한 회사가 안 한 회사보다 매출 성장 53% 빠름.",
+          "source": "Deloitte"
+        }
+      ],
+      "footer": "→ AI는 SoI를 만들지 못합니다. 사람 머릿속 룰을 끄집어내 시스템에 옮기는 일 — 이게 진짜 비싼 일입니다.",
+      "notes": "6:30~9:15. 1년/3년/5년 풍경. Big number 3개. 푸터에 핵심 thesis. 팔란티어·본인 일은 발화로."
+    },
+    {
+      "type": "notion_hero",
+      "eyebrow": "CLOSING",
+      "title": "구조가 없으면,\nAI도 없습니다.",
+      "subtitle": "수백명 넘는 회사가 AI 시대 준비를 시작하는 일 — 저는 그 일을 합니다.",
+      "pill_text": "쏘드 컴퍼니 · 김지명",
+      "notes": "9:15~10:00. 슬로건 재호명 + 자기 일 정리. 명함 직접 CTA 없음. 자연 referral. (감사합니다.)"
+    }
+  ]
+}
