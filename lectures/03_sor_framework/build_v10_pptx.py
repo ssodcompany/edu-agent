@@ -21,12 +21,20 @@ OUTPUT = ROOT / "BNI_SoR_v10.pptx"
 
 CANVAS_W = Inches(13.333)
 CANVAS_H = Inches(7.5)
-BG_BLACK = RGBColor(0x00, 0x00, 0x00)
-INK_WHITE = RGBColor(0xFF, 0xFF, 0xFF)
-MUTED_GRAY = RGBColor(0x66, 0x66, 0x66)
+
+# Linear DESIGN.md 이식 (alpha v10.1, monochrome 유지 + ink·spacing refinement)
+BG_BLACK = RGBColor(0x01, 0x01, 0x02)  # Linear canvas — near-black with faint blue tint
+INK_WHITE = RGBColor(0xF7, 0xF8, 0xF8)  # Linear ink — light gray (덜 가혹)
+MUTED_GRAY = RGBColor(0x8A, 0x8F, 0x98)  # Linear ink-subtle (caption)
+INK_TERTIARY = RGBColor(0x62, 0x66, 0x6D)  # Linear ink-tertiary (page no, eyebrow)
+HAIRLINE = RGBColor(0x23, 0x25, 0x2A)  # 1px border / divider
+SURFACE_1 = RGBColor(0x0F, 0x10, 0x11)  # card lift (diagram 박스 fill)
+
 FONT_BLACK = "Pretendard Black"
 FONT_LIGHT = "Pretendard Light"
 FONT_MONO = "SF Mono"
+
+PUNCH_SPACING_PCT = -3.5  # Linear display aggressive negative tracking
 
 
 # ────────────────────────────────────────────────────────────
@@ -42,6 +50,19 @@ def set_font(run, font_name: str):
         if el is None:
             el = etree.SubElement(rPr, qn(tag))
         el.set("typeface", font_name)
+
+
+def set_letter_spacing(run, spacing_pct: float):
+    """Letter-spacing in percent of font size. Negative = tighter (Linear signature).
+
+    OOXML spc unit = 1/100 pt. 200pt × -3.5% = -7pt = spc='-700'.
+    """
+    if run.font.size is None:
+        return
+    pt = run.font.size.pt
+    spc_val = int(pt * spacing_pct)
+    rPr = run._r.get_or_add_rPr()
+    rPr.set("spc", str(spc_val))
 
 
 def add_black_slide(prs: Presentation):
@@ -80,6 +101,9 @@ def add_punch_text(
     set_font(run, font_name)
     run.font.size = Pt(font_size_pt)
     run.font.color.rgb = color
+    # Linear aggressive negative tracking on display punch
+    if font_name == FONT_BLACK and font_size_pt >= 80:
+        set_letter_spacing(run, PUNCH_SPACING_PCT)
     return tb
 
 
@@ -112,8 +136,8 @@ SSOD_LOGO_W = Inches(0.42 * 600 / 356)  # aspect 1.685 유지
 
 
 def add_brandlogy(slide, slide_no: int):
-    """좌상 NN/12 mono 텍스트 + 우하 SSOD 로고 PNG (본문 슬라이드 공통)."""
-    # 좌상: NN/12
+    """좌상 NN/13 Linear eyebrow + 우하 SSOD 로고 PNG (본문 슬라이드 공통)."""
+    # 좌상: NN/13 — Linear eyebrow style (mono + positive tracking + ink-tertiary)
     tl = slide.shapes.add_textbox(Inches(0.4), Inches(0.3), Inches(1.0), Inches(0.3))
     p = tl.text_frame.paragraphs[0]
     p.alignment = PP_ALIGN.LEFT
@@ -121,7 +145,8 @@ def add_brandlogy(slide, slide_no: int):
     r.text = f"{slide_no:02d}/13"
     set_font(r, FONT_MONO)
     r.font.size = Pt(11)
-    r.font.color.rgb = MUTED_GRAY
+    r.font.color.rgb = INK_TERTIARY
+    set_letter_spacing(r, 3.0)  # eyebrow positive tracking (Linear signature)
 
     # 우하: SSOD 로고 (흰색, currentColor → #FFF 변환 PNG)
     if SSOD_LOGO_WHITE.exists():
@@ -293,15 +318,15 @@ def build_s10_diagram(prs):
     for idx, (label_en, label_ko) in enumerate(layers):
         top = start_top + (box_h + gap) * idx
 
-        # 박스 outline (흰색 1.5pt, fill 없음 — 검정 캔버스 그대로)
+        # Linear lift: surface-1 fill + hairline 1pt border + sm corner
         box = slide.shapes.add_shape(
             MSO_SHAPE.ROUNDED_RECTANGLE, left, top, box_w, box_h
         )
-        box.fill.background()
-        box.line.color.rgb = INK_WHITE
-        box.line.width = Pt(1.5)
-        # 라운드 corner 조절
-        box.adjustments[0] = 0.15
+        box.fill.solid()
+        box.fill.fore_color.rgb = SURFACE_1
+        box.line.color.rgb = HAIRLINE
+        box.line.width = Pt(1.0)
+        box.adjustments[0] = 0.10  # Linear lg rounded ≈ 8.5% of box_h
 
         # 박스 안 텍스트: 영문 punch + 한글 보조
         tf = box.text_frame
