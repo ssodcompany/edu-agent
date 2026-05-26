@@ -181,28 +181,39 @@ def build_s3_years(prs):
 
 
 def build_s4_dual_ambassador(prs):
-    """s4 둘 다 + Notion·n8n 배지 (배지만 원색 유지)."""
+    """s4 둘 다 + Notion·n8n 배지 (배지만 원색 유지, 가로 중앙 정렬)."""
     slide = add_black_slide(prs)
     add_brandlogy(slide, 4)
     add_punch_text(slide, "둘 다", 160, top_inches=1.4, height_inches=2.2)
 
-    badge_h = Inches(1.4)
     notion_path = ASSETS / "notion-ambassador-badge.png"
     n8n_path = ASSETS / "n8n-amber-ssod-black.png"
 
+    # 실측: notion 400x123 (aspect 3.25), n8n 391x110 (aspect 3.55)
+    badge_h_in = 1.1
+    badge_h = Inches(badge_h_in)
+    notion_w = Inches(badge_h_in * 400 / 123)
+    n8n_w = Inches(badge_h_in * 391 / 110)
+    gap = Inches(0.45)
+
+    total_w = notion_w + gap + n8n_w
+    left_notion = (CANVAS_W - total_w) / 2
+    left_n8n = left_notion + notion_w + gap
+    top = Inches(4.55)
+
     if notion_path.exists():
         slide.shapes.add_picture(
-            str(notion_path), Inches(4.3), Inches(4.4), height=badge_h
+            str(notion_path), left_notion, top, width=notion_w, height=badge_h
         )
     if n8n_path.exists():
         slide.shapes.add_picture(
-            str(n8n_path), Inches(7.3), Inches(4.4), height=badge_h
+            str(n8n_path), left_n8n, top, width=n8n_w, height=badge_h
         )
 
     add_caption(
         slide,
         "글로벌 공식 앰버서더 — 한국에 쏘드뿐",
-        top_inches=6.2,
+        top_inches=6.1,
         font_size_pt=20,
     )
 
