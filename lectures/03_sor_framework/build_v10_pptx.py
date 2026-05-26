@@ -6,10 +6,13 @@ Output: BNI_SoR_v10.pptx (16:9, 1280x720)
 """
 from pathlib import Path
 
+from lxml import etree
+
 from pptx import Presentation
 from pptx.dml.color import RGBColor
 from pptx.enum.shapes import MSO_SHAPE
 from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
+from pptx.oxml.ns import qn
 from pptx.util import Inches, Pt
 
 ROOT = Path(__file__).parent
@@ -29,6 +32,16 @@ FONT_MONO = "SF Mono"
 # ────────────────────────────────────────────────────────────
 # Helpers
 # ────────────────────────────────────────────────────────────
+
+
+def set_font(run, font_name: str):
+    """python-pptx font.name은 Latin만 잡음. Hangul/CJK 위해 ea·cs track도 동일 폰트로 강제."""
+    rPr = run._r.get_or_add_rPr()
+    for tag in ("a:latin", "a:ea", "a:cs"):
+        el = rPr.find(qn(tag))
+        if el is None:
+            el = etree.SubElement(rPr, qn(tag))
+        el.set("typeface", font_name)
 
 
 def add_black_slide(prs: Presentation):
@@ -64,7 +77,7 @@ def add_punch_text(
     p.alignment = PP_ALIGN.CENTER
     run = p.add_run()
     run.text = text
-    run.font.name = font_name
+    set_font(run, font_name)
     run.font.size = Pt(font_size_pt)
     run.font.color.rgb = color
     return tb
@@ -87,7 +100,7 @@ def add_caption(
     p.alignment = align
     r = p.add_run()
     r.text = text
-    r.font.name = FONT_LIGHT
+    set_font(r, FONT_LIGHT)
     r.font.size = Pt(font_size_pt)
     r.font.color.rgb = color
     return tb
@@ -106,7 +119,7 @@ def add_brandlogy(slide, slide_no: int):
     p.alignment = PP_ALIGN.LEFT
     r = p.add_run()
     r.text = f"{slide_no:02d}/12"
-    r.font.name = FONT_MONO
+    set_font(r, FONT_MONO)
     r.font.size = Pt(11)
     r.font.color.rgb = MUTED_GRAY
 
@@ -154,7 +167,7 @@ def build_s2_promise(prs):
         p.space_after = Pt(28)
         r = p.add_run()
         r.text = text
-        r.font.name = FONT_LIGHT
+        set_font(r, FONT_LIGHT)
         r.font.size = Pt(40)
         r.font.color.rgb = INK_WHITE
 
@@ -209,7 +222,7 @@ def build_s5_scale(prs):
     def _run(text, *, size, color):
         r = p.add_run()
         r.text = text
-        r.font.name = FONT_BLACK
+        set_font(r, FONT_BLACK)
         r.font.size = Pt(size)
         r.font.color.rgb = color
 
@@ -246,7 +259,7 @@ def build_sox(prs, slide_no: int, label_en: str, label_ko: str, examples: str):
     p.alignment = PP_ALIGN.CENTER
     r = p.add_run()
     r.text = label_en
-    r.font.name = FONT_MONO
+    set_font(r, FONT_MONO)
     r.font.size = Pt(32)
     r.font.color.rgb = MUTED_GRAY
 
@@ -281,7 +294,7 @@ def build_s11_self_audit(prs):
         p.space_after = Pt(16)
         r = p.add_run()
         r.text = text
-        r.font.name = FONT_LIGHT
+        set_font(r, FONT_LIGHT)
         r.font.size = Pt(36)
         r.font.color.rgb = MUTED_GRAY
 
@@ -308,7 +321,7 @@ def build_s12_close(prs):
     p.alignment = PP_ALIGN.RIGHT
     r = p.add_run()
     r.text = "김지명"
-    r.font.name = FONT_LIGHT
+    set_font(r, FONT_LIGHT)
     r.font.size = Pt(16)
     r.font.color.rgb = INK_WHITE
 
