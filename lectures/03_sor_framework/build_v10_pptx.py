@@ -118,7 +118,7 @@ def add_brandlogy(slide, slide_no: int):
     p = tl.text_frame.paragraphs[0]
     p.alignment = PP_ALIGN.LEFT
     r = p.add_run()
-    r.text = f"{slide_no:02d}/12"
+    r.text = f"{slide_no:02d}/13"
     set_font(r, FONT_MONO)
     r.font.size = Pt(11)
     r.font.color.rgb = MUTED_GRAY
@@ -247,39 +247,96 @@ def build_s6_dx_ax(prs):
 
 
 def build_sox(prs, slide_no: int, label_en: str, label_ko: str, examples: str):
-    """s7·s8·s9 공통 — SoR/SoE/SoI 패턴 (상단 영문 약어 / 중앙 한글 punch / 하단 예시)."""
+    """s7·s8·s9 공통 — SoR/SoE/SoI 패턴 (영문 약어 메인 흰 punch / 한글 보조 / 예시)."""
     slide = add_black_slide(prs)
     add_brandlogy(slide, slide_no)
 
-    # 상단 회색 영문 약어 voltage anchor
-    top_label = slide.shapes.add_textbox(
-        Inches(0), Inches(1.6), CANVAS_W, Inches(0.6)
-    )
-    p = top_label.text_frame.paragraphs[0]
-    p.alignment = PP_ALIGN.CENTER
-    r = p.add_run()
-    r.text = label_en
-    set_font(r, FONT_MONO)
-    r.font.size = Pt(32)
-    r.font.color.rgb = MUTED_GRAY
+    # 메인: 영문 약어 흰 큰 punch (visual anchor)
+    add_punch_text(slide, label_en, 200, top_inches=2.0, height_inches=2.8)
 
-    # 중앙 한글 punch
-    add_punch_text(slide, label_ko, 140, top_inches=2.7, height_inches=2.4)
+    # 보조: 한글 회색 작게
+    add_caption(slide, label_ko, top_inches=4.6, font_size_pt=48, color=MUTED_GRAY)
 
-    # 하단 예시
-    add_caption(slide, examples, top_inches=5.4, font_size_pt=22)
+    # 하단: 예시 작은 회색
+    add_caption(slide, examples, top_inches=5.7, font_size_pt=22)
 
 
-def build_s10_plus_ai(prs):
-    """s10 + AI — 그 위에 AI 씌움 (구조 없으면 AI도 못 들어옴)."""
+def build_s10_diagram(prs):
+    """s10 신규 — SoR·SoE·SoI 세 레이어 수직 연결 다이어그램 (Palantir Ontology 모델)."""
     slide = add_black_slide(prs)
     add_brandlogy(slide, 10)
+
+    box_w = Inches(6.0)
+    box_h = Inches(1.15)
+    gap = Inches(0.45)  # 화살표 들어갈 자리
+    left = (CANVAS_W - box_w) / 2
+    start_top = Inches(1.35)
+
+    # 위→아래: SoI (판단) / SoE (일) / SoR (데이터) — 데이터가 토대, 판단이 정점
+    layers = [
+        ("SoI", "판단"),
+        ("SoE", "일"),
+        ("SoR", "데이터"),
+    ]
+
+    for idx, (label_en, label_ko) in enumerate(layers):
+        top = start_top + (box_h + gap) * idx
+
+        # 박스 outline (흰색 1.5pt, fill 없음 — 검정 캔버스 그대로)
+        box = slide.shapes.add_shape(
+            MSO_SHAPE.ROUNDED_RECTANGLE, left, top, box_w, box_h
+        )
+        box.fill.background()
+        box.line.color.rgb = INK_WHITE
+        box.line.width = Pt(1.5)
+        # 라운드 corner 조절
+        box.adjustments[0] = 0.15
+
+        # 박스 안 텍스트: 영문 punch + 한글 보조
+        tf = box.text_frame
+        tf.margin_left = Inches(0.4)
+        tf.margin_right = Inches(0.4)
+        tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+        p = tf.paragraphs[0]
+        p.alignment = PP_ALIGN.CENTER
+
+        r1 = p.add_run()
+        r1.text = label_en
+        set_font(r1, FONT_BLACK)
+        r1.font.size = Pt(54)
+        r1.font.color.rgb = INK_WHITE
+
+        r2 = p.add_run()
+        r2.text = f"    {label_ko}"
+        set_font(r2, FONT_LIGHT)
+        r2.font.size = Pt(28)
+        r2.font.color.rgb = MUTED_GRAY
+
+        # 박스 사이 ↑ 화살표 (마지막 박스 위에는 안 그림)
+        if idx > 0:
+            arrow_top = top - gap + Inches(0.05)
+            arrow = slide.shapes.add_textbox(
+                left, arrow_top, box_w, gap - Inches(0.1)
+            )
+            ap = arrow.text_frame.paragraphs[0]
+            ap.alignment = PP_ALIGN.CENTER
+            ar = ap.add_run()
+            ar.text = "↑"
+            set_font(ar, FONT_LIGHT)
+            ar.font.size = Pt(26)
+            ar.font.color.rgb = MUTED_GRAY
+
+
+def build_s11_plus_ai(prs):
+    """s11 + AI — 그 위에 AI 씌움 (구조 없으면 AI도 못 들어옴)."""
+    slide = add_black_slide(prs)
+    add_brandlogy(slide, 11)
     add_caption(slide, "그 위에", top_inches=2.0, font_size_pt=28)
     add_punch_text(slide, "+ AI", 240, top_inches=3.0, height_inches=3.0)
 
 
-def build_s11_self_audit(prs):
-    """s11 우리 회사는? + 체크박스 SoR/SoE/SoI (자기진단 cliff hanger)."""
+def build_s12_self_audit(prs):
+    """s12 우리 회사는? + 체크박스 SoR/SoE/SoI (자기진단 cliff hanger)."""
     slide = add_black_slide(prs)
     add_punch_text(slide, "우리 회사는?", 96, top_inches=1.5, height_inches=1.3)
 
@@ -299,8 +356,8 @@ def build_s11_self_audit(prs):
         r.font.color.rgb = MUTED_GRAY
 
 
-def build_s12_close(prs):
-    """s12 검정 마무리 — 우하 SSOD 로고 + 김지명."""
+def build_s13_close(prs):
+    """s13 검정 마무리 — 우하 SSOD 로고 + 김지명."""
     slide = add_black_slide(prs)
 
     # 우하 로고 (본문보다 약간 크게)
@@ -340,9 +397,10 @@ def main():
     build_sox(prs, 7, "SoR", "데이터", "ERP · 고객 명단 · 매출")
     build_sox(prs, 8, "SoE", "일", "카톡 · 노션 · 결재")
     build_sox(prs, 9, "SoI", "판단", "사장님 · 대시보드 · AI")
-    build_s10_plus_ai(prs)
-    build_s11_self_audit(prs)
-    build_s12_close(prs)
+    build_s10_diagram(prs)
+    build_s11_plus_ai(prs)
+    build_s12_self_audit(prs)
+    build_s13_close(prs)
 
     prs.save(OUTPUT)
     print(f"saved → {OUTPUT}  ({len(prs.slides)} slides)")
