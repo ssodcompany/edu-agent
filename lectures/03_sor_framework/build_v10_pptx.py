@@ -1,6 +1,6 @@
-"""BNI v10 PPT builder — Monochrome Punch (12 slides, 검정+흰색 only).
+"""BNI v10 PPT builder — Monochrome Punch (14 slides, 검정+흰색 only).
 
-Spec: design-v10-spec.md (2026-05-25 SHIP).
+Spec: design-v10-spec.md (2026-05-25 SHIP) + photo wall s4 추가 (2026-05-26).
 Run: python build_v10_pptx.py
 Output: BNI_SoR_v10.pptx (16:9, 1280x720)
 """
@@ -17,10 +17,12 @@ from pptx.util import Inches, Pt
 
 ROOT = Path(__file__).parent
 ASSETS = ROOT / "assets"
+PHOTOS = ASSETS / "photos"
 OUTPUT = ROOT / "BNI_SoR_v10.pptx"
 
 CANVAS_W = Inches(13.333)
 CANVAS_H = Inches(7.5)
+TOTAL_SLIDES = 13
 
 # Linear DESIGN.md 이식 (alpha v10.1, monochrome 유지 + ink·spacing refinement)
 BG_BLACK = RGBColor(0x01, 0x01, 0x02)  # Linear canvas — near-black with faint blue tint
@@ -78,6 +80,48 @@ def add_black_slide(prs: Presentation):
     return slide
 
 
+def add_gradient_slide(prs: Presentation):
+    """16:9 빈 슬라이드 + diagonal 그라데이션 (좌상 검정 → 보라 → 우하 라일락).
+
+    3-stop gradient, 135° diagonal (top-left → bottom-right).
+    """
+    blank_layout = prs.slide_layouts[6]
+    slide = prs.slides.add_slide(blank_layout)
+    bg = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, 0, 0, CANVAS_W, CANVAS_H)
+    bg.line.fill.background()
+
+    sp_pr = bg.fill._xPr
+    for tag in ("a:solidFill", "a:gradFill", "a:noFill", "a:pattFill", "a:blipFill"):
+        el = sp_pr.find(qn(tag))
+        if el is not None:
+            sp_pr.remove(el)
+
+    grad = etree.SubElement(sp_pr, qn("a:gradFill"))
+    grad.set("flip", "none")
+    grad.set("rotWithShape", "1")
+    gs_lst = etree.SubElement(grad, qn("a:gsLst"))
+
+    # 3-stop: 좌상 검정 영역 넓게 → 중앙 진보라 → 우하 라일락
+    # 검정 0~35%, 보라 70%, 라일락 100% — reference 톤 매칭
+    stops = [
+        ("0", "000000"),
+        ("35000", "000000"),
+        ("70000", "6a5acd"),
+        ("100000", "e8b0e8"),
+    ]
+    for pos, hex_color in stops:
+        gs = etree.SubElement(gs_lst, qn("a:gs"))
+        gs.set("pos", pos)
+        srgb = etree.SubElement(gs, qn("a:srgbClr"))
+        srgb.set("val", hex_color)
+
+    lin = etree.SubElement(grad, qn("a:lin"))
+    lin.set("ang", "2700000")  # 45° = 좌상→우하 diagonal
+    lin.set("scaled", "0")
+
+    return slide
+
+
 def add_punch_text(
     slide,
     text: str,
@@ -132,18 +176,35 @@ def add_caption(
     return tb
 
 
-SSOD_LOGO_LAVENDER = ASSETS / "ssod-logo-lavender.png"
-SSOD_LOGO_H = Inches(0.48)  # 살짝 키움
-SSOD_LOGO_W = Inches(0.48 * 600 / 356)
+SSOD_LOGO = ASSETS / "ssod-wordmark.png"  # 가로형 워드마크 (마크 + SSOD 영문)
+SSOD_LOGO_H = Inches(0.62)
+SSOD_LOGO_W = Inches(0.62 * 2440 / 1585)  # 원본 비율 2440x1585
+
+# Footer 레이아웃 토큰
+FOOTER_DIVIDER_Y = Inches(6.72)  # divider 위치 (footer 영역 확장)
+FOOTER_BASELINE_Y = Inches(6.82)  # chip·로고 top baseline
 
 
 def add_brandlogy(slide, slide_no: int):
-    """좌상 NN/13 chip (hairline border + surface-1 fill) + 우하 SSOD 라벤더 로고."""
-    # 좌상: pill chip — surface-1 fill + hairline border + rounded pill
-    chip_w = Inches(0.85)
+    """좌하 NN/14 chip + 하단 hairline divider + 우하 SSOD 가로형 워드마크.
+
+    Footer 시각 균형: divider 위(콘텐츠) / divider 아래(footer 영역) 분리.
+    좌측 chip(작음, 보조 정보) vs 우측 워드마크(큼, 브랜드 시그너처) 위계 명확.
+    """
+    # 하단 hairline divider — footer 영역 윤곽
+    divider = slide.shapes.add_connector(
+        1, Inches(0.4), FOOTER_DIVIDER_Y, CANVAS_W - Inches(0.4), FOOTER_DIVIDER_Y
+    )
+    divider.line.color.rgb = HAIRLINE
+    divider.line.width = Pt(0.5)
+
+    # 좌하: pill chip — surface-1 fill + hairline border + rounded pill
+    chip_w = Inches(1.05)
     chip_h = Inches(0.32)
+    # 로고 vertical center와 align (로고 height 0.62, top 6.82 → center 7.13)
+    # chip center 7.13 → chip top 7.13 - 0.16 = 6.97
     chip = slide.shapes.add_shape(
-        MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.4), Inches(0.35), chip_w, chip_h
+        MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.4), Inches(6.97), chip_w, chip_h
     )
     chip.fill.solid()
     chip.fill.fore_color.rgb = SURFACE_1
@@ -151,33 +212,27 @@ def add_brandlogy(slide, slide_no: int):
     chip.line.width = Pt(0.75)
     chip.adjustments[0] = 0.5  # pill
     tf = chip.text_frame
-    tf.margin_left = tf.margin_right = Inches(0.08)
+    tf.word_wrap = False  # 한 줄 강제
+    tf.margin_left = tf.margin_right = Inches(0.1)
     tf.margin_top = tf.margin_bottom = 0
     tf.vertical_anchor = MSO_ANCHOR.MIDDLE
     p = tf.paragraphs[0]
     p.alignment = PP_ALIGN.CENTER
     r = p.add_run()
-    r.text = f"{slide_no:02d} / 13"
+    r.text = f"{slide_no:02d} / {TOTAL_SLIDES}"
     set_font(r, FONT_MONO)
     r.font.size = Pt(10)
     r.font.color.rgb = MUTED_GRAY
     set_letter_spacing(r, 4.0)  # eyebrow positive tracking
 
-    # 하단 hairline divider — footer 영역 윤곽
-    divider = slide.shapes.add_connector(
-        1, Inches(0.4), Inches(6.85), CANVAS_W - Inches(0.4), Inches(6.85)
-    )
-    divider.line.color.rgb = HAIRLINE
-    divider.line.width = Pt(0.5)
-
-    # 우하: SSOD 라벤더 로고 (Linear brand mark = lavender accent)
-    if SSOD_LOGO_LAVENDER.exists():
-        right_margin = Inches(0.45)
-        bottom_margin = Inches(0.28)
+    # 우하: SSOD 가로형 워드마크 (footer 영역 안, divider 아래)
+    if SSOD_LOGO.exists():
+        right_margin = Inches(0.4)
+        # 로고 top 6.82, height 0.62 → bottom 7.44 (캔버스 7.5 안, divider 6.72 아래)
+        top = FOOTER_BASELINE_Y
         left = CANVAS_W - SSOD_LOGO_W - right_margin
-        top = CANVAS_H - SSOD_LOGO_H - bottom_margin
         slide.shapes.add_picture(
-            str(SSOD_LOGO_LAVENDER), left, top, width=SSOD_LOGO_W, height=SSOD_LOGO_H
+            str(SSOD_LOGO), left, top, width=SSOD_LOGO_W, height=SSOD_LOGO_H
         )
 
 
@@ -187,10 +242,35 @@ def add_brandlogy(slide, slide_no: int):
 
 
 def build_s1_cover(prs):
-    """s1 표지 — 회사의 일하는 구조 + SSOD · 김지명."""
+    """s1 표지 — eyebrow + punch + 중앙 SSOD 워드마크, 검정 BG."""
     slide = add_black_slide(prs)
-    add_punch_text(slide, "AI 시대 일하는 구조", 84, top_inches=2.9, height_inches=1.5)
-    add_caption(slide, "SSOD · 김지명", top_inches=4.6, font_size_pt=20, color=INK_WHITE)
+
+    # eyebrow: AI 시대 (작은 mono small caps 톤)
+    eyebrow = slide.shapes.add_textbox(Inches(0), Inches(2.4), CANVAS_W, Inches(0.5))
+    ep = eyebrow.text_frame.paragraphs[0]
+    ep.alignment = PP_ALIGN.CENTER
+    er = ep.add_run()
+    er.text = "AI 시대"
+    set_font(er, FONT_LIGHT)
+    er.font.size = Pt(28)
+    er.font.color.rgb = MUTED_GRAY
+
+    # punch: 준비해야하는 일의 구조
+    add_punch_text(
+        slide,
+        "준비해야하는 일의 구조",
+        72,
+        top_inches=3.05,
+        height_inches=1.6,
+    )
+
+    # 중앙 SSOD 워드마크 (표지 시그너처)
+    if SSOD_LOGO.exists():
+        h = Inches(0.7)
+        w = Inches(0.7 * 2440 / 1585)
+        left = (CANVAS_W - w) / 2
+        top = Inches(5.3)
+        slide.shapes.add_picture(str(SSOD_LOGO), left, top, width=w, height=h)
 
 
 def build_s2_promise(prs):
@@ -228,10 +308,10 @@ def build_s3_years(prs):
 
 
 def build_s4_dual_ambassador(prs):
-    """s4 둘 다 + Notion·n8n 배지 (배지만 원색 유지, 가로 중앙 정렬)."""
+    """s4 국내 유일 + Notion·n8n 배지 (배지만 원색 유지, 가로 중앙 정렬)."""
     slide = add_black_slide(prs)
     add_brandlogy(slide, 4)
-    add_punch_text(slide, "둘 다", 160, top_inches=1.4, height_inches=2.2)
+    add_punch_text(slide, "국내 유일", 130, top_inches=1.4, height_inches=2.2)
 
     notion_path = ASSETS / "notion-ambassador-badge.png"
     n8n_path = ASSETS / "n8n-amber-ssod-black.png"
@@ -259,7 +339,7 @@ def build_s4_dual_ambassador(prs):
 
     add_caption(
         slide,
-        "글로벌 공식 앰버서더 — 한국에 쏘드뿐",
+        "이중 앰버서더는 국내 SSOD뿐",
         top_inches=6.1,
         font_size_pt=20,
     )
@@ -304,23 +384,22 @@ def build_s6_dx_ax(prs):
     )
 
 
-def build_sox(prs, slide_no: int, label_en: str, label_ko: str, examples: str):
-    """s7·s8·s9 공통 — SoR/SoE/SoI 패턴 (영문 약어 메인 흰 punch / 한글 보조 / 예시)."""
+def build_sox(prs, slide_no, label_en, label_ko, subtitle, examples):
+    """s7·s8·s9 공통 — SoR/SoE/SoI 패턴.
+
+    위계: 영문 약어 punch(흰, 메인) → 한글 단어(muted) → 부제 1줄(흰, 풍부) → 예시(muted, 작게).
+    """
     slide = add_black_slide(prs)
     add_brandlogy(slide, slide_no)
 
-    # 메인: 영문 약어 흰 큰 punch (visual anchor)
-    add_punch_text(slide, label_en, 200, top_inches=2.0, height_inches=2.8)
-
-    # 보조: 한글 회색 작게
-    add_caption(slide, label_ko, top_inches=4.6, font_size_pt=48, color=MUTED_GRAY)
-
-    # 하단: 예시 작은 회색
-    add_caption(slide, examples, top_inches=5.7, font_size_pt=22)
+    add_punch_text(slide, label_en, 200, top_inches=1.6, height_inches=2.6)
+    add_caption(slide, label_ko, top_inches=4.45, font_size_pt=44, color=MUTED_GRAY)
+    add_caption(slide, subtitle, top_inches=5.15, font_size_pt=22, color=INK_WHITE)
+    add_caption(slide, examples, top_inches=5.85, font_size_pt=18)
 
 
 def build_s10_diagram(prs):
-    """s10 신규 — SoR·SoE·SoI 세 레이어 수직 연결 다이어그램 (Palantir Ontology 모델)."""
+    """s10 — SoR·SoE·SoI 세 레이어 수직 연결 다이어그램 (Palantir Ontology 모델)."""
     slide = add_black_slide(prs)
     add_brandlogy(slide, 10)
 
@@ -330,11 +409,11 @@ def build_s10_diagram(prs):
     left = (CANVAS_W - box_w) / 2
     start_top = Inches(1.35)
 
-    # 위→아래: SoI (판단) / SoE (일) / SoR (데이터) — 데이터가 토대, 판단이 정점
+    # 위→아래: SoI (지능) / SoE (참여) / SoR (기록) — 기록이 토대, 지능이 정점
     layers = [
-        ("SoI", "판단"),
-        ("SoE", "일"),
-        ("SoR", "데이터"),
+        ("SoI", "지능"),
+        ("SoE", "참여"),
+        ("SoR", "기록"),
     ]
 
     for idx, (label_en, label_ko) in enumerate(layers):
@@ -402,7 +481,7 @@ def build_s12_self_audit(prs):
     tf = tb.text_frame
     tf.vertical_anchor = MSO_ANCHOR.TOP
 
-    items = ["☐  SoR — 데이터", "☐  SoE — 일", "☐  SoI — 판단"]
+    items = ["☐  SoR — 기록", "☐  SoE — 참여", "☐  SoI — 지능"]
     for idx, text in enumerate(items):
         p = tf.paragraphs[0] if idx == 0 else tf.add_paragraph()
         p.alignment = PP_ALIGN.CENTER
@@ -415,29 +494,25 @@ def build_s12_self_audit(prs):
 
 
 def build_s13_close(prs):
-    """s13 검정 마무리 — 우하 SSOD 라벤더 로고 + 김지명."""
+    """s13 검정 마무리 — 중앙 SSOD 가로형 워드마크 + 김지명."""
     slide = add_black_slide(prs)
 
-    # 우하 라벤더 로고 (closing brand mark)
-    if SSOD_LOGO_LAVENDER.exists():
-        h = Inches(0.75)
-        w = Inches(0.75 * 600 / 356)
-        right_margin = Inches(0.55)
-        bottom_margin = Inches(0.55)
-        left = CANVAS_W - w - right_margin
-        top = CANVAS_H - h - bottom_margin
-        slide.shapes.add_picture(str(SSOD_LOGO_LAVENDER), left, top, width=w, height=h)
+    # 중앙 가로형 워드마크 (closing brand mark)
+    if SSOD_LOGO.exists():
+        h = Inches(1.4)
+        w = Inches(1.4 * 2440 / 1585)
+        left = (CANVAS_W - w) / 2
+        top = (CANVAS_H - h) / 2 - Inches(0.3)
+        slide.shapes.add_picture(str(SSOD_LOGO), left, top, width=w, height=h)
 
-    # 로고 위 김지명
-    tb = slide.shapes.add_textbox(
-        Inches(10.5), Inches(6.0), Inches(2.5), Inches(0.4)
-    )
+    # 워드마크 아래 김지명 (중앙 정렬)
+    tb = slide.shapes.add_textbox(Inches(0), Inches(5.1), CANVAS_W, Inches(0.5))
     p = tb.text_frame.paragraphs[0]
-    p.alignment = PP_ALIGN.RIGHT
+    p.alignment = PP_ALIGN.CENTER
     r = p.add_run()
     r.text = "김지명"
     set_font(r, FONT_LIGHT)
-    r.font.size = Pt(16)
+    r.font.size = Pt(18)
     r.font.color.rgb = INK_WHITE
 
 
@@ -452,9 +527,9 @@ def main():
     build_s4_dual_ambassador(prs)
     build_s5_scale(prs)
     build_s6_dx_ax(prs)
-    build_sox(prs, 7, "SoR", "데이터", "ERP · 고객 명단 · 매출")
-    build_sox(prs, 8, "SoE", "일", "카톡 · 노션 · 결재")
-    build_sox(prs, 9, "SoI", "판단", "사장님 · 대시보드 · AI")
+    build_sox(prs, 7, "SoR", "기록", "회사의 거래·사실이 권위 있게 적힌 자리", "ERP · CRM · 매출")
+    build_sox(prs, 8, "SoE", "참여", "사람의 상호작용·협업이 일어나는 자리", "카톡 · 노션 · 메일")
+    build_sox(prs, 9, "SoI", "지능", "여러 기록을 합쳐 AI가 결정을 만드는 자리", "BI · 대시보드 · AI")
     build_s10_diagram(prs)
     build_s11_plus_ai(prs)
     build_s12_self_audit(prs)
