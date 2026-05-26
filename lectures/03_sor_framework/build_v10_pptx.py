@@ -93,9 +93,14 @@ def add_caption(
     return tb
 
 
+SSOD_LOGO_WHITE = ASSETS / "ssod-logo-white.png"
+SSOD_LOGO_H = Inches(0.42)  # ~76px @ 1280x720 — 11pt text와 시각 무게 균형
+SSOD_LOGO_W = Inches(0.42 * 600 / 356)  # aspect 1.685 유지
+
+
 def add_brandlogy(slide, slide_no: int):
-    """좌상 NN/12 + 우하 SSOD 워드마크 (본문 슬라이드 공통)."""
-    # 좌상
+    """좌상 NN/12 mono 텍스트 + 우하 SSOD 로고 PNG (본문 슬라이드 공통)."""
+    # 좌상: NN/12
     tl = slide.shapes.add_textbox(Inches(0.4), Inches(0.3), Inches(1.0), Inches(0.3))
     p = tl.text_frame.paragraphs[0]
     p.alignment = PP_ALIGN.LEFT
@@ -105,17 +110,15 @@ def add_brandlogy(slide, slide_no: int):
     r.font.size = Pt(11)
     r.font.color.rgb = MUTED_GRAY
 
-    # 우하
-    br = slide.shapes.add_textbox(
-        Inches(11.5), Inches(6.95), Inches(1.5), Inches(0.3)
-    )
-    p = br.text_frame.paragraphs[0]
-    p.alignment = PP_ALIGN.RIGHT
-    r = p.add_run()
-    r.text = "SSOD"
-    r.font.name = FONT_BLACK
-    r.font.size = Pt(11)
-    r.font.color.rgb = INK_WHITE
+    # 우하: SSOD 로고 (흰색, currentColor → #FFF 변환 PNG)
+    if SSOD_LOGO_WHITE.exists():
+        right_margin = Inches(0.45)
+        bottom_margin = Inches(0.32)
+        left = CANVAS_W - SSOD_LOGO_W - right_margin
+        top = CANVAS_H - SSOD_LOGO_H - bottom_margin
+        slide.shapes.add_picture(
+            str(SSOD_LOGO_WHITE), left, top, width=SSOD_LOGO_W, height=SSOD_LOGO_H
+        )
 
 
 # ────────────────────────────────────────────────────────────
@@ -284,17 +287,29 @@ def build_s11_self_audit(prs):
 
 
 def build_s12_close(prs):
-    """s12 검정 마무리 — 우하 SSOD · 김지명만."""
+    """s12 검정 마무리 — 우하 SSOD 로고 + 김지명."""
     slide = add_black_slide(prs)
+
+    # 우하 로고 (본문보다 약간 크게)
+    if SSOD_LOGO_WHITE.exists():
+        h = Inches(0.6)
+        w = Inches(0.6 * 600 / 356)
+        right_margin = Inches(0.55)
+        bottom_margin = Inches(0.55)
+        left = CANVAS_W - w - right_margin
+        top = CANVAS_H - h - bottom_margin
+        slide.shapes.add_picture(str(SSOD_LOGO_WHITE), left, top, width=w, height=h)
+
+    # 로고 위 김지명
     tb = slide.shapes.add_textbox(
-        Inches(10.5), Inches(6.85), Inches(2.5), Inches(0.4)
+        Inches(10.5), Inches(6.0), Inches(2.5), Inches(0.4)
     )
     p = tb.text_frame.paragraphs[0]
     p.alignment = PP_ALIGN.RIGHT
     r = p.add_run()
-    r.text = "SSOD · 김지명"
+    r.text = "김지명"
     r.font.name = FONT_LIGHT
-    r.font.size = Pt(14)
+    r.font.size = Pt(16)
     r.font.color.rgb = INK_WHITE
 
 
