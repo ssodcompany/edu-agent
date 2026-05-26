@@ -254,6 +254,14 @@ def build_sox(prs, slide_no: int, label_en: str, label_ko: str, examples: str):
     add_caption(slide, examples, top_inches=5.4, font_size_pt=22)
 
 
+def build_s10_plus_ai(prs):
+    """s10 + AI — 그 위에 AI 씌움 (구조 없으면 AI도 못 들어옴)."""
+    slide = add_black_slide(prs)
+    add_brandlogy(slide, 10)
+    add_caption(slide, "그 위에", top_inches=2.0, font_size_pt=28)
+    add_punch_text(slide, "+ AI", 240, top_inches=3.0, height_inches=3.0)
+
+
 def build_s11_self_audit(prs):
     """s11 우리 회사는? + 체크박스 SoR/SoE/SoI (자기진단 cliff hanger)."""
     slide = add_black_slide(prs)
@@ -304,8 +312,7 @@ def main():
     build_sox(prs, 7, "SoR", "데이터", "ERP · 고객 명단 · 매출")
     build_sox(prs, 8, "SoE", "일", "카톡 · 노션 · 결재")
     build_sox(prs, 9, "SoI", "판단", "사장님 · 대시보드 · AI")
-    slide = add_black_slide(prs)  # s10 placeholder (filled in Task 5)
-    add_brandlogy(slide, 10)
+    build_s10_plus_ai(prs)
     build_s11_self_audit(prs)
     build_s12_close(prs)
 
