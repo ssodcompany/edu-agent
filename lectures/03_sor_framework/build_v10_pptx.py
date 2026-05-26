@@ -230,6 +230,30 @@ def build_s6_dx_ax(prs):
     )
 
 
+def build_sox(prs, slide_no: int, label_en: str, label_ko: str, examples: str):
+    """s7·s8·s9 공통 — SoR/SoE/SoI 패턴 (상단 영문 약어 / 중앙 한글 punch / 하단 예시)."""
+    slide = add_black_slide(prs)
+    add_brandlogy(slide, slide_no)
+
+    # 상단 회색 영문 약어 voltage anchor
+    top_label = slide.shapes.add_textbox(
+        Inches(0), Inches(1.6), CANVAS_W, Inches(0.6)
+    )
+    p = top_label.text_frame.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    r = p.add_run()
+    r.text = label_en
+    r.font.name = FONT_MONO
+    r.font.size = Pt(32)
+    r.font.color.rgb = MUTED_GRAY
+
+    # 중앙 한글 punch
+    add_punch_text(slide, label_ko, 140, top_inches=2.7, height_inches=2.4)
+
+    # 하단 예시
+    add_caption(slide, examples, top_inches=5.4, font_size_pt=22)
+
+
 def build_s11_self_audit(prs):
     """s11 우리 회사는? + 체크박스 SoR/SoE/SoI (자기진단 cliff hanger)."""
     slide = add_black_slide(prs)
@@ -277,9 +301,11 @@ def main():
     build_s4_dual_ambassador(prs)
     build_s5_scale(prs)
     build_s6_dx_ax(prs)
-    for i in range(7, 11):  # s7~s10 placeholder (filled in Tasks 4–5)
-        slide = add_black_slide(prs)
-        add_brandlogy(slide, i)
+    build_sox(prs, 7, "SoR", "데이터", "ERP · 고객 명단 · 매출")
+    build_sox(prs, 8, "SoE", "일", "카톡 · 노션 · 결재")
+    build_sox(prs, 9, "SoI", "판단", "사장님 · 대시보드 · AI")
+    slide = add_black_slide(prs)  # s10 placeholder (filled in Task 5)
+    add_brandlogy(slide, 10)
     build_s11_self_audit(prs)
     build_s12_close(prs)
 
