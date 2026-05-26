@@ -30,6 +30,8 @@ INK_TERTIARY = RGBColor(0x62, 0x66, 0x6D)  # Linear ink-tertiary (page no, eyebr
 HAIRLINE = RGBColor(0x23, 0x25, 0x2A)  # 1px border / divider
 SURFACE_1 = RGBColor(0x0F, 0x10, 0x11)  # card lift (diagram 박스 fill)
 
+LAVENDER = RGBColor(0x5E, 0x6A, 0xD2)  # Linear signature accent (brand mark only)
+
 FONT_BLACK = "Pretendard Black"
 FONT_LIGHT = "Pretendard Light"
 FONT_MONO = "SF Mono"
@@ -130,32 +132,52 @@ def add_caption(
     return tb
 
 
-SSOD_LOGO_WHITE = ASSETS / "ssod-logo-white.png"
-SSOD_LOGO_H = Inches(0.42)  # ~76px @ 1280x720 — 11pt text와 시각 무게 균형
-SSOD_LOGO_W = Inches(0.42 * 600 / 356)  # aspect 1.685 유지
+SSOD_LOGO_LAVENDER = ASSETS / "ssod-logo-lavender.png"
+SSOD_LOGO_H = Inches(0.48)  # 살짝 키움
+SSOD_LOGO_W = Inches(0.48 * 600 / 356)
 
 
 def add_brandlogy(slide, slide_no: int):
-    """좌상 NN/13 Linear eyebrow + 우하 SSOD 로고 PNG (본문 슬라이드 공통)."""
-    # 좌상: NN/13 — Linear eyebrow style (mono + positive tracking + ink-tertiary)
-    tl = slide.shapes.add_textbox(Inches(0.4), Inches(0.3), Inches(1.0), Inches(0.3))
-    p = tl.text_frame.paragraphs[0]
-    p.alignment = PP_ALIGN.LEFT
+    """좌상 NN/13 chip (hairline border + surface-1 fill) + 우하 SSOD 라벤더 로고."""
+    # 좌상: pill chip — surface-1 fill + hairline border + rounded pill
+    chip_w = Inches(0.85)
+    chip_h = Inches(0.32)
+    chip = slide.shapes.add_shape(
+        MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.4), Inches(0.35), chip_w, chip_h
+    )
+    chip.fill.solid()
+    chip.fill.fore_color.rgb = SURFACE_1
+    chip.line.color.rgb = HAIRLINE
+    chip.line.width = Pt(0.75)
+    chip.adjustments[0] = 0.5  # pill
+    tf = chip.text_frame
+    tf.margin_left = tf.margin_right = Inches(0.08)
+    tf.margin_top = tf.margin_bottom = 0
+    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+    p = tf.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
     r = p.add_run()
-    r.text = f"{slide_no:02d}/13"
+    r.text = f"{slide_no:02d} / 13"
     set_font(r, FONT_MONO)
-    r.font.size = Pt(11)
-    r.font.color.rgb = INK_TERTIARY
-    set_letter_spacing(r, 3.0)  # eyebrow positive tracking (Linear signature)
+    r.font.size = Pt(10)
+    r.font.color.rgb = MUTED_GRAY
+    set_letter_spacing(r, 4.0)  # eyebrow positive tracking
 
-    # 우하: SSOD 로고 (흰색, currentColor → #FFF 변환 PNG)
-    if SSOD_LOGO_WHITE.exists():
+    # 하단 hairline divider — footer 영역 윤곽
+    divider = slide.shapes.add_connector(
+        1, Inches(0.4), Inches(6.85), CANVAS_W - Inches(0.4), Inches(6.85)
+    )
+    divider.line.color.rgb = HAIRLINE
+    divider.line.width = Pt(0.5)
+
+    # 우하: SSOD 라벤더 로고 (Linear brand mark = lavender accent)
+    if SSOD_LOGO_LAVENDER.exists():
         right_margin = Inches(0.45)
-        bottom_margin = Inches(0.32)
+        bottom_margin = Inches(0.28)
         left = CANVAS_W - SSOD_LOGO_W - right_margin
         top = CANVAS_H - SSOD_LOGO_H - bottom_margin
         slide.shapes.add_picture(
-            str(SSOD_LOGO_WHITE), left, top, width=SSOD_LOGO_W, height=SSOD_LOGO_H
+            str(SSOD_LOGO_LAVENDER), left, top, width=SSOD_LOGO_W, height=SSOD_LOGO_H
         )
 
 
@@ -348,7 +370,7 @@ def build_s10_diagram(prs):
         r2.font.size = Pt(28)
         r2.font.color.rgb = MUTED_GRAY
 
-        # 박스 사이 ↑ 화살표 (마지막 박스 위에는 안 그림)
+        # 박스 사이 ↑ 화살표 — 라벤더 액센트 (Linear signature accent)
         if idx > 0:
             arrow_top = top - gap + Inches(0.05)
             arrow = slide.shapes.add_textbox(
@@ -358,9 +380,9 @@ def build_s10_diagram(prs):
             ap.alignment = PP_ALIGN.CENTER
             ar = ap.add_run()
             ar.text = "↑"
-            set_font(ar, FONT_LIGHT)
-            ar.font.size = Pt(26)
-            ar.font.color.rgb = MUTED_GRAY
+            set_font(ar, FONT_BLACK)
+            ar.font.size = Pt(28)
+            ar.font.color.rgb = LAVENDER
 
 
 def build_s11_plus_ai(prs):
@@ -393,18 +415,18 @@ def build_s12_self_audit(prs):
 
 
 def build_s13_close(prs):
-    """s13 검정 마무리 — 우하 SSOD 로고 + 김지명."""
+    """s13 검정 마무리 — 우하 SSOD 라벤더 로고 + 김지명."""
     slide = add_black_slide(prs)
 
-    # 우하 로고 (본문보다 약간 크게)
-    if SSOD_LOGO_WHITE.exists():
-        h = Inches(0.6)
-        w = Inches(0.6 * 600 / 356)
+    # 우하 라벤더 로고 (closing brand mark)
+    if SSOD_LOGO_LAVENDER.exists():
+        h = Inches(0.75)
+        w = Inches(0.75 * 600 / 356)
         right_margin = Inches(0.55)
         bottom_margin = Inches(0.55)
         left = CANVAS_W - w - right_margin
         top = CANVAS_H - h - bottom_margin
-        slide.shapes.add_picture(str(SSOD_LOGO_WHITE), left, top, width=w, height=h)
+        slide.shapes.add_picture(str(SSOD_LOGO_LAVENDER), left, top, width=w, height=h)
 
     # 로고 위 김지명
     tb = slide.shapes.add_textbox(
