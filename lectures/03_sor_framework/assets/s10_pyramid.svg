@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  s10_pyramid.svg — SoR(토대) → SoE(중간) → SoI(정점) 3-layer 정삼각형.
+  homepage CoreSystemGraphic·LayerSection·CoreGraphicVariants 노하우 풀패스:
+    · currentColor + monochrome wireframe
+    · stroke 위계 (0.55 / 0.9 / 1.2) — 보조선 < 분할선 < 외곽
+    · fillOpacity 깊이 — 정점 진함 (0.12) → 토대 옅음 (0.04)
+    · 좌측 dim line + tick (CoreSystemGraphic DimLine 패턴)
+    · L자 corner cut mark (CutMark 패턴)
+    · 정점 라벤더 dot — Linear signature accent (브랜드 마크와 동일 톤)
+    · dashed 가이드선 — 토대 baseline 연장 (LayerSection N8nFlowSvg 패턴)
+-->
+<svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg"
+     fill="none" aria-hidden="true"
+     style="color: #f7f8f8">
+
+  <!-- ─────────────────────────────────────────────────────────────
+       1. 좌측 dim line (height = 3 layers 측정)
+       ───────────────────────────────────────────────────────────── -->
+  <g stroke="currentColor" stroke-linecap="round" opacity="0.45">
+    <!-- extension lines: 피라미드 좌측 → dim line -->
+    <line x1="60"  y1="540" x2="32" y2="540" stroke-width="0.55"/>
+    <line x1="140" y1="380" x2="32" y2="380" stroke-width="0.55"/>
+    <line x1="220" y1="220" x2="32" y2="220" stroke-width="0.55"/>
+    <line x1="300" y1="60"  x2="32" y2="60"  stroke-width="0.55"/>
+    <!-- main vertical dim line -->
+    <line x1="32" y1="60" x2="32" y2="540" stroke-width="0.65"/>
+    <!-- end ticks -->
+    <line x1="26" y1="60"  x2="38" y2="60"  stroke-width="0.75"/>
+    <line x1="26" y1="540" x2="38" y2="540" stroke-width="0.75"/>
+    <!-- mid layer ticks -->
+    <line x1="28" y1="220" x2="36" y2="220" stroke-width="0.6"/>
+    <line x1="28" y1="380" x2="36" y2="380" stroke-width="0.6"/>
+  </g>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       2. 토대 baseline 연장 (dashed) — 피라미드가 어디에 앉아있는지 신호
+       ───────────────────────────────────────────────────────────── -->
+  <g stroke="currentColor" stroke-width="0.55" opacity="0.32">
+    <line x1="60"  y1="555" x2="20"  y2="555" stroke-dasharray="3 4"/>
+    <line x1="540" y1="555" x2="580" y2="555" stroke-dasharray="3 4"/>
+  </g>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       3. 3-layer 피라미드 (위→아래 = SoI / SoE / SoR)
+          fillOpacity: 정점 진함(0.12) → 토대 옅음(0.04)
+          stroke: 외곽 1.2 / 분할선 0.9
+       ───────────────────────────────────────────────────────────── -->
+
+  <!-- SoR base trapezoid (토대, 가장 넓음, 가장 옅음) -->
+  <polygon points="140,380 460,380 540,540 60,540"
+           fill="currentColor" fill-opacity="0.04"
+           stroke="currentColor" stroke-width="1.2"
+           stroke-linejoin="round"/>
+
+  <!-- SoE mid trapezoid (중간) -->
+  <polygon points="220,220 380,220 460,380 140,380"
+           fill="currentColor" fill-opacity="0.07"
+           stroke="currentColor" stroke-width="1.0"
+           stroke-linejoin="round"/>
+
+  <!-- SoI top triangle (정점, 가장 진함, 라벤더 hint) -->
+  <polygon points="300,60 380,220 220,220"
+           fill="#5e6ad2" fill-opacity="0.18"
+           stroke="currentColor" stroke-width="1.2"
+           stroke-linejoin="round"/>
+
+  <!-- 분할선 overlap 보강 (trapezoid 간 hairline 강조) -->
+  <g stroke="currentColor" stroke-linecap="round" opacity="0.7">
+    <line x1="220" y1="220" x2="380" y2="220" stroke-width="0.9"/>
+    <line x1="140" y1="380" x2="460" y2="380" stroke-width="0.9"/>
+  </g>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       4. 정점 라벤더 accent — Linear signature
+          (s10 다이어그램에 라벤더 1회만 들어가는 spot)
+       ───────────────────────────────────────────────────────────── -->
+  <circle cx="300" cy="60" r="4.5" fill="#5e6ad2"/>
+  <!-- 정점 위 작은 ↑ 마커 — "+ AI가 그 위에" 암시 (s11과 연결) -->
+  <g stroke="#5e6ad2" stroke-width="1.4" stroke-linecap="round" opacity="0.85">
+    <line x1="300" y1="40" x2="300" y2="22"/>
+    <line x1="294" y1="28" x2="300" y2="22"/>
+    <line x1="306" y1="28" x2="300" y2="22"/>
+  </g>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       5. 코너 cut mark (L자 등록 마크) — 측정·재단 신호
+       ───────────────────────────────────────────────────────────── -->
+  <g stroke="currentColor" stroke-width="0.75" stroke-linecap="round" opacity="0.65">
+    <!-- bottom-left -->
+    <line x1="60" y1="540" x2="48" y2="540"/>
+    <line x1="60" y1="540" x2="60" y2="552"/>
+    <!-- bottom-right -->
+    <line x1="540" y1="540" x2="552" y2="540"/>
+    <line x1="540" y1="540" x2="540" y2="552"/>
+  </g>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       6. 베이스 ground line (피라미드 토대 가로 hairline)
+       ───────────────────────────────────────────────────────────── -->
+  <line x1="20" y1="540" x2="580" y2="540"
+        stroke="currentColor" stroke-width="0.5" opacity="0.35"/>
+</svg>

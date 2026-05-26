@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  s1_bg_pattern.svg — 표지 배경 geometric grid.
+  Linear/Vercel/Notion 표지 톤 — subtle square line grid.
+  transparent BG → 검정 슬라이드 위에 dots/lines만 비침.
+-->
+<svg viewBox="0 0 1333 750" xmlns="http://www.w3.org/2000/svg"
+     preserveAspectRatio="none">
+  <defs>
+    <!-- base square line grid (60u cell) -->
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60"
+            fill="none"
+            stroke="#62666d"
+            stroke-width="0.4"
+            stroke-opacity="0.4"/>
+    </pattern>
+    <!-- accent dot at every 4th grid intersection (240u) -->
+    <pattern id="dots" width="240" height="240" patternUnits="userSpaceOnUse">
+      <circle cx="0" cy="0" r="1.6" fill="#5e6ad2" fill-opacity="0.55"/>
+    </pattern>
+    <!-- center focal radial fade (punch 영역 grid 톤다운) -->
+    <radialGradient id="focal-fade" cx="50%" cy="55%" r="30%">
+      <stop offset="0%" stop-color="#010102" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#010102" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- layer 0: 검정 BG (PPT 슬라이드 BG와 일치 — 디버그용 + add_picture 단일 레이어) -->
+  <rect width="100%" height="100%" fill="#010102"/>
+  <!-- layer 1: grid -->
+  <rect width="100%" height="100%" fill="url(#grid)"/>
+  <!-- layer 2: 라벤더 accent dots (sparse, 시그너처) -->
+  <rect width="100%" height="100%" fill="url(#dots)"/>
+  <!-- layer 3: 중앙 radial fade (텍스트 가독성 확보) -->
+  <rect width="100%" height="100%" fill="url(#focal-fade)"/>
+</svg>

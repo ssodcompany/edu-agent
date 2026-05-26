@@ -1,0 +1,5 @@
+# Build caches (regenerated from source assets via build_v10_pptx.py)
+assets/case-logo-white/
+
+# Legacy v1 (사용 보류, reference만 보존하려면 별도 add)
+BNI_SoR_v1.pptx
